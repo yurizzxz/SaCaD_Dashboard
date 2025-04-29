@@ -7,63 +7,20 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-]
+} from "@/components/ui/table";
+import { Button } from "../ui/button";
+import { IconEdit, IconTrash } from "@tabler/icons-react"
 
 type Column = {
-  key: string
-  label: string
-  alignRight?: boolean
-}
+  key: string;
+  label: string;
+  alignRight?: boolean;
+};
 
 type DataTableProps = {
-  columns: Column[]
-  data: Record<string, any>[]
-}
+  columns: Column[];
+  data: Record<string, any>[];
+};
 
 export function DataTable({ columns, data }: DataTableProps) {
   return (
@@ -78,6 +35,7 @@ export function DataTable({ columns, data }: DataTableProps) {
               {col.label}
             </TableHead>
           ))}
+          <TableHead className="text-right">Ações</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -91,9 +49,15 @@ export function DataTable({ columns, data }: DataTableProps) {
                 {row[col.key]}
               </TableCell>
             ))}
+            <TableCell className="text-right">
+              <div className="flex justify-end gap-1.5">
+                <Button variant="outline"><IconEdit /></Button>
+                <Button variant="destructive"><IconTrash /></Button>
+              </div>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
     </Table>
-  )
+  );
 }
