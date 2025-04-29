@@ -3,6 +3,28 @@ import { DataTable } from "@/components/table/data-table";
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 
+const columns = [
+  { key: "invoice", label: "RA" },
+  { key: "paymentStatus", label: "Status" },
+  { key: "paymentMethod", label: "Método" },
+  { key: "totalAmount", label: "Total", alignRight: true },
+]
+
+const data = [
+  {
+    invoice: "INV001",
+    paymentStatus: "Pago",
+    totalAmount: "R$250,00",
+    paymentMethod: "Cartão de Crédito",
+  },
+  {
+    invoice: "INV002",
+    paymentStatus: "Pendente",
+    totalAmount: "R$150,00",
+    paymentMethod: "Pix",
+  },
+]
+
 export default function Page() {
   return (
     <Section>
@@ -34,7 +56,7 @@ export default function Page() {
             <Button>Adicionar Aluno</Button>
           </div>
         </div>
-        <DataTable />
+        <DataTable columns={columns} data={data} />
       </Content>
     </Section>
   );

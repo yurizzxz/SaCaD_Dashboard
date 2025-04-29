@@ -54,34 +54,46 @@ const invoices = [
   },
 ]
 
-export function DataTable() {
+type Column = {
+  key: string
+  label: string
+  alignRight?: boolean
+}
+
+type DataTableProps = {
+  columns: Column[]
+  data: Record<string, any>[]
+}
+
+export function DataTable({ columns, data }: DataTableProps) {
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">RA</TableHead>
-          <TableHead>Nome</TableHead>
-          <TableHead>CPF</TableHead>
-          <TableHead>Email</TableHead>
-          <TableHead>Curso</TableHead>
-          <TableHead>Semestre</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Nascimento</TableHead>
-          <TableHead>Endereço</TableHead>
-          <TableHead className="text-right">Ações</TableHead>
+          {columns.map((col) => (
+            <TableHead
+              key={col.key}
+              className={col.alignRight ? "text-right" : ""}
+            >
+              {col.label}
+            </TableHead>
+          ))}
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell className="font-medium">{invoice.invoice}</TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+        {data.map((row, rowIndex) => (
+          <TableRow key={rowIndex}>
+            {columns.map((col) => (
+              <TableCell
+                key={col.key}
+                className={col.alignRight ? "text-right" : ""}
+              >
+                {row[col.key]}
+              </TableCell>
+            ))}
           </TableRow>
         ))}
       </TableBody>
-
     </Table>
   )
 }
