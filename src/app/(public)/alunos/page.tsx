@@ -1,15 +1,9 @@
-'use client'
+"use client";
 import { Content, Section } from "@/components/section";
+import { FiltroAlunos } from "./filter";
+import { DialogAdicionarAluno } from "./dialog-add";
+import { useAlunos } from "@/hooks/useAlunos";
 import { DataTable } from "@/components/table/data-table";
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
-import { useAlunos } from "@/hooks/useAlunos"; 
 
 export default function Page() {
   const { alunos, loading, error } = useAlunos();
@@ -40,33 +34,14 @@ export default function Page() {
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-medium">Lista de Alunos</h1>
           <div className="flex gap-2">
-            <Select>
-              <SelectTrigger className="w-[160px]">
-                <SelectValue placeholder="Filtrar por Curso" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="todos">Todos</SelectItem>
-                <SelectItem value="Engenharia da Computação">Engenharia</SelectItem>
-                <SelectItem value="Administração de Empresas">Administração</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="w-[160px]">
-                <SelectValue placeholder="Filtrar por Status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="todos">Todos</SelectItem>
-                <SelectItem value="Ativo">Ativo</SelectItem>
-                <SelectItem value="Suspenso">Suspenso</SelectItem>
-              </SelectContent>
-            </Select>
-            <Button>Adicionar Aluno</Button>
+            <FiltroAlunos />
+            <DialogAdicionarAluno />
           </div>
         </div>
 
         {loading && <p>Carregando alunos...</p>}
         {error && <p className="text-red-500">{error}</p>}
-        {!loading && !error && <DataTable columns={columns} data={data} />}
+        {!loading && !error && <DataTable columns={columns} data={alunos} />}
       </Content>
     </Section>
   );
