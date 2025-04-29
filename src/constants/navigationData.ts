@@ -18,7 +18,7 @@ export const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/",
       icon: IconDashboard,
     },
     {
@@ -37,14 +37,9 @@ export const data = {
       icon: IconFolder,
     },
     {
-      title: "Salas",
+      title: "Salas/Laboratórios",
       url: "/rooms",
       icon: IconBuilding,
-    },
-    {
-      title: "Laboratórios",
-      url: "/labs",
-      icon: IconFileAi,
     },
     {
       title: "Relatórios",
