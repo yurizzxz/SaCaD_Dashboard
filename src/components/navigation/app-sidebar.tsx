@@ -4,7 +4,6 @@ import * as React from "react";
 import { IconInnerShadowTop } from "@tabler/icons-react";
 
 import { NavMain } from "@/components/navigation/nav-main";
-import { NavSecondary } from "@/components/navigation/nav-secondary";
 import { NavUser } from "@/components/navigation/nav-user";
 import {
   Sidebar,
@@ -17,8 +16,10 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { data } from "@/constants/navigationData";
+import { usePathname } from "next/navigation";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname();
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -37,8 +38,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavMain pathname={pathname} items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />

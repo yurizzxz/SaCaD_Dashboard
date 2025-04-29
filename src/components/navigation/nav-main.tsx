@@ -11,6 +11,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function NavMain({
   items,
@@ -20,7 +21,9 @@ export function NavMain({
     url: string;
     icon?: Icon;
   }[];
+  pathname: string;
 }) {
+  const pathname = usePathname();
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col">
@@ -28,8 +31,8 @@ export function NavMain({
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <Link href={item.url} className="cursor-pointer">
-                <SidebarMenuButton tooltip={item.title}>
+              <Link href={item.url}>
+                <SidebarMenuButton className={pathname === item.url ? "bg-primary/15 cursor-pointer" : "cursor-pointer"} tooltip={item.title}>
                   {item.icon && <item.icon />}
                   <span>{item.title}</span>
                 </SidebarMenuButton>
