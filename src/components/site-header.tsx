@@ -11,6 +11,7 @@ const titles: Record<string, string> = {
   "/teachers": "Professores",
   "/courses": "Cursos",
   "/disciplinas": "Componentes",
+  "/rooms": "Salas/Laboratórios",
 };
 
 export function SiteHeader() {

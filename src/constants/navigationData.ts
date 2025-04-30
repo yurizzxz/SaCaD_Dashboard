@@ -1,7 +1,7 @@
 import {
   IconBuilding,
   IconDashboard,
-  IconFileAi,
+  IconBook,
   IconFolder,
   IconReportAnalytics,
   IconSchool,
@@ -35,6 +35,11 @@ export const data = {
       title: "Cursos",
       url: "/courses",
       icon: IconFolder,
+    },
+    {
+      title: "Disciplinas",
+      url: "/disciplinas",
+      icon: IconBook,
     },
     {
       title: "Salas/Laboratórios",
