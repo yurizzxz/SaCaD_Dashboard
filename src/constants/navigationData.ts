@@ -7,6 +7,8 @@ import {
   IconSchool,
   IconSettings,
   IconUsers,
+  IconDeviceLaptop,
+  IconHome,
 } from "@tabler/icons-react";
 
 export const data = {
@@ -44,12 +46,12 @@ export const data = {
     {
       title: "Salas",
       url: "/rooms",
-      icon: IconBuilding,
+      icon: IconHome,
     },
     {
       title: "Laboratórios",
       url: "/labs",
-      icon: IconBuilding,
+      icon: IconDeviceLaptop,
     },
     {
       title: "Relatórios",
