@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 const titles: Record<string, string> = {
   "/": "Dashboard",
   "/alunos": "Alunos",
-  "/professores": "Professores",
+  "/teachers": "Professores",
   "/courses": "Cursos",
   "/disciplinas": "Componentes",
 };

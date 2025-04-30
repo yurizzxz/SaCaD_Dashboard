@@ -1,9 +1,9 @@
 "use client";
 import { Content, Section } from "@/components/section";
 import { FiltroAlunos } from "./filter";
-import { DialogAdicionarAluno } from "./dialog-add";
 import { useAlunos } from "@/hooks/useAlunos";
 import { DataTable } from "@/components/table/data-table";
+import { DialogAdicionarAluno } from "./dialog-add";
 
 export default function Page() {
   const { alunos, loading, error } = useAlunos();
