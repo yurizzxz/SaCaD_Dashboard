@@ -64,17 +64,6 @@
       "telefone": "(11) 96543-2109",
       "endereco": "Rua Fictícia, 110, Bairro B, Cidade V",
       "cpf": "567.890.123-14"
-    },
-    {
-      "id": 6,
-      "nome": "Testeee",
-      "email": "teste@gmail.com",
-      "cpf": "2154800520",
-      "data_nascimento": "2008-05-05",
-      "curso": "Processos Gerenciais",
-      "semestre": 2,
-      "endereco": "afdsafasd",
-      "status": "Ativo"
     }
   ],
   "professores": [

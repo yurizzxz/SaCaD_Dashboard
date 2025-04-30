@@ -40,7 +40,7 @@ export default function Page() {
 
   const handleSave = async (aluno: any) => {
     if (aluno.id) {
-      await editarAluno, aluno.id(aluno);
+      await editarAluno(aluno.id, aluno);
     } else {
       await cadastrarAluno(aluno);
     }
