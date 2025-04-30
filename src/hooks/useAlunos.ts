@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Aluno } from "@/lib/types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_ALUNOS_URL;
+const API_URL = process.env.NEXT_PUBLIC_ALUNOS_URL;
 
 export function useAlunos() {
   const [alunos, setAlunos] = useState<Aluno[]>([]);

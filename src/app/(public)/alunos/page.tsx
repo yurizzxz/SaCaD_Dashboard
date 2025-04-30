@@ -19,7 +19,7 @@ export default function Page() {
   ];
 
   const data = alunos.map((aluno) => ({
-    ra: aluno.ra,
+    ra: aluno.id,
     nome: aluno.nome,
     cpf: aluno.cpf,
     curso: aluno.curso,
@@ -31,9 +31,9 @@ export default function Page() {
   return (
     <Section>
       <Content>
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <h1 className="text-2xl font-medium">Lista de Alunos</h1>
-          <div className="flex gap-2">
+          <div className="flex gap-3 flex-wrap">
             <FiltroAlunos />
             <DialogAdicionarAluno />
           </div>
@@ -41,7 +41,7 @@ export default function Page() {
 
         {loading && <p>Carregando alunos...</p>}
         {error && <p className="text-red-500">{error}</p>}
-        {!loading && !error && <DataTable columns={columns} data={alunos} />}
+        {!loading && !error && <DataTable columns={columns} data={data} />}
       </Content>
     </Section>
   );

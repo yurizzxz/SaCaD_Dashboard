@@ -1,5 +1,5 @@
 export type Aluno = {
-  ra: number;
+  id: number;
   nome: string;
   data_nascimento: string;
   curso: string;
