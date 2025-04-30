@@ -75,6 +75,8 @@ export function useAlunos() {
       });
       if (!res.ok) throw new Error("Erro ao excluir aluno");
 
+      toast.success("Aluno excluído com sucesso!");
+
       await fetchAlunos();
     } catch (err) {
       setError("Erro ao excluir aluno");

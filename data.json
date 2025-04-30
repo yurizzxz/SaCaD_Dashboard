@@ -75,50 +75,6 @@
       "semestre": 2,
       "endereco": "afdsafasd",
       "status": "Ativo"
-    },
-    {
-      "id": 7,
-      "nome": "adfa",
-      "email": "teste@gmail.com",
-      "cpf": "502001840",
-      "data_nascimento": "2007-05-20",
-      "curso": "Análise e Desenvolvimento De Sistemas",
-      "semestre": 2,
-      "endereco": "asdfadf",
-      "status": "Ativo"
-    },
-    {
-      "id": 8,
-      "nome": "adfa",
-      "email": "teste@gmail.com",
-      "cpf": "2352005050",
-      "data_nascimento": "2007-06-26",
-      "curso": "Processos Gerenciais",
-      "semestre": 5,
-      "endereco": "asdfafd",
-      "status": "Suspenso"
-    },
-    {
-      "id": 9,
-      "nome": "Testeee",
-      "email": "teste@gmail.com",
-      "cpf": "2352005050",
-      "data_nascimento": "2007-06-26",
-      "curso": "Processos Gerenciais",
-      "semestre": 5,
-      "endereco": "asdfafd",
-      "status": "Suspenso"
-    },
-    {
-      "id": 10,
-      "nome": "Testeee",
-      "email": "yuri@gmail.com",
-      "cpf": "2352005050",
-      "data_nascimento": "",
-      "curso": "Análise e Desenvolvimento De Sistemas",
-      "semestre": 0,
-      "endereco": "asdfafd",
-      "status": "Suspenso"
     }
   ],
   "professores": [

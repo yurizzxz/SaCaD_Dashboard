@@ -9,12 +9,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
-import { IconEdit, IconTrash } from "@tabler/icons-react"
+import { IconEdit, IconTrash } from "@tabler/icons-react";
 
 type Column = {
   key: string;
   label: string;
-  alignRight?: boolean;
+  render?: (row: Record<string, any>) => React.ReactNode;
 };
 
 type DataTableProps = {
@@ -27,15 +27,14 @@ export function DataTable({ columns, data }: DataTableProps) {
     <Table>
       <TableHeader>
         <TableRow>
-          {columns.map((col) => (
+          {columns.map((col, index) => (
             <TableHead
               key={col.key}
-              className={col.alignRight ? "text-right" : ""}
+              className={index === columns.length - 1 ? "text-right" : ""}
             >
               {col.label}
             </TableHead>
           ))}
-          <TableHead className="text-right">Ações</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -44,17 +43,10 @@ export function DataTable({ columns, data }: DataTableProps) {
             {columns.map((col) => (
               <TableCell
                 key={col.key}
-                className={col.alignRight ? "text-right" : ""}
               >
-                {row[col.key]}
+                {col.render ? col.render(row) : row[col.key]}
               </TableCell>
             ))}
-            <TableCell className="text-right">
-              <div className="flex justify-end gap-1.5">
-                <Button variant="outline"><IconEdit /></Button>
-                <Button variant="destructive"><IconTrash /></Button>
-              </div>
-            </TableCell>
           </TableRow>
         ))}
       </TableBody>
