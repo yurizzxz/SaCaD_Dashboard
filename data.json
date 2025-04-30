@@ -1,17 +1,17 @@
 {
   "alunos": [
     {
-      "id": 1,
       "nome": "Lucas Fernandes",
-      "data_nascimento": "1998-07-15",
+      "cpf": "123.456.789-10",
       "curso": "Engenharia da Computação",
-      "semestre": 4,
       "status": "Ativo",
-      "data_matricula": "2021-02-01",
+      "semestre": 4,
       "email": "lucas.fernandes@exemplo.com",
       "telefone": "(11) 98765-4321",
       "endereco": "Rua Exemplo, 45, Bairro X, Cidade Y",
-      "cpf": "123.456.789-10"
+      "data_nascimento": "1998-07-15",
+      "data_matricula": "2021-02-01",
+      "id": 1
     },
     {
       "id": 2,

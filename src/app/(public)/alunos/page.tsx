@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useAlunos } from "@/hooks/useAlunos";
-import { AlunoModal } from "./create-modal";
-import { ConfirmDeleteModal } from "./delete-modal";
+import { AlunoModal } from "./register/create-modal";
+import { ConfirmDeleteModal } from "./register/delete-modal";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { DataTable } from "@/components/table/data-table";
 import { Button } from "@/components/ui/button";
