@@ -42,8 +42,13 @@ export const data = {
       icon: IconBook,
     },
     {
-      title: "Salas/Laboratórios",
+      title: "Salas",
       url: "/rooms",
+      icon: IconBuilding,
+    },
+    {
+      title: "Laboratórios",
+      url: "/labs",
       icon: IconBuilding,
     },
     {

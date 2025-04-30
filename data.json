@@ -1,0 +1,410 @@
+{
+  "alunos": [
+    {
+      "id": 1,
+      "nome": "Lucas Fernandes",
+      "data_nascimento": "1998-07-15",
+      "curso": "Engenharia da Computação",
+      "semestre": 4,
+      "status": "Ativo",
+      "data_matricula": "2021-02-01",
+      "email": "lucas.fernandes@exemplo.com",
+      "telefone": "(11) 98765-4321",
+      "endereco": "Rua Exemplo, 45, Bairro X, Cidade Y",
+      "cpf": "123.456.789-10"
+    },
+    {
+      "id": 2,
+      "nome": "Mariana Castro",
+      "data_nascimento": "2000-03-22",
+      "curso": "Administração de Empresas",
+      "semestre": 2,
+      "status": "Ativo",
+      "data_matricula": "2023-01-20",
+      "email": "mariana.castro@exemplo.com",
+      "telefone": "(11) 91234-5678",
+      "endereco": "Rua Teste, 89, Bairro Z, Cidade W",
+      "cpf": "234.567.890-11"
+    },
+    {
+      "id": 3,
+      "nome": "Carlos Silva",
+      "data_nascimento": "1999-08-10",
+      "curso": "Engenharia da Computação",
+      "semestre": 3,
+      "status": "Ativo",
+      "data_matricula": "2022-02-15",
+      "email": "carlos.silva@exemplo.com",
+      "telefone": "(11) 92345-6789",
+      "endereco": "Rua Centro, 123, Bairro A, Cidade X",
+      "cpf": "345.678.901-12"
+    },
+    {
+      "id": 4,
+      "nome": "Ana Souza",
+      "data_nascimento": "2001-05-25",
+      "curso": "Administração de Empresas",
+      "semestre": 1,
+      "status": "Ativo",
+      "data_matricula": "2024-03-10",
+      "email": "ana.souza@exemplo.com",
+      "telefone": "(11) 93456-7890",
+      "endereco": "Avenida Exemplo, 100, Bairro Y, Cidade Z",
+      "cpf": "456.789.012-13"
+    },
+    {
+      "id": 5,
+      "nome": "Pedro Costa",
+      "data_nascimento": "2000-11-30",
+      "curso": "Administração de Empresas",
+      "semestre": 2,
+      "status": "Suspenso",
+      "data_matricula": "2022-06-15",
+      "email": "pedro.costa@exemplo.com",
+      "telefone": "(11) 96543-2109",
+      "endereco": "Rua Fictícia, 110, Bairro B, Cidade V",
+      "cpf": "567.890.123-14"
+    },
+    {
+      "id": 6,
+      "nome": "Testeee",
+      "email": "teste@gmail.com",
+      "cpf": "2154800520",
+      "data_nascimento": "2008-05-05",
+      "curso": "Processos Gerenciais",
+      "semestre": 2,
+      "endereco": "afdsafasd",
+      "status": "Ativo"
+    },
+    {
+      "id": 7,
+      "nome": "adfa",
+      "email": "teste@gmail.com",
+      "cpf": "502001840",
+      "data_nascimento": "2007-05-20",
+      "curso": "Análise e Desenvolvimento De Sistemas",
+      "semestre": 2,
+      "endereco": "asdfadf",
+      "status": "Ativo"
+    },
+    {
+      "id": 8,
+      "nome": "adfa",
+      "email": "teste@gmail.com",
+      "cpf": "2352005050",
+      "data_nascimento": "2007-06-26",
+      "curso": "Processos Gerenciais",
+      "semestre": 5,
+      "endereco": "asdfafd",
+      "status": "Suspenso"
+    },
+    {
+      "id": 9,
+      "nome": "Testeee",
+      "email": "teste@gmail.com",
+      "cpf": "2352005050",
+      "data_nascimento": "2007-06-26",
+      "curso": "Processos Gerenciais",
+      "semestre": 5,
+      "endereco": "asdfafd",
+      "status": "Suspenso"
+    },
+    {
+      "id": 10,
+      "nome": "Testeee",
+      "email": "yuri@gmail.com",
+      "cpf": "2352005050",
+      "data_nascimento": "",
+      "curso": "Análise e Desenvolvimento De Sistemas",
+      "semestre": 0,
+      "endereco": "asdfafd",
+      "status": "Suspenso"
+    }
+  ],
+  "professores": [
+    {
+      "id": 1,
+      "nome": "Paulo Henrique",
+      "disciplina": "Matemática Discreta",
+      "data_admissao": "2020-02-10",
+      "status": "Ativo",
+      "cursos": [
+        {
+          "nome_curso": "Engenharia da Computação",
+          "semestre": 4,
+          "aulas_teoricas": 30,
+          "aulas_praticas": 10
+        }
+      ],
+      "email": "paulo.henrique@exemplo.com",
+      "telefone": "(11) 92345-6789"
+    },
+    {
+      "id": 2,
+      "nome": "Juliana Souza",
+      "disciplina": "Gestão de Negócios",
+      "data_admissao": "2019-05-15",
+      "status": "Ativo",
+      "cursos": [
+        {
+          "nome_curso": "Administração de Empresas",
+          "semestre": 2,
+          "aulas_teoricas": 20,
+          "aulas_praticas": 5
+        }
+      ],
+      "email": "juliana.souza@exemplo.com",
+      "telefone": "(11) 93456-7890"
+    },
+    {
+      "id": 3,
+      "nome": "Ricardo Alves",
+      "disciplina": "Algoritmos e Estruturas de Dados",
+      "data_admissao": "2018-03-01",
+      "status": "Afastado",
+      "cursos": [
+        {
+          "nome_curso": "Engenharia da Computação",
+          "semestre": 3,
+          "aulas_teoricas": 40,
+          "aulas_praticas": 20
+        }
+      ],
+      "email": "ricardo.alves@exemplo.com",
+      "telefone": "(11) 94567-8901"
+    },
+    {
+      "id": 4,
+      "nome": "Fernanda Oliveira",
+      "disciplina": "Marketing Digital",
+      "data_admissao": "2021-09-10",
+      "status": "Ativo",
+      "cursos": [
+        {
+          "nome_curso": "Administração de Empresas",
+          "semestre": 1,
+          "aulas_teoricas": 25,
+          "aulas_praticas": 15
+        }
+      ],
+      "email": "fernanda.oliveira@exemplo.com",
+      "telefone": "(11) 96789-1234"
+    }
+  ],
+  "cursos": [
+    {
+      "id": 1,
+      "nome": "Engenharia da Computação",
+      "area_tecnologica": "Tecnologia da Informação",
+      "duracao_em_semestres": 10,
+      "periodo": "Noite",
+      "modalidade": "Presencial",
+      "disciplinas": [
+        {
+          "id": 1,
+          "nome": "Matemática Discreta",
+          "aulas_teoricas": 30,
+          "aulas_praticas": 10
+        },
+        {
+          "id": 2,
+          "nome": "Estruturas de Dados",
+          "aulas_teoricas": 40,
+          "aulas_praticas": 20
+        },
+        {
+          "id": 3,
+          "nome": "Algoritmos",
+          "aulas_teoricas": 30,
+          "aulas_praticas": 15
+        },
+        {
+          "id": 4,
+          "nome": "Redes de Computadores",
+          "aulas_teoricas": 40,
+          "aulas_praticas": 15
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Administração de Empresas",
+      "area_tecnologica": "Gestão e Negócios",
+      "duracao_em_semestres": 8,
+      "periodo": "Tarde",
+      "modalidade": "Híbrido",
+      "disciplinas": [
+        {
+          "id": 5,
+          "nome": "Gestão de Negócios",
+          "aulas_teoricas": 20,
+          "aulas_praticas": 5
+        },
+        {
+          "id": 6,
+          "nome": "Marketing Digital",
+          "aulas_teoricas": 15,
+          "aulas_praticas": 5
+        },
+        {
+          "id": 7,
+          "nome": "Gestão de Projetos",
+          "aulas_teoricas": 30,
+          "aulas_praticas": 10
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nome": "Administração de Empresas",
+      "area_tecnologica": "Gestão e Negócios",
+      "duracao_em_semestres": 8,
+      "periodo": "EAD",
+      "modalidade": "EAD",
+      "disciplinas": [
+        {
+          "id": 8,
+          "nome": "Gestão de Pessoas",
+          "aulas_teoricas": 40,
+          "aulas_praticas": 0
+        },
+        {
+          "id": 9,
+          "nome": "Liderança",
+          "aulas_teoricas": 30,
+          "aulas_praticas": 0
+        }
+      ]
+    }
+  ],
+  "salas": [
+    {
+      "id": 1,
+      "nome_sala": "Sala 101",
+      "capacidade": 40,
+      "equipamentos": {
+        "Projetor": 1,
+        "Computador": 10,
+        "Quadro branco": 1
+      }
+    },
+    {
+      "id": 2,
+      "nome_sala": "Sala 202",
+      "capacidade": 30,
+      "equipamentos": {
+        "Computadores": 15,
+        "Quadro Digital": 1
+      }
+    },
+    {
+      "id": 3,
+      "nome_sala": "Sala 303",
+      "capacidade": 20,
+      "equipamentos": {
+        "Computador": 10,
+        "Projetor": 1,
+        "Quadro negro": 1
+      }
+    }
+  ],
+  "laboratorios": [
+    {
+      "id": 1,
+      "nome": "Laboratório de Computação",
+      "curso_associado": "Engenharia da Computação",
+      "equipamentos": {
+        "Computadores": 20,
+        "Placas de Circuito": 10,
+        "Máquinas de Solda": 5
+      },
+      "horario": [
+        {
+          "dia": "Segunda-feira",
+          "inicio": "08:00",
+          "fim": "12:00",
+          "professor_id": 1,
+          "alunos_usando": [
+            "123456",
+            "345678"
+          ]
+        },
+        {
+          "dia": "Quarta-feira",
+          "inicio": "13:00",
+          "fim": "17:00",
+          "professor_id": 1,
+          "alunos_usando": [
+            "123456",
+            "345678"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Laboratório de Marketing",
+      "curso_associado": "Administração de Empresas",
+      "equipamentos": {
+        "Computadores": 15,
+        "Câmeras": 10,
+        "Projetor": 2
+      },
+      "horario": [
+        {
+          "dia": "Terça-feira",
+          "inicio": "09:00",
+          "fim": "12:00",
+          "professor_id": 2,
+          "alunos_usando": [
+            "234567",
+            "456789"
+          ]
+        },
+        {
+          "dia": "Quinta-feira",
+          "inicio": "14:00",
+          "fim": "17:00",
+          "professor_id": 2,
+          "alunos_usando": [
+            "234567",
+            "456789"
+          ]
+        }
+      ]
+    }
+  ],
+  "metricas": {
+    "matriculas_por_curso": {
+      "Engenharia da Computação": 50,
+      "Administração de Empresas": 60
+    },
+    "distribuicao_de_alunos_por_modalidade": {
+      "Presencial": 80,
+      "Híbrido": 45,
+      "EAD": 15
+    }
+  },
+  "relatorios": [
+    {
+      "id": 1,
+      "titulo": "Relatório de Matrículas por Curso",
+      "data": "2025-04-25",
+      "tipo": "Matrículas",
+      "conteudo": "Este relatório contém o número de matrículas por curso."
+    },
+    {
+      "id": 2,
+      "titulo": "Relatório de Desempenho Acadêmico",
+      "data": "2025-04-25",
+      "tipo": "Desempenho",
+      "conteudo": "Relatório com a média de notas dos alunos por curso e semestre."
+    }
+  ],
+  "configuracoes": {
+    "nome_universidade": "Universidade Exemplo",
+    "endereco": "Rua Universitária, 1000, Bairro Acadêmico, Cidade Z",
+    "email_contato": "contato@universidadeexemplo.com",
+    "telefone": "(11) 1234-5678"
+  }
+}

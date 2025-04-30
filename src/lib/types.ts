@@ -33,3 +33,25 @@ export type Professor = {
 export type ProfessoresResponse = {
   professores: Professor[];
 };
+
+export interface Disciplina {
+  id: number;
+  nome: string;
+  aulas_teoricas: number;
+  aulas_praticas: number;
+}
+
+export interface Sala {
+  id: number;
+  nome_sala: string;
+  capacidade: number;
+  equipamentos: Record<string, number>;
+}
+
+export interface Laboratorio {
+  id: number;
+  nome: string;
+  curso_associado: string;
+  equipamentos: Record<string, number>;
+  horario: { dia: string, inicio: string, fim: string, professor_id: number, alunos_usando: string[] }[];
+}

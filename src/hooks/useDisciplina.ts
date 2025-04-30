@@ -1,16 +1,10 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { Disciplina } from "@/lib/types";
 
 const API_URL = process.env.NEXT_PUBLIC_CURSOS_URL;
-
-interface Disciplina {
-  id: number;
-  nome: string;
-  aulas_teoricas: number;
-  aulas_praticas: number;
-}
 
 export function useDisciplinas() {
   const [disciplinas, setDisciplinas] = useState<Disciplina[]>([]);
@@ -28,7 +22,9 @@ export function useDisciplinas() {
       if (!res.ok) throw new Error("Erro ao buscar cursos");
 
       const data = await res.json();
-      const allDisciplinas = data.flatMap((curso: { disciplinas: Disciplina[] }) => curso.disciplinas);
+      const allDisciplinas = data.flatMap(
+        (curso: { disciplinas: Disciplina[] }) => curso.disciplinas
+      );
       setDisciplinas(allDisciplinas);
     } catch (err) {
       setError("Erro ao buscar disciplinas");
@@ -37,7 +33,10 @@ export function useDisciplinas() {
     }
   };
 
-  const cadastrarDisciplina = async (novoCursoId: number, novaDisciplina: Partial<Disciplina>) => {
+  const cadastrarDisciplina = async (
+    novoCursoId: number,
+    novaDisciplina: Partial<Disciplina>
+  ) => {
     try {
       const res = await fetch(`${API_URL}/${novoCursoId}/disciplinas`, {
         method: "POST",
@@ -55,15 +54,22 @@ export function useDisciplinas() {
     }
   };
 
-  const editarDisciplina = async (cursoId: number, disciplinaId: number, disciplinaAtualizada: Partial<Disciplina>) => {
+  const editarDisciplina = async (
+    cursoId: number,
+    disciplinaId: number,
+    disciplinaAtualizada: Partial<Disciplina>
+  ) => {
     try {
-      const res = await fetch(`${API_URL}/${cursoId}/disciplinas/${disciplinaId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(disciplinaAtualizada),
-      });
+      const res = await fetch(
+        `${API_URL}/${cursoId}/disciplinas/${disciplinaId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(disciplinaAtualizada),
+        }
+      );
       if (!res.ok) throw new Error("Erro ao editar disciplina");
 
       toast.success("Disciplina editada com sucesso!");
@@ -75,9 +81,12 @@ export function useDisciplinas() {
 
   const excluirDisciplina = async (cursoId: number, disciplinaId: number) => {
     try {
-      const res = await fetch(`${API_URL}/${cursoId}/disciplinas/${disciplinaId}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${API_URL}/${cursoId}/disciplinas/${disciplinaId}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (!res.ok) throw new Error("Erro ao excluir disciplina");
 
       await fetchDisciplinas();
