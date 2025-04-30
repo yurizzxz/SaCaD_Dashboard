@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { FormFields } from "./form";
 
-export function AlunoModal({
+export function Modal({
   open,
   onOpenChange,
   initialData,
@@ -16,43 +16,31 @@ export function AlunoModal({
 }: any) {
   const [formData, setFormData] = useState({
     nome: "",
-    cpf: "",
-    curso: "",
+    disciplina: "",
+    cursos: [],
+    data_admissao: "",
     status: "",
-    semestre: "",
     email: "",
-    telefone: "",
-    endereco: "",
-    data_nascimento: "",
-    data_matricula: "",
   });
 
   useEffect(() => {
     if (initialData) {
       setFormData({
         nome: initialData.nome || "",
-        cpf: initialData.cpf || "",
-        curso: initialData.curso || "",
+        disciplina: initialData.disciplina || "",
+        cursos: initialData.cursos || [],
+        data_admissao: initialData.data_admissao || "",
         status: initialData.status || "",
-        semestre: initialData.semestre || "",
         email: initialData.email || "",
-        telefone: initialData.telefone || "",
-        endereco: initialData.endereco || "",
-        data_nascimento: initialData.data_nascimento || "",
-        data_matricula: initialData.data_matricula || "",
       });
     } else {
       setFormData({
         nome: "",
-        cpf: "",
-        curso: "",
+        disciplina: "",
+        cursos: [],
+        data_admissao: "",
         status: "",
-        semestre: "",
         email: "",
-        telefone: "",
-        endereco: "",
-        data_nascimento: "",
-        data_matricula: "",
       });
     }
   }, [initialData]);
@@ -62,8 +50,8 @@ export function AlunoModal({
   };
 
   const handleSubmit = () => {
-    const aluno = { ...formData, id: initialData?.id };
-    onSave(aluno);
+    const professor = { ...formData, id: initialData?.id };
+    onSave(professor);
   };
 
   return (
@@ -71,18 +59,18 @@ export function AlunoModal({
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle className="text-xl">
-            {initialData ? "Editar Aluno" : "Cadastrar Aluno"}
+            {initialData ? "Editar Professor" : "Cadastrar Professor"}
           </DialogTitle>
         </DialogHeader>
 
-          <FormFields formData={formData} handleChange={handleChange} />
+        <FormFields formData={formData} handleChange={handleChange} />
 
         <div className="flex justify-end gap-2">
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancelar
           </Button>
           <Button onClick={handleSubmit}>
-            {initialData ? "Salvar Alterações" : "Cadastrar Aluno"}
+            {initialData ? "Salvar Alterações" : "Cadastrar Professor"}
           </Button>
         </div>
       </DialogContent>

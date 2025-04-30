@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useAlunos } from "@/hooks/useAlunos";
-import { AlunoModal } from "./register/create-modal";
-import { ConfirmDeleteModal } from "./register/delete-modal";
+import { AlunoModal } from "./actions/create-modal";
+import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { DataTable } from "@/components/table/data-table";
 import { Button } from "@/components/ui/button";
@@ -61,7 +61,7 @@ export default function Page() {
       label: "Ações",
       render: (row: any) => (
         <div className="flex justify-end gap-1.5">
-          <Button variant="outline" onClick={() => handleEdit(row)}>
+          <Button variant="default" onClick={() => handleEdit(row)}>
             <IconEdit />
           </Button>
           <Button variant="destructive" onClick={() => handleDelete(row)}>
