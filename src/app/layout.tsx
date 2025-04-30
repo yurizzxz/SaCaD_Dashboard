@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/context/theme-provider";
 import { AppSidebar } from "@/components/navigation/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -42,6 +43,7 @@ export default function RootLayout({
               </div>
             </SidebarInset>
           </SidebarProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

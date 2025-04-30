@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Aluno } from "@/lib/types";
+import { toast } from "sonner"
 
 const API_URL = process.env.NEXT_PUBLIC_ALUNOS_URL;
 
@@ -40,6 +41,8 @@ export function useAlunos() {
       });
       if (!res.ok) throw new Error("Erro ao cadastrar aluno");
 
+      toast.success("Aluno cadastrado com sucesso!");
+
       await fetchAlunos();
     } catch (err) {
       setError("Erro ao cadastrar aluno");
@@ -57,6 +60,8 @@ export function useAlunos() {
       });
       if (!res.ok) throw new Error("Erro ao editar aluno");
 
+      toast.success("Aluno editado com sucesso!");
+
       await fetchAlunos();
     } catch (err) {
       setError("Erro ao editar aluno");
@@ -69,6 +74,8 @@ export function useAlunos() {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Erro ao excluir aluno");
+
+      toast.success("Aluno excluído com sucesso!");
 
       await fetchAlunos();
     } catch (err) {
