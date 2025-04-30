@@ -73,6 +73,8 @@ export function useCursos() {
       });
       if (!res.ok) throw new Error("Erro ao excluir curso");
 
+      toast.success("Curso excluido com sucesso!");
+
       await fetchCursos();
     } catch (err) {
       setError("Erro ao excluir curso");

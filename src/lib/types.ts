@@ -13,10 +13,12 @@ export type Aluno = {
 };
 
 export type Curso = {
+  id: number;
   nome_curso: string;
   semestre: number;
   aulas_teoricas: number;
   aulas_praticas: number;
+  email_coordenador: string;
 };
 
 export type Professor = {
