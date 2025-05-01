@@ -1,7 +1,7 @@
 
 # Dashboard SaCaD
 
-Dashboard para controle de instituições de ensino (focado emu niversidades)
+O SaCaD é uma dashboard, feita exclusivamente para controle de instituições de ensino, focado especificamente para instituições de ensino
 
 **Projeto não finalizado**
 
