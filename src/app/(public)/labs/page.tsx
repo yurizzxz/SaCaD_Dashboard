@@ -15,6 +15,7 @@ import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Modal as LabModal } from "./actions/create-modal";
 import { Laboratorio as Lab } from "@/lib/types";
+import { DataTable } from "@/components/table/data-table";
 
 export default function Page() {
   const {
@@ -63,6 +64,40 @@ export default function Page() {
     setLabSelecionado(null);
   };
 
+  const columns = [
+      { key: "id", label: "ID" },
+      { key: "nome_sala", label: "Nome da Sala" },
+      { key: "capacidade", label: "Capacidade"  },
+      { key: "curso_associado", label: "Curso Associado" },
+      { key: "equipamentosString", label: "Equipamentos" },      {
+        key: "acoes",
+        label: "Ações",
+        render: (row: any) => (
+          <div className="flex justify-end gap-1.5">
+            <Button variant="default" onClick={() => handleEdit(row)}>
+              <IconEdit />
+            </Button>
+            <Button variant="destructive" onClick={() => handleDelete(row)}>
+              <IconTrash />
+            </Button>
+          </div>
+        ),
+      },
+    ];
+
+    const data = labs.map((sala: Lab) => ({
+      id: sala.id,
+      nome_sala: sala.nome,
+      curso_associado: sala.curso_associado,
+      capacidade: sala.capacidade,
+      equipamentosString: Object.entries(sala.equipamentos || {})
+        .filter(([equip, qtd]) => equip && qtd > 0)
+        .map(([equip, qtd]: [string, number]) => `${equip}: ${qtd}`)
+        .join(", "),
+      equipamentos: sala.equipamentos, 
+    }));
+    
+
   return (
     <Section>
       <Content>
@@ -74,60 +109,7 @@ export default function Page() {
         {loadingLabs && <p>Carregando laboratórios...</p>}
         {errorLabs && <p className="text-red-500">{errorLabs}</p>}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {!loadingLabs &&
-            !errorLabs &&
-            labs.map((lab: Lab) => (
-              <Card key={lab.id} className="border rounded-lg shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold">
-                    {lab.nome}
-                  </CardTitle>
-                  <CardDescription>
-                    Capacidade: {lab.capacidade} alunos
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="mb-3 -mt-4">
-                    <p>
-                      <strong className="block">Curso Associado:</strong>{" "}
-                      {lab.curso_associado}
-                    </p>
-                  </div>
-                  <div className="mb-3">
-                    <p>
-                      <strong>Equipamentos:</strong>
-                    </p>
-                    <ul>
-                      {Object.entries(lab.equipamentos || {}).map(
-                        ([equip, qtd]) => (
-                          <li key={equip}>
-                            {equip}: {qtd}
-                          </li>
-                        )
-                      )}
-                    </ul>
-                  </div>
-                </CardContent>
-                <CardFooter className="flex justify-end gap-2">
-                  <Button
-                    variant="default"
-                    size="icon"
-                    onClick={() => handleEdit(lab)}
-                  >
-                    <IconEdit size={18} />
-                  </Button>
-                  <Button
-                    variant="destructive"
-                    size="icon"
-                    onClick={() => handleDelete(lab)}
-                  >
-                    <IconTrash size={18} />
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-        </div>
+        <DataTable columns={columns} data={data} />
 
         <LabModal
           open={modalOpen}

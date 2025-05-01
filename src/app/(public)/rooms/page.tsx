@@ -20,7 +20,7 @@ export default function Page() {
     { key: "id", label: "ID" },
     { key: "nome_sala", label: "Nome da Sala" },
     { key: "capacidade", label: "Capacidade" },
-    { key: "equipamentos", label: "Equipamentos" },
+    { key: "equipamentosString", label: "Equipamentos" },
     {
       key: "acoes",
       label: "Ações",
@@ -40,10 +40,11 @@ export default function Page() {
     id: sala.id,
     nome_sala: sala.nome_sala,
     capacidade: sala.capacidade,
-    equipamentos: Object.entries(sala.equipamentos || {})
+    equipamentosString: Object.entries(sala.equipamentos || {})
       .filter(([equip, qtd]) => equip && qtd > 0) 
       .map(([equip, qtd]: [string, number]) => `${equip}: ${qtd}`)
       .join(", "),
+    equipamentos: sala.equipamentos,
   }));
   
   
