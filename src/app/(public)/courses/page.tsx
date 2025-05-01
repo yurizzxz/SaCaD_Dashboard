@@ -57,6 +57,36 @@ export default function Page() {
     setModalOpen(false);
     setCursoSelecionado(null);
   };
+
+  const columns = [
+    { key: "id", label: "ID" },
+    { key: "nome", label: "Nome" },
+    { key: "periodo", label: "Turno" },
+    { key: "modalidade", label: "Modalidade" },
+    { key: "forma_oferecimento", label: "Forma de Oferecimento" },
+    { key: "email_coordenador", label: "Email Coordenador" },
+    { key: "disciplinas", label: "Disciplinas", render: (row: any) => row.disciplinas?.length || 0 },
+    { key: "duracao_em_semestres", label: "Semestres" },
+    {
+      key: "acoes",
+      label: "Ações",
+      render: (row: any) => (
+        <div className="flex justify-end gap-1.5">
+          <Button variant="default" onClick={() => handleEdit(row)}>
+            <IconEdit />
+          </Button>
+          <Button variant="destructive" onClick={() => handleDelete(row)}>
+            <IconTrash />
+          </Button>
+        </div>
+      ),
+    },
+  ];
+
+  const data = cursos.map((cursos) => ({
+    ...cursos,
+    id: cursos.id,
+  }));
   return (
     <Section>
       <Content>
@@ -68,57 +98,7 @@ export default function Page() {
         {loading && <p>Carregando cursos...</p>}
         {error && <p className="text-red-500">{error}</p>}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {!loading &&
-            !error &&
-            cursos.map((curso: any) => (
-              <Card key={curso.id} className="border rounded-lg shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold">
-                    {curso.nome}
-                  </CardTitle>
-                  <CardDescription>
-                    {curso.duracao_em_semestres} semestres, {curso.area_tecnologica}, {curso.periodo}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex flex-col gap-2">
-                  <p>
-                    <strong>Disciplinas:</strong>
-                    <span className="block">
-                      {curso.disciplinas?.length > 0
-                        ? `${
-                            curso.disciplinas.length
-                          } disciplina(s): ${curso.disciplinas
-                            .map((d: any) => d.nome)
-                            .join(", ")}`
-                        : "Sem disciplinas"}
-                    </span>
-                  </p>
-                  <p>
-                    <strong>Status:</strong>{" "}
-                    <span className="block">{curso.status || "Ativo"}</span>
-                  </p>
-                  <p>
-                    <strong>Email do Coordenador:</strong>
-                    <span className="block">
-                      {curso.email_coordenador || "Não informado"}
-                    </span>
-                  </p>
-                </CardContent>
-                <CardFooter className="flex  gap-2  justify-end">
-                  <Button onClick={() => handleEdit(curso)}>
-                    <IconEdit />
-                  </Button>
-                  <Button
-                    variant="destructive"
-                    onClick={() => handleDelete(curso)}
-                  >
-                    <IconTrash />
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-        </div>
+        <DataTable columns={columns} data={data} />
 
         <CursoModal
           open={modalOpen}

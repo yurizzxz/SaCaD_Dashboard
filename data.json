@@ -141,7 +141,7 @@
       "id": 2,
       "nome": "Administração de Empresas",
       "area_tecnologica": "Gestão e Negócios",
-      "duracao_em_semestres": 8,
+      "duracao_em_semestres": "8",
       "periodo": "Tarde",
       "modalidade": "Híbrido",
       "disciplinas": [
@@ -154,7 +154,6 @@
         {
           "id": 6,
           "nome": "Marketing Digital",
-
           "aulas_teoricas": 15,
           "aulas_praticas": 5
         },
@@ -168,17 +167,20 @@
           "aulas_teoricas": 30,
           "aulas_praticas": 10
         }
-      ]
+      ],
+      "email_coordenador": "coord@gmail.com",
+      "forma_oferecimento": "Semestral"
     },
     {
       "id": 4,
       "nome": "Engenharia da Computação",
       "area_tecnologica": "Tecnologia da Informação",
-      "duracao_em_semestres": "8",
+      "duracao_em_semestres": 8,
       "periodo": "Matutino",
       "modalidade": "Híbrido",
       "disciplinas": [],
-      "email_coordenador": "coord@gmail.com"
+      "email_coordenador": "coord@gmail.com",
+      "forma_oferecimento": "Anual"
     }
   ],
   "salas": [
