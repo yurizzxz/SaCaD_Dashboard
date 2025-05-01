@@ -154,12 +154,17 @@
         {
           "id": 6,
           "nome": "Marketing Digital",
+
           "aulas_teoricas": 15,
           "aulas_praticas": 5
         },
         {
           "id": 7,
           "nome": "Gestão de Projetos",
+          "professor": "Ricardo Alves",
+          "curso:": "Administração de Empresas",
+          "modalidade": "Presencial",
+          "area_tecnologica": "Gestão e Negócios",
           "aulas_teoricas": 30,
           "aulas_praticas": 10
         }
@@ -169,10 +174,11 @@
       "id": 4,
       "nome": "Engenharia da Computação",
       "area_tecnologica": "Tecnologia da Informação",
-      "duracao_em_semestres": 8,
-      "periodo": "Diurno",
+      "duracao_em_semestres": "8",
+      "periodo": "Matutino",
       "modalidade": "Híbrido",
-      "disciplinas": []
+      "disciplinas": [],
+      "email_coordenador": "coord@gmail.com"
     }
   ],
   "salas": [
@@ -216,28 +222,7 @@
         "Placas de Circuito": 10,
         "Máquinas de Solda": 5
       },
-      "horario": [
-        {
-          "dia": "Segunda-feira",
-          "inicio": "08:00",
-          "fim": "12:00",
-          "professor_id": 1,
-          "alunos_usando": [
-            "123456",
-            "345678"
-          ]
-        },
-        {
-          "dia": "Quarta-feira",
-          "inicio": "13:00",
-          "fim": "17:00",
-          "professor_id": 1,
-          "alunos_usando": [
-            "123456",
-            "345678"
-          ]
-        }
-      ]
+      "capacidade": "40"
     },
     {
       "id": 2,
@@ -248,28 +233,7 @@
         "Câmeras": 10,
         "Projetor": 2
       },
-      "horario": [
-        {
-          "dia": "Terça-feira",
-          "inicio": "09:00",
-          "fim": "12:00",
-          "professor_id": 2,
-          "alunos_usando": [
-            "234567",
-            "456789"
-          ]
-        },
-        {
-          "dia": "Quinta-feira",
-          "inicio": "14:00",
-          "fim": "17:00",
-          "professor_id": 2,
-          "alunos_usando": [
-            "234567",
-            "456789"
-          ]
-        }
-      ]
+      "capacidade": "50"
     }
   ],
   "metricas": {

@@ -48,6 +48,11 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           label: "Curso Associado",
           placeholder: "ex: Engenharia da Computação",
         },
+        {
+          name: "capacidade",
+          label: "Capacidade",
+          placeholder: "ex: 30",
+        },
       ].map((field) => (
         <div key={field.name} className="flex flex-col gap-2 w-full">
           <Label>{field.label}</Label>

@@ -38,7 +38,7 @@ export function useDisciplinas() {
     novaDisciplina: Partial<Disciplina>
   ) => {
     try {
-      const res = await fetch(`${API_URL}/${novoCursoId}/disciplinas`, {
+      const res = await fetch(API_URL!, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export function useDisciplinas() {
   ) => {
     try {
       const res = await fetch(
-        `${API_URL}/${cursoId}/disciplinas/${disciplinaId}`,
+        `${API_URL}/${cursoId}/${disciplinaId}`,
         {
           method: "PUT",
           headers: {
@@ -82,12 +82,14 @@ export function useDisciplinas() {
   const excluirDisciplina = async (cursoId: number, disciplinaId: number) => {
     try {
       const res = await fetch(
-        `${API_URL}/${cursoId}/disciplinas/${disciplinaId}`,
+        API_URL!,
         {
           method: "DELETE",
         }
       );
       if (!res.ok) throw new Error("Erro ao excluir disciplina");
+
+      toast.success("Disciplina excluida com sucesso!");
 
       await fetchDisciplinas();
     } catch (err) {

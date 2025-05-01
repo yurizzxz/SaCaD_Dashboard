@@ -8,17 +8,19 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { FormFields } from "./form";
 
-export function Modal({
-  open,
-  onOpenChange,
-  initialData,
-  onSave,
-}: any) {
+export function Modal({ open, onOpenChange, initialData, onSave }: any) {
   const [formData, setFormData] = useState({
     id: 0,
     nome: "",
-    aulas_praticas: 0,
     aulas_teoricas: 0,
+    aulas_praticas: 0,
+    sigla: "",
+    curso: "",
+    professor: "",
+    semestre: 0,
+    area_tecnologica: "",
+    modalidade: "",
+    qtd_aulas: 0,
   });
 
   useEffect(() => {
@@ -26,15 +28,29 @@ export function Modal({
       setFormData({
         id: initialData.id,
         nome: initialData.nome || "",
-        aulas_praticas: initialData.aulas_praticas || 0,
         aulas_teoricas: initialData.aulas_teoricas || 0,
+        aulas_praticas: initialData.aulas_praticas || 0,
+        sigla: initialData.sigla || "",
+        curso: initialData.curso || "",
+        professor: initialData.professor || "",
+        semestre: initialData.semestre || 0,
+        area_tecnologica: initialData.area_tecnologica || "",
+        modalidade: initialData.modalidade || "",
+        qtd_aulas: initialData.qtd_aulas || 0,
       });
     } else {
       setFormData({
         id: 0,
         nome: "",
-        aulas_praticas: 0,
         aulas_teoricas: 0,
+        aulas_praticas: 0,
+        sigla: "",
+        curso: "",
+        professor: "",
+        semestre: 0,
+        area_tecnologica: "",
+        modalidade: "",
+        qtd_aulas: 0,
       });
     }
   }, [initialData]);
@@ -44,7 +60,9 @@ export function Modal({
     setFormData((prev: any) => ({
       ...prev,
       [name]:
-        name === "aulas_teoricas" || name === "aulas_praticas" ? parseInt(value || "0") : value,
+        name === "aulas_teoricas" || name === "aulas_praticas"
+          ? parseInt(value || "0")
+          : value,
     }));
   };
 

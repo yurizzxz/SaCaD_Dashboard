@@ -9,6 +9,25 @@ type FormFieldsProps = {
 export function FormFields({ formData, handleChange }: FormFieldsProps) {
   const disciplinasFields = [
     { name: "nome", label: "Nome", placeholder: "ex: Matemática" },
+    { name: "sigla", label: "Sigla", placeholder: "ex: MAT" },
+    {
+      name: "curso",
+      label: "Curso",
+      placeholder: "ex: Engenharia da Computação",
+    },
+    {
+      name: "professor",
+      label: "Professor",
+      placeholder: "ex: Paulo Henrique",
+    },
+    { name: "semestre", label: "Semestre", placeholder: "ex: 1" },
+    {
+      name: "area_tecnologica",
+      label: "Área Tecnológica",
+      placeholder: "ex: Tecnologia da Informação",
+    },
+    { name: "modalidade", label: "Modalidade", placeholder: "ex: Presencial" },
+    { name: "qtd_aulas", label: "Quantidade de Aulas", placeholder: "ex: 80" },
     { name: "aulas_teoricas", label: "Aulas Teóricas", placeholder: "ex: 30" },
     { name: "aulas_praticas", label: "Aulas Práticas", placeholder: "ex: 15" },
   ];

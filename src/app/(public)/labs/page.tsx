@@ -7,6 +7,7 @@ import {
   CardTitle,
   CardContent,
   CardFooter,
+  CardDescription,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -82,6 +83,9 @@ export default function Page() {
                   <CardTitle className="text-2xl font-bold">
                     {lab.nome}
                   </CardTitle>
+                  <CardDescription>
+                    Capacidade: {lab.capacidade} alunos
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="mb-3 -mt-4">

@@ -53,8 +53,6 @@ export default function Page() {
     { key: "nome", label: "Nome" },
     { key: "disciplina", label: "Disciplina" },
     { key: "cursos", label: "Cursos" },
-    { key: "data_admissao", label: "Data de Admissão" },
-    { key: "status", label: "Status" },
     { key: "email", label: "Email" },
     {
       key: "acoes",

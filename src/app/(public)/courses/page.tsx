@@ -78,26 +78,31 @@ export default function Page() {
                     {curso.nome}
                   </CardTitle>
                   <CardDescription>
-                    {curso.duracao_em_semestres} semestres
+                    {curso.duracao_em_semestres} semestres, {curso.area_tecnologica}, {curso.periodo}
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex flex-col gap-2">
                   <p>
-                    <strong>Disciplinas:</strong>{" "}
-                    {curso.disciplinas?.length > 0
-                      ? `${
-                          curso.disciplinas.length
-                        } disciplina(s): ${curso.disciplinas
-                          .map((d: any) => d.nome)
-                          .join(", ")}`
-                      : "Sem disciplinas"}
+                    <strong>Disciplinas:</strong>
+                    <span className="block">
+                      {curso.disciplinas?.length > 0
+                        ? `${
+                            curso.disciplinas.length
+                          } disciplina(s): ${curso.disciplinas
+                            .map((d: any) => d.nome)
+                            .join(", ")}`
+                        : "Sem disciplinas"}
+                    </span>
                   </p>
                   <p>
-                    <strong>Status:</strong> {curso.status || "Ativo"}
+                    <strong>Status:</strong>{" "}
+                    <span className="block">{curso.status || "Ativo"}</span>
                   </p>
                   <p>
-                    <strong>Email do Coordenador:</strong>{" "}
-                    {curso.email_coordenador || "Não informado"}
+                    <strong>Email do Coordenador:</strong>
+                    <span className="block">
+                      {curso.email_coordenador || "Não informado"}
+                    </span>
                   </p>
                 </CardContent>
                 <CardFooter className="flex  gap-2  justify-end">

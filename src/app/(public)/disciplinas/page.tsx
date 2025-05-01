@@ -51,8 +51,12 @@ export default function Page() {
   const columns = [
     { key: "id", label: "ID" },
     { key: "nome", label: "Nome" },
+    { key: "professor", label: "Professor" },
+    { key: "curso", label: "Curso" },
+    { key: "area_tecnologica", label: "Eixo Tecnológico" },
     { key: "aulas_teoricas", label: "Aulas Teóricas" },
     { key: "aulas_praticas", label: "Aulas Práticas" },
+    { key: "modalidade", label: "Modalidade" },
     {
       key: "acoes",
       label: "Ações",
