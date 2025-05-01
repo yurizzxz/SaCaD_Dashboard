@@ -2,13 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-
-interface Sala {
-  id: number;
-  nome_sala: string;
-  capacidade: number;
-  equipamentos: Record<string, number>;
-}
+import { Sala } from "@/lib/types";
 
 const API_URL = process.env.NEXT_PUBLIC_SALAS_URL;
 
@@ -38,7 +32,7 @@ export function useSalas() {
 
   const cadastrarSala = async (novaSala: Partial<Sala>) => {
     try {
-      const res = await fetch(`${API_URL}/salas`, {
+      const res = await fetch(`${API_URL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +51,7 @@ export function useSalas() {
 
   const editarSala = async (id: number, salaAtualizada: Partial<Sala>) => {
     try {
-      const res = await fetch(`${API_URL}/salas/${id}`, {
+      const res = await fetch(`${API_URL}/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -76,10 +70,12 @@ export function useSalas() {
 
   const excluirSala = async (id: number) => {
     try {
-      const res = await fetch(`${API_URL}/salas/${id}`, {
+      const res = await fetch(`${API_URL}/${id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Erro ao excluir sala");
+
+      toast.success("Sala excluida com sucesso!");
 
       await fetchSalas();
     } catch (err) {

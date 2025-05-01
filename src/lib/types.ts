@@ -57,3 +57,9 @@ export interface Laboratorio {
   equipamentos: Record<string, number>;
   horario: { dia: string, inicio: string, fim: string, professor_id: number, alunos_usando: string[] }[];
 }
+export interface Sala {
+  id: number;
+  nome_sala: string;
+  capacidade: number;
+  equipamentos: Record<string, number>;
+}
