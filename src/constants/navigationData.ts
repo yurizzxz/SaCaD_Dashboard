@@ -53,11 +53,11 @@ export const data = {
       url: "/labs",
       icon: IconDeviceLaptop,
     },
-    {
-      title: "Relatórios",
-      url: "/reports",
-      icon: IconReportAnalytics,
-    },
+    // {
+    //   title: "Relatórios",
+    //   url: "/reports",
+    //   icon: IconReportAnalytics,
+    // },
   ],
   navSecondary: [
     {

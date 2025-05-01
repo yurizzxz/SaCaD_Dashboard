@@ -107,7 +107,7 @@ export default function Page() {
                 </CardContent>
                 <CardFooter className="flex justify-end gap-2">
                   <Button
-                    variant="outline"
+                    variant="default"
                     size="icon"
                     onClick={() => handleEdit(lab)}
                   >

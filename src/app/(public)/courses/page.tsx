@@ -100,15 +100,16 @@ export default function Page() {
                     {curso.email_coordenador || "Não informado"}
                   </p>
                 </CardContent>
-                <CardFooter>
-                  <div className="flex gap-2">
-                    <Button onClick={() => handleEdit(curso)}>
-                      <IconEdit />
-                    </Button>
-                    <Button variant="destructive" onClick={() => handleDelete(curso)}>
-                      <IconTrash />
-                    </Button>
-                  </div>
+                <CardFooter className="flex  gap-2  justify-end">
+                  <Button onClick={() => handleEdit(curso)}>
+                    <IconEdit />
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    onClick={() => handleDelete(curso)}
+                  >
+                    <IconTrash />
+                  </Button>
                 </CardFooter>
               </Card>
             ))}
