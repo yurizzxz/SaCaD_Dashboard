@@ -8,7 +8,7 @@ type FormFieldsProps = {
 
 export function FormFields({ formData, handleChange }: FormFieldsProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2">
+    <div className="flex flex-col gap-4 py-2">
       {[
         { name: "nome", label: "Nome do Curso", placeholder: "ex: Engenharia da Computação" },
         { name: "area_tecnologica", label: "Área Tecnológica", placeholder: "ex: Tecnologia da Informação" },
@@ -16,6 +16,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
         { name: "periodo", label: "Período", placeholder: "ex: Noite" },
         { name: "email_coordenador" , label: "Email do Coordenador", placeholder: "ex: nome@exemplo.com" },
         { name: "modalidade", label: "Modalidade", placeholder: "ex: Presencial" },
+        { name: "forma_oferecimento" , label: "Forma de Oferecimento", placeholder: "ex: Semestral, Anual, Bimestral etc." },
       ].map((field) => (
         <div key={field.name} className="flex gap-2 flex-col w-full">
           <Label>{field.label}</Label>

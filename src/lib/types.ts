@@ -19,6 +19,9 @@ export type Curso = {
   aulas_teoricas: number;
   aulas_praticas: number;
   email_coordenador: string;
+  forma_oferecimento: string;
+  modalidade: string;
+  periodo: string;
 };
 
 export type Professor = {

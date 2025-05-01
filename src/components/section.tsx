@@ -6,10 +6,12 @@ export function Section ({ children }: { children: React.ReactNode }) {
     );
 }
 
-export function Content ({ children }: { children: React.ReactNode }) {
+export function Content(props: React.HTMLAttributes<HTMLDivElement>) {
+    const { children, className = "", ...rest } = props;
+  
     return (
-        <div className="px-4 lg:px-6">
-            {children}
-        </div>
+      <div className={`px-4 lg:px-6 ${className}`} {...rest}>
+        {children}
+      </div>
     );
-}
+  }

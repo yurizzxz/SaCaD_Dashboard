@@ -22,6 +22,8 @@ export function Modal({
     periodo: "",
     modalidade: "",
     disciplinas: [],
+    email_coordenador: "",
+    forma_oferecimento: "",
   });
 
   useEffect(() => {
@@ -34,6 +36,8 @@ export function Modal({
         periodo: initialData.periodo || "",
         modalidade: initialData.modalidade || "",
         disciplinas: initialData.disciplinas || [],
+        email_coordenador: initialData.email_coordenador || "",
+        forma_oferecimento: initialData.forma_oferecimento || "",
       });
     } else {
       setFormData({
@@ -44,6 +48,8 @@ export function Modal({
         periodo: "",
         modalidade: "",
         disciplinas: [],
+        email_coordenador: "",
+        forma_oferecimento: "",
       });
     }
   }, [initialData]);
@@ -64,7 +70,7 @@ export function Modal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-xl">
         <DialogHeader>
           <DialogTitle className="text-xl">
             {initialData ? "Editar Curso" : "Cadastrar Curso"}
