@@ -7,13 +7,14 @@ import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
+import { Sala } from "@/lib/types";
 
 export default function Page() {
   const { salas, loading, error, cadastrarSala, editarSala, excluirSala } =
     useSalas();
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [salaSelecionada, setSalaSelecionada] = useState<any | null>(null);
+  const [salaSelecionada, setSalaSelecionada] = useState<Sala | null>(null);
 
   const columns = [
     { key: "id", label: "ID" },
@@ -35,48 +36,51 @@ export default function Page() {
       ),
     },
   ];
-
-  const data = salas.map((sala: any) => ({
+  const data = salas.map((sala: Sala) => ({
     id: sala.id,
     nome_sala: sala.nome_sala,
     capacidade: sala.capacidade,
-    equipamentos: Object.entries(sala.equipamentos)
-      .map(([equipamento, quantidade]) => `${equipamento}: ${quantidade}`)
+    equipamentos: Object.entries(sala.equipamentos || {})
+      .filter(([equip, qtd]) => equip && qtd > 0) 
+      .map(([equip, qtd]: [string, number]) => `${equip}: ${qtd}`)
       .join(", "),
   }));
+  
+  
+  
 
-  const handleAdd = () => {
+ const handleAdd = () => {
+  setSalaSelecionada(null);
+  setModalOpen(true);
+};
+
+const handleEdit = (sala: Sala) => {
+  setSalaSelecionada(sala);
+  setModalOpen(true);
+};
+
+const handleDelete = (sala: Sala) => {
+  setSalaSelecionada(sala);
+  setDeleteModalOpen(true);
+};
+
+const confirmDelete = async () => {
+  if (salaSelecionada?.id) {
+    await excluirSala(salaSelecionada.id);
+    setDeleteModalOpen(false);
     setSalaSelecionada(null);
-    setModalOpen(true);
-  };
+  }
+};
 
-  const handleEdit = (sala: any) => {
-    setSalaSelecionada(sala);
-    setModalOpen(true);
-  };
-
-  const handleDelete = (sala: any) => {
-    setSalaSelecionada(sala);
-    setDeleteModalOpen(true);
-  };
-
-  const confirmDelete = async () => {
-    if (salaSelecionada?.id) {
-      await excluirSala(salaSelecionada.id);
-      setDeleteModalOpen(false);
-      setSalaSelecionada(null);
-    }
-  };
-
-  const handleSave = async (sala: any) => {
-    if (sala.id) {
-      await editarSala(sala.id, sala);
-    } else {
-      await cadastrarSala(sala);
-    }
-    setModalOpen(false);
-    setSalaSelecionada(null);
-  };
+const handleSave = async (sala: Sala) => {
+  if (sala.id) {
+    await editarSala(sala.id, sala);
+  } else {
+    await cadastrarSala(sala);
+  }
+  setModalOpen(false);
+  setSalaSelecionada(null);
+};
 
   return (
     <Section>

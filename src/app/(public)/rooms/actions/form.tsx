@@ -39,14 +39,14 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
     <div className="flex flex-col gap-4 py-2">
       {[
         {
-          name: "nome_sala",
-          label: "Nome da Sala",
-          placeholder: "ex: Sala 1",
+          name: "nome",
+          label: "Nome do Laboratório",
+          placeholder: "ex: Laboratório de Informática",
         },
         {
-          name: "capacidade",
-          label: "Capacidade",
-          placeholder: "ex: 30 Alunos",
+          name: "curso_associado",
+          label: "Curso Associado",
+          placeholder: "ex: Engenharia da Computação",
         },
       ].map((field) => (
         <div key={field.name} className="flex flex-col gap-2 w-full">

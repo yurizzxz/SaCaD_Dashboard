@@ -16,8 +16,8 @@ export function Modal({
 }: any) {
   const [formData, setFormData] = useState({
     id: 0,
-    nome_sala: "",
-    capacidade: 0,
+    nome: "",
+    curso_associado: "",
     equipamentos: {},
   });
 
@@ -25,15 +25,15 @@ export function Modal({
     if (initialData) {
       setFormData({
         id: initialData.id || 0,
-        nome_sala: initialData.nome_sala || "",
-        capacidade: initialData.capacidade || 0,
+        nome: initialData.nome || "",
+        curso_associado: initialData.curso_associado || "",
         equipamentos: initialData.equipamentos || {},
       });
     } else {
       setFormData({
         id: 0,
-        nome_sala: "",
-        capacidade: 0,
+        nome: "",
+        curso_associado: "",
         equipamentos: {},
       });
     }
