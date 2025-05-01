@@ -63,3 +63,10 @@ export interface Sala {
   capacidade: number;
   equipamentos: Record<string, number>;
 }
+
+export interface Laboratorio {
+  id: number;
+  nome: string;
+  curso_associado: string;
+  equipamentos: Record<string, number>;
+}

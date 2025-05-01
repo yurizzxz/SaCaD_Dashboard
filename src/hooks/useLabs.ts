@@ -1,12 +1,13 @@
 'use client';
 
+import { Laboratorio } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const API_URL = process.env.NEXT_PUBLIC_LABS_URL;
 
 export function useLabs() {
-  const [labs, setLabs] = useState<any[]>([]);
+  const [labs, setLabs] = useState<Laboratorio[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,7 +30,7 @@ export function useLabs() {
     }
   };
 
-  const cadastrarLab = async (novoLab: Partial<any>) => {
+  const cadastrarLab = async (novoLab: Partial<Laboratorio>) => {
     try {
       const res = await fetch(API_URL!, {
         method: "POST",
@@ -48,7 +49,7 @@ export function useLabs() {
     }
   };
 
-  const editarLab = async (id: number, labAtualizado: Partial<any>) => {
+  const editarLab = async (id: number, labAtualizado: Partial<Laboratorio>) => {
     try {
       const res = await fetch(`${API_URL}/${id}`, {
         method: "PUT",
@@ -73,6 +74,8 @@ export function useLabs() {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Erro ao excluir laboratório");
+
+      toast.success("Laboratório excluído com sucesso!");
 
       await fetchLabs();
     } catch (err) {
