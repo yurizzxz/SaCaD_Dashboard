@@ -17,6 +17,8 @@
 /.next/
 /out/
 
+data.json
+
 # production
 /build
 

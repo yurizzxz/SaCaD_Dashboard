@@ -21,7 +21,6 @@ export function Modal({
     duracao_em_semestres: "",
     periodo: "",
     modalidade: "",
-    disciplinas: [],
     email_coordenador: "",
     forma_oferecimento: "",
   });
@@ -35,7 +34,6 @@ export function Modal({
         duracao_em_semestres: initialData.duracao_em_semestres?.toString() || "",
         periodo: initialData.periodo || "",
         modalidade: initialData.modalidade || "",
-        disciplinas: initialData.disciplinas || [],
         email_coordenador: initialData.email_coordenador || "",
         forma_oferecimento: initialData.forma_oferecimento || "",
       });
@@ -47,7 +45,6 @@ export function Modal({
         duracao_em_semestres: "",
         periodo: "",
         modalidade: "",
-        disciplinas: [],
         email_coordenador: "",
         forma_oferecimento: "",
       });

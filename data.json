@@ -122,32 +122,41 @@
     {
       "id": 1,
       "nome": "Administração de Empresas",
-      "modalidade": "Presencial",
       "area_tecnologica": "Gestão",
+      "duracao_em_semestres": "8",
+      "periodo": "Diurno",
+      "modalidade": "Presencial",
       "disciplinas_id": [
         1,
         2,
         3
       ],
-      "professores_id": [
-        1,
-        2,
-        3
-      ]
+      "email_coordenador": "coord@gmail.com",
+      "forma_oferecimento": "Semestral"
     },
     {
       "id": 2,
       "nome": "Engenharia da Computação",
-      "modalidade": "Presencial",
       "area_tecnologica": "Tecnologia",
+      "duracao_em_semestres": "6",
+      "periodo": "Vespertino",
+      "modalidade": "Presencial",
       "disciplinas_id": [
         4,
         5
       ],
-      "professores_id": [
-        4,
-        5
-      ]
+      "email_coordenador": "coord@gmail.com",
+      "forma_oferecimento": "Semestral"
+    },
+    {
+      "id": 3,
+      "nome": "Analise e Desenvolvimento de Sistemas",
+      "area_tecnologica": "Tecnologia da Informação",
+      "duracao_em_semestres": 8,
+      "periodo": "Noturno",
+      "modalidade": "Híbrido",
+      "email_coordenador": "coord@gmail.com",
+      "forma_oferecimento": "Anual"
     }
   ],
   "disciplinas": [

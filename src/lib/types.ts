@@ -22,6 +22,8 @@ export type Curso = {
   forma_oferecimento: string;
   modalidade: string;
   periodo: string;
+  disciplinas_id: number[];
+  professores_id: number[];
 };
 
 export type Professor = {

@@ -65,7 +65,11 @@ export default function Page() {
     { key: "modalidade", label: "Modalidade" },
     { key: "forma_oferecimento", label: "Forma de Oferecimento" },
     { key: "email_coordenador", label: "Email Coordenador" },
-    { key: "disciplinas", label: "Disciplinas", render: (row: any) => row.disciplinas?.length || 0 },
+    {
+      key: "disciplinas_id",
+      label: "Disciplinas",
+      render: (row: any) => <span>{row.disciplinas_id}</span>,
+    },
     { key: "duracao_em_semestres", label: "Semestres" },
     {
       key: "acoes",
@@ -83,10 +87,14 @@ export default function Page() {
     },
   ];
 
-  const data = cursos.map((cursos) => ({
-    ...cursos,
-    id: cursos.id,
+  const data = cursos.map((curso) => ({
+    ...curso,
+    id: curso.id,
+    disciplinas_id: Array.isArray(curso.disciplinas_id)
+      ? curso.disciplinas_id.length
+      : 0,
   }));
+  
   return (
     <Section>
       <Content>
