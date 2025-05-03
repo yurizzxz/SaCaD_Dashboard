@@ -66,7 +66,7 @@ export default function Page() {
 
   const columns = [
       { key: "id", label: "ID" },
-      { key: "nome_sala", label: "Nome da Sala" },
+      { key: "nome", label: "Nome do Laboratório" },
       { key: "capacidade", label: "Capacidade"  },
       { key: "curso_associado", label: "Curso Associado" },
       { key: "equipamentosString", label: "Equipamentos" },      {
@@ -87,7 +87,7 @@ export default function Page() {
 
     const data = labs.map((sala: Lab) => ({
       id: sala.id,
-      nome_sala: sala.nome,
+      nome: sala.nome,
       curso_associado: sala.curso_associado,
       capacidade: sala.capacidade,
       equipamentosString: Object.entries(sala.equipamentos || {})

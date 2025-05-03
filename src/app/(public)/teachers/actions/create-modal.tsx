@@ -17,6 +17,7 @@ export function Modal({
   const [formData, setFormData] = useState({
     nome: "",
     disciplina: "",
+    cpf: "",
     cursos: [],
     data_admissao: "",
     status: "",
@@ -28,6 +29,7 @@ export function Modal({
       setFormData({
         nome: initialData.nome || "",
         disciplina: initialData.disciplina || "",
+        cpf: initialData.cpf || "",
         cursos: initialData.cursos || [],
         data_admissao: initialData.data_admissao || "",
         status: initialData.status || "",
@@ -37,6 +39,7 @@ export function Modal({
       setFormData({
         nome: "",
         disciplina: "",
+        cpf: "",
         cursos: [],
         data_admissao: "",
         status: "",

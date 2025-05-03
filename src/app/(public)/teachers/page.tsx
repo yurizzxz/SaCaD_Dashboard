@@ -51,8 +51,9 @@ export default function Page() {
   const columns = [
     { key: "id", label: "ID" },
     { key: "nome", label: "Nome" },
+    { key: "cpf", label: "CPF" },
     { key: "disciplina", label: "Disciplina" },
-    { key: "cursos", label: "Cursos" },
+    { key: "cursos", label: "Cursos", render: (row: any) => row.cursos },
     { key: "email", label: "Email" },
     {
       key: "acoes",
@@ -72,16 +73,16 @@ export default function Page() {
 
   const data = teachers.map((professor) => ({
     ...professor,
-    cursos: professor.cursos
-      .map((curso) => `${curso.nome_curso} - Semestre ${curso.semestre}`)
-      .join(", "),
+    cursos: Array.isArray(professor.cursos)
+  ? professor.cursos.map((curso) => `${curso.nome_curso} - Semestre ${curso.semestre}`).join(", ")
+  : "",
   }));
 
   return (
     <Section>
       <Content>
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">Lista de Professores</h1>
+          <h1 className="text-2xl font-medium">Lista de Professores</h1>
           <Button onClick={handleAdd}>Adicionar Professor</Button>
         </div>
 

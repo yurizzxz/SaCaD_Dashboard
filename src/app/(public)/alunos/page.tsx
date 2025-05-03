@@ -81,7 +81,7 @@ export default function Page() {
     <Section>
       <Content>
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">Lista de Alunos</h1>
+          <h1 className="text-2xl font-medium">Lista de Alunos</h1>
           <Button onClick={handleAdd}>Adicionar Aluno</Button>
         </div>
 

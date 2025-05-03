@@ -67,122 +67,123 @@
     }
   ],
   "professores": [
+  {
+    "id": 1,
+    "nome": "Ana Silva",
+    "curso_id": [1],
+    "disciplinas_id": [1]
+  },
+  {
+    "id": 2,
+    "nome": "Carlos Oliveira",
+    "curso_id": [1],
+    "disciplinas_id": [2]
+  },
+  {
+    "id": 3,
+    "nome": "Juliana Pereira",
+    "curso_id": [1],
+    "disciplinas_id": [3]
+  },
+  {
+    "id": 4,
+    "nome": "Paulo Souza",
+    "curso_id": [2],
+    "disciplinas_id": [5]
+  },
+  {
+    "id": 5,
+    "nome": "Roberta Costa",
+    "curso_id": [2],
+    "disciplinas_id": [4]
+  }
+],
+  "cursos": [
+  {
+    "id": 1,
+    "nome": "Administração de Empresas",
+    "modalidade": "Presencial",
+    "area_tecnologica": "Gestão",
+    "disciplinas_id": [1, 2, 3],
+    "professores_id": [1, 2, 3]
+  },
+  {
+    "id": 2,
+    "nome": "Engenharia da Computação",
+    "modalidade": "Presencial",
+    "area_tecnologica": "Tecnologia",
+    "disciplinas_id": [4, 5],
+    "professores_id": [4, 5]
+  }
+],
+  "disciplinas": [
     {
       "id": 1,
-      "nome": "Paulo Henrique",
-      "disciplina": "Matemática Discreta",
-      "data_admissao": "2020-02-10",
-      "status": "Ativo",
-      "cursos": [
-        {
-          "nome_curso": "Engenharia da Computação",
-          "semestre": 4,
-          "aulas_teoricas": 30,
-          "aulas_praticas": 10
-        }
-      ],
-      "email": "paulo.henrique@exemplo.com",
-      "telefone": "(11) 92345-6789"
+      "nome": "Introdução à Administração",
+      "aulas_teoricas": 30,
+      "aulas_praticas": 15,
+      "sigla": "IA",
+      "curso": "Administração de Empresas",
+      "professor": "Professor A",
+      "semestre": 1,
+      "area_tecnologica": "Gestão",
+      "modalidade": "Presencial",
+      "qtd_aulas": 45
     },
     {
       "id": 2,
-      "nome": "Juliana Souza",
-      "disciplina": "Gestão de Negócios",
-      "data_admissao": "2019-05-15",
-      "status": "Ativo",
-      "cursos": [
-        {
-          "nome_curso": "Administração de Empresas",
-          "semestre": 2,
-          "aulas_teoricas": 20,
-          "aulas_praticas": 5
-        }
-      ],
-      "email": "juliana.souza@exemplo.com",
-      "telefone": "(11) 93456-7890"
+      "nome": "Contabilidade Básica",
+      "aulas_teoricas": 40,
+      "aulas_praticas": 10,
+      "sigla": "CB",
+      "curso": "Administração de Empresas",
+      "professor": "Professor B",
+      "semestre": 1,
+      "area_tecnologica": "Gestão",
+      "modalidade": "Presencial",
+      "qtd_aulas": 50
     },
     {
       "id": 3,
-      "nome": "Ricardo Alves",
-      "disciplina": "Algoritmos e Estruturas de Dados",
-      "data_admissao": "2018-03-01",
-      "status": "Afastado",
-      "cursos": [
-        {
-          "nome_curso": "Engenharia da Computação",
-          "semestre": 3,
-          "aulas_teoricas": 40,
-          "aulas_praticas": 20
-        }
-      ],
-      "email": "ricardo.alves@exemplo.com",
-      "telefone": "(11) 94567-8901"
+      "nome": "Gestão de Projetos",
+      "aulas_teoricas": 35,
+      "aulas_praticas": 15,
+      "sigla": "GP",
+      "curso": "Administração de Empresas",
+      "professor": "Professor C",
+      "semestre": 2,
+      "area_tecnologica": "Gestão",
+      "modalidade": "Presencial",
+      "qtd_aulas": 50
     },
     {
       "id": 4,
-      "nome": "Fernanda Oliveira",
-      "disciplina": "Marketing Digital",
-      "data_admissao": "2021-09-10",
-      "status": "Ativo",
-      "cursos": [
-        {
-          "nome_curso": "Administração de Empresas",
-          "semestre": 1,
-          "aulas_teoricas": 25,
-          "aulas_praticas": 15
-        }
-      ],
-      "email": "fernanda.oliveira@exemplo.com",
-      "telefone": "(11) 96789-1234"
-    }
-  ],
-  "cursos": [
-    {
-      "id": 2,
-      "nome": "Administração de Empresas",
-      "area_tecnologica": "Gestão e Negócios",
-      "duracao_em_semestres": "8",
-      "periodo": "Tarde",
-      "modalidade": "Híbrido",
-      "disciplinas": [
-        {
-          "id": 5,
-          "nome": "Gestão de Negócios",
-          "aulas_teoricas": 20,
-          "aulas_praticas": 5
-        },
-        {
-          "id": 6,
-          "nome": "Marketing Digital",
-          "aulas_teoricas": 15,
-          "aulas_praticas": 5
-        },
-        {
-          "id": 7,
-          "nome": "Gestão de Projetos",
-          "professor": "Ricardo Alves",
-          "curso:": "Administração de Empresas",
-          "modalidade": "Presencial",
-          "area_tecnologica": "Gestão e Negócios",
-          "aulas_teoricas": 30,
-          "aulas_praticas": 10
-        }
-      ],
-      "email_coordenador": "coord@gmail.com",
-      "forma_oferecimento": "Semestral"
+      "nome": "Lógica de Programação",
+      "aulas_teoricas": 40,
+      "aulas_praticas": 20,
+      "sigla": "LP",
+      "curso": "Engenharia da Computação",
+      "professor": "Professor E",
+      "semestre": 1,
+      "area_tecnologica": "Tecnologia",
+      "modalidade": "Presencial",
+      "qtd_aulas": 60
     },
     {
-      "id": 4,
-      "nome": "Engenharia da Computação",
-      "area_tecnologica": "Tecnologia da Informação",
-      "duracao_em_semestres": 8,
-      "periodo": "Matutino",
-      "modalidade": "Híbrido",
-      "disciplinas": [],
-      "email_coordenador": "coord@gmail.com",
-      "forma_oferecimento": "Anual"
+      "id": 5,
+      "nome": "Estruturas de Dados",
+      "aulas_teoricas": 35,
+      "aulas_praticas": 25,
+      "sigla": "ED",
+      "curso": "Engenharia da Computação",
+      "professor": "Professor D",
+      "semestre": 2,
+      "area_tecnologica": "Tecnologia",
+      "modalidade": "Presencial",
+      "qtd_aulas": 60
     }
   ],
+
   "salas": [
     {
       "id": 1,

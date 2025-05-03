@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Disciplina } from "@/lib/types";
 
-const API_URL = process.env.NEXT_PUBLIC_CURSOS_URL;
+const API_URL = process.env.NEXT_PUBLIC_DISCIPLINAS_URL;
 
 export function useDisciplinas() {
   const [disciplinas, setDisciplinas] = useState<Disciplina[]>([]);
@@ -22,11 +22,16 @@ export function useDisciplinas() {
       if (!res.ok) throw new Error("Erro ao buscar cursos");
 
       const data = await res.json();
+      console.log("Dados da API:", data); 
+
       const allDisciplinas = data.flatMap(
         (curso: { disciplinas: Disciplina[] }) => curso.disciplinas
       );
+      console.log("Disciplinas extraídas:", allDisciplinas); 
+
       setDisciplinas(allDisciplinas);
     } catch (err) {
+      console.error("Erro ao buscar disciplinas:", err); 
       setError("Erro ao buscar disciplinas");
     } finally {
       setLoading(false);
@@ -50,6 +55,7 @@ export function useDisciplinas() {
       toast.success("Disciplina cadastrada com sucesso!");
       await fetchDisciplinas();
     } catch (err) {
+      console.error("Erro ao cadastrar disciplina:", err);
       setError("Erro ao cadastrar disciplina");
     }
   };
@@ -75,6 +81,7 @@ export function useDisciplinas() {
       toast.success("Disciplina editada com sucesso!");
       await fetchDisciplinas();
     } catch (err) {
+      console.error("Erro ao editar disciplina:", err); 
       setError("Erro ao editar disciplina");
     }
   };
@@ -82,17 +89,17 @@ export function useDisciplinas() {
   const excluirDisciplina = async (cursoId: number, disciplinaId: number) => {
     try {
       const res = await fetch(
-        API_URL!,
+        `${API_URL}/${cursoId}/${disciplinaId}`,
         {
           method: "DELETE",
         }
       );
       if (!res.ok) throw new Error("Erro ao excluir disciplina");
 
-      toast.success("Disciplina excluida com sucesso!");
-
+      toast.success("Disciplina excluída com sucesso!");
       await fetchDisciplinas();
     } catch (err) {
+      console.error("Erro ao excluir disciplina:", err);
       setError("Erro ao excluir disciplina");
     }
   };
