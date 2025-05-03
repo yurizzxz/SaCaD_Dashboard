@@ -24,10 +24,10 @@ export function ConfirmDeleteModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Excluir sala</DialogTitle>
+          <DialogTitle>Excluir Laboratório</DialogTitle>
         </DialogHeader>
         <p>
-          Tem certeza que deseja excluir o sala <strong>{sala?.nome}</strong>?
+          Tem certeza que deseja excluir o laboratório <strong>{sala?.nome}</strong>?
         </p>
         <DialogFooter className="mt-4">
           <Button variant="outline" onClick={() => onOpenChange(false)}>

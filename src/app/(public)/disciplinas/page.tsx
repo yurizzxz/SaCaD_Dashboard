@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState } from "react";
 import { useDisciplinas } from "@/hooks/useDisciplina";
 import { Modal as DisciplinaModal } from "./actions/create-modal";
@@ -10,29 +10,36 @@ import { Section, Content } from "@/components/section";
 import { Disciplina } from "@/lib/types";
 
 export default function Page() {
-  const { disciplinas, cadastrarDisciplina, editarDisciplina, excluirDisciplina, loading, error } = useDisciplinas();
+  const {
+    disciplinas,
+    cadastrarDisciplina,
+    editarDisciplina,
+    excluirDisciplina,
+    loading,
+    error,
+  } = useDisciplinas();
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [disciplinaSelecionada, setDisciplinaSelecionada] = useState<Disciplina | null>(null);
+  const [disciplinaSelecionada, setDisciplinaSelecionada] =
+    useState<Disciplina | null>(null);
 
   const handleAdd = () => {
     setDisciplinaSelecionada(null);
     setModalOpen(true);
   };
 
-  const handleEdit = (disciplina: any) => {
+  const handleEdit = (disciplina: Disciplina) => {
     setDisciplinaSelecionada(disciplina);
     setModalOpen(true);
   };
 
-  const handleDelete = (disciplina: any) => {
+  const handleDelete = (disciplina: Disciplina) => {
     setDisciplinaSelecionada(disciplina);
     setDeleteModalOpen(true);
   };
-
   const confirmDelete = async () => {
     if (disciplinaSelecionada?.id) {
-      await excluirDisciplina, disciplinaSelecionada.id, (disciplinaSelecionada.id);
+      await excluirDisciplina(disciplinaSelecionada.id);
       setDeleteModalOpen(false);
       setDisciplinaSelecionada(null);
     }
@@ -40,9 +47,9 @@ export default function Page() {
 
   const handleSave = async (disciplina: any) => {
     if (disciplina.id) {
-      await editarDisciplina(disciplina.id, disciplina, disciplina.id);
+      await editarDisciplina(disciplina.id, disciplina);
     } else {
-      await cadastrarDisciplina(disciplina, disciplina.id);
+      await cadastrarDisciplina(disciplina);
     }
     setModalOpen(false);
     setDisciplinaSelecionada(null);
@@ -51,6 +58,8 @@ export default function Page() {
   const columns = [
     { key: "id", label: "ID" },
     { key: "nome", label: "Nome" },
+    { key: "sigla", label: "Sigla" },
+    { key: "semestre", label: "Semestre" },
     { key: "professor", label: "Professor" },
     { key: "curso", label: "Curso" },
     { key: "area_tecnologica", label: "Eixo Tecnológico" },
@@ -73,8 +82,20 @@ export default function Page() {
     },
   ];
 
-  const data = disciplinas.map((d: Disciplina) => ({
-    ...d,
+  const data = disciplinas.map((disciplina: Disciplina) => ({
+    id: disciplina.id,
+    nome: disciplina.nome,
+    professor: Array.isArray(disciplina.professor)
+      ? disciplina.professor.join(", ")
+      : "",
+    curso: disciplina.curso,
+    area_tecnologica: disciplina.area_tecnologica,
+    aulas_teoricas: disciplina.aulas_teoricas,
+    aulas_praticas: disciplina.aulas_praticas,
+    modalidade: disciplina.modalidade,
+    semestre: disciplina.semestre,
+    qtd_aulas: disciplina.qtd_aulas,
+    sigla: disciplina.sigla,
   }));
 
   return (

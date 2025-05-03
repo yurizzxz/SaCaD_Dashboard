@@ -45,13 +45,14 @@ export interface Disciplina {
   aulas_teoricas: number;
   aulas_praticas: number;
   sigla: string;
-  curso: string;
-  professor: string;
+  curso: number[]; 
+  professor: number[]; 
   semestre: number;
   area_tecnologica: string;
   modalidade: string;
   qtd_aulas: number;
 }
+
 
 export interface Sala {
   id: number;

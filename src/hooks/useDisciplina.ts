@@ -18,88 +18,70 @@ export function useDisciplinas() {
   const fetchDisciplinas = async () => {
     setLoading(true);
     try {
-      const res = await fetch(API_URL!);
-      if (!res.ok) throw new Error("Erro ao buscar cursos");
+      const res = await fetch(`${API_URL}`);
+      if (!res.ok) throw new Error("Erro ao buscar Disciplinas");
 
-      const data = await res.json();
-      console.log("Dados da API:", data); 
-
-      const allDisciplinas = data.flatMap(
-        (curso: { disciplinas: Disciplina[] }) => curso.disciplinas
-      );
-      console.log("Disciplinas extraídas:", allDisciplinas); 
-
-      setDisciplinas(allDisciplinas);
+      const data: Disciplina[] = await res.json();
+      setDisciplinas(data);
     } catch (err) {
-      console.error("Erro ao buscar disciplinas:", err); 
-      setError("Erro ao buscar disciplinas");
+      setError("Erro ao buscar Disciplinas");
     } finally {
       setLoading(false);
     }
   };
 
-  const cadastrarDisciplina = async (
-    novoCursoId: number,
-    novaDisciplina: Partial<Disciplina>
-  ) => {
+  const cadastrarDisciplina = async (novoLab: Partial<Disciplina>) => {
     try {
       const res = await fetch(API_URL!, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(novaDisciplina),
+        body: JSON.stringify(novoLab),
       });
       if (!res.ok) throw new Error("Erro ao cadastrar disciplina");
 
-      toast.success("Disciplina cadastrada com sucesso!");
+      toast.success("Disciplina cadastrado com sucesso!");
+
       await fetchDisciplinas();
     } catch (err) {
-      console.error("Erro ao cadastrar disciplina:", err);
       setError("Erro ao cadastrar disciplina");
     }
   };
 
   const editarDisciplina = async (
-    cursoId: number,
-    disciplinaId: number,
-    disciplinaAtualizada: Partial<Disciplina>
+    id: number,
+    labAtualizado: Partial<Disciplina>
   ) => {
     try {
-      const res = await fetch(
-        `${API_URL}/${cursoId}/${disciplinaId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(disciplinaAtualizada),
-        }
-      );
+      const res = await fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(labAtualizado),
+      });
       if (!res.ok) throw new Error("Erro ao editar disciplina");
 
       toast.success("Disciplina editada com sucesso!");
+
       await fetchDisciplinas();
     } catch (err) {
-      console.error("Erro ao editar disciplina:", err); 
       setError("Erro ao editar disciplina");
     }
   };
 
-  const excluirDisciplina = async (cursoId: number, disciplinaId: number) => {
+  const excluirDisciplina = async (id: number) => {
     try {
-      const res = await fetch(
-        `${API_URL}/${cursoId}/${disciplinaId}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const res = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+      });
       if (!res.ok) throw new Error("Erro ao excluir disciplina");
 
       toast.success("Disciplina excluída com sucesso!");
+
       await fetchDisciplinas();
     } catch (err) {
-      console.error("Erro ao excluir disciplina:", err);
       setError("Erro ao excluir disciplina");
     }
   };
