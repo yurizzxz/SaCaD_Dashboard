@@ -1,14 +1,12 @@
 "use client";
-import { useState } from "react";
-import { useTeachers } from "@/hooks/teachers/useTeachers";
 import { Modal as TeacherModal } from "./actions/create-modal";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { DataTable } from "@/components/table/data-table";
 import { Button } from "@/components/ui/button";
 import { Section, Content } from "@/components/section";
-import { Professor as Teacher } from "@/lib/types";
 import { useTeachersHooks } from "@/hooks/teachers/actions";
+import { GenericModal } from "@/components/generic-modal";
 
 export default function Page() {
   const {
@@ -23,6 +21,9 @@ export default function Page() {
     professorSelecionado,
     deleteModalOpen,
     setDeleteModalOpen,
+    composicaoOpen,
+    setComposicaoOpen,
+    verComposicaoCurricular,
   } = useTeachersHooks();
 
   const columns = [
@@ -30,8 +31,17 @@ export default function Page() {
     { key: "nome", label: "Nome" },
     { key: "cpf", label: "CPF" },
     { key: "email", label: "Email" },
-    { key: "disciplina", label: "Disciplina" },
-    { key: "cursos", label: "Cursos", render: (row: any) => row.cursos },
+    { key: "telefone", label: "Telefone" },
+    { key: "status", label: "Status" },
+    {
+      key: "cursos",
+      label: "Composição Curricular",
+      render: (row: any) => (
+        <Button onClick={() => verComposicaoCurricular(row)}>
+          Ver Composição Curricular
+        </Button>
+      ),
+    },
 
     {
       key: "acoes",
@@ -51,11 +61,6 @@ export default function Page() {
 
   const data = teachers.map((professor) => ({
     ...professor,
-    cursos: Array.isArray(professor.cursos)
-      ? professor.cursos
-          .map((curso) => `${curso.nome_curso} - Semestre ${curso.semestre}`)
-          .join(", ")
-      : "",
   }));
 
   return (
@@ -80,6 +85,24 @@ export default function Page() {
           onOpenChange={setDeleteModalOpen}
           onConfirm={confirmDelete}
           professor={professorSelecionado}
+        />
+
+        <GenericModal
+          open={composicaoOpen}
+          onOpenChange={setComposicaoOpen}
+          title="Composição Curricular"
+          items={
+            Array.isArray(professorSelecionado?.curso_id) &&
+            Array.isArray(professorSelecionado?.disciplinas_id)
+              ? professorSelecionado.curso_id.map(
+                  (curso: number, index: number) => {
+                    const disciplina =
+                      professorSelecionado?.disciplinas_id?.[index];
+                    return `Disciplina: ${disciplina} - Curso: ${curso} `;
+                  }
+                )
+              : []
+          }
         />
       </Content>
     </Section>

@@ -32,7 +32,9 @@ export type Professor = {
   disciplina: string;
   data_admissao: string;
   status: string;
-  cursos: Curso[];
+  curso_id: number[];
+  cpf: string;
+  disciplinas_id: number[];
   email: string;
   telefone: string;
 };

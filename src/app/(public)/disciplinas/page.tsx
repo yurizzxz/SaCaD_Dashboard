@@ -7,13 +7,6 @@ import { DataTable } from "@/components/table/data-table";
 import { Button } from "@/components/ui/button";
 import { Section, Content } from "@/components/section";
 import { Disciplina } from "@/lib/types";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { GenericModal } from "@/components/generic-modal";
 
 export default function Page() {
