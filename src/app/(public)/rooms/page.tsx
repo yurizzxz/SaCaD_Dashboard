@@ -1,28 +1,52 @@
 "use client";
 import { Content, Section } from "@/components/section";
-import { useSalas } from "@/hooks/useSalas";
 import { DataTable } from "@/components/table/data-table";
 import { Modal as SalaModal } from "./actions/create-modal";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Sala } from "@/lib/types";
+import { useSalasHooks } from "@/hooks/salas/actions";
 
 export default function Page() {
-  const { salas, loading, error, cadastrarSala, editarSala, excluirSala } =
-    useSalas();
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [salaSelecionada, setSalaSelecionada] = useState<Sala | null>(null);
+  const {
+    salas,
+    loading,
+    error,
+    handleAdd,
+    handleEdit,
+    handleDelete,
+    confirmDelete,
+    handleSave,
+    modalOpen,
+    setModalOpen,
+    salaSelecionada,
+    setSalaSelecionada,
+    deleteModalOpen,
+    setDeleteModalOpen,
+  } = useSalasHooks();
 
   const columns = [
     { key: "id", label: "ID" },
     { key: "nome_sala", label: "Nome da Sala" },
-    { key: "capacidade", label: "Capacidade" },
-    { key: "equipamentosString", label: "Equipamentos" },
+    {
+      key: "capacidade",
+      label: "Capacidade",
+      render: (row: any) => <>{row.capacidade} Alunos</>,
+    },
     { key: "predio", label: "Predio" },
-      { key: "bloco", label: "Bloco" },
+    { key: "bloco", label: "Bloco" },
+    { key: "curso_associado", label: "Curso Associado" },
+    {
+      key: "equipamentosString",
+      label: "Equipamentos",
+      render: (row: any) => (
+        <Button variant="default" onClick={() => handleEdit(row)}>
+          Ver Equipamentos
+        </Button>
+      ),
+    },
+
     {
       key: "acoes",
       label: "Ações",
@@ -42,48 +66,15 @@ export default function Page() {
     id: sala.id,
     nome_sala: sala.nome_sala,
     capacidade: sala.capacidade,
+    curso_associado: sala.curso_associado,
+    predio: sala.predio,
+    bloco: sala.bloco,
     equipamentosString: Object.entries(sala.equipamentos || {})
-      .filter(([equip, qtd]) => equip && qtd > 0) 
+      .filter(([equip, qtd]) => equip && qtd > 0)
       .map(([equip, qtd]: [string, number]) => `${equip}: ${qtd}`)
       .join(", "),
     equipamentos: sala.equipamentos,
   }));
-  
-  
-  
-
- const handleAdd = () => {
-  setSalaSelecionada(null);
-  setModalOpen(true);
-};
-
-const handleEdit = (sala: Sala) => {
-  setSalaSelecionada(sala);
-  setModalOpen(true);
-};
-
-const handleDelete = (sala: Sala) => {
-  setSalaSelecionada(sala);
-  setDeleteModalOpen(true);
-};
-
-const confirmDelete = async () => {
-  if (salaSelecionada?.id) {
-    await excluirSala(salaSelecionada.id);
-    setDeleteModalOpen(false);
-    setSalaSelecionada(null);
-  }
-};
-
-const handleSave = async (sala: Sala) => {
-  if (sala.id) {
-    await editarSala(sala.id, sala);
-  } else {
-    await cadastrarSala(sala);
-  }
-  setModalOpen(false);
-  setSalaSelecionada(null);
-};
 
   return (
     <Section>
@@ -91,17 +82,13 @@ const handleSave = async (sala: Sala) => {
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <h1 className="text-2xl font-medium">Lista de Salas</h1>
           <div className="flex gap-3 flex-wrap">
-            <Button onClick={handleAdd}>
-              Adicionar Sala
-            </Button>
+            <Button onClick={handleAdd}>Adicionar Sala</Button>
           </div>
         </div>
 
         {loading && <p>Carregando salas...</p>}
         {error && <p className="text-red-500">{error}</p>}
-        {!loading && !error && (
-          <DataTable columns={columns} data={data} />
-        )}
+        {!loading && !error && <DataTable columns={columns} data={data} />}
 
         <SalaModal
           open={modalOpen}

@@ -39,7 +39,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
     <div className="flex flex-col gap-4 py-2">
       {[
         {
-          name: "nome",
+          name: "nome_sala",
           label: "Nome da Sala",
           placeholder: "ex: Sala 1",
         },

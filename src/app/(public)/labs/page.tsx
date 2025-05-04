@@ -28,7 +28,7 @@ export default function Page() {
   const columns = [
     { key: "id", label: "ID" },
     { key: "nome", label: "Nome do Laboratório" },
-    { key: "capacidade", label: "Capacidade" },
+    { key: "capacidade", label: "Capacidade", render: (row: any) => (<>{row.capacidade} Alunos</>) },
     { key: "predio", label: "Predio" },
     { key: "bloco", label: "Bloco" },
     { key: "curso_associado", label: "Curso Associado" },
