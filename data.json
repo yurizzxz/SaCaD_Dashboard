@@ -1,0 +1,275 @@
+{
+  "alunos": [
+    {
+      "nome": "Lucas Fernandes",
+      "cpf": "123.456.789-10",
+      "curso": "Engenharia da Computação",
+      "status": "Ativo",
+      "semestre": 4,
+      "email": "lucas.fernandes@exemplo.com",
+      "telefone": "(11) 98765-4321",
+      "endereco": "Rua Exemplo, 45, Bairro X, Cidade Y",
+      "data_nascimento": "1998-07-15",
+      "data_matricula": "2021-02-01",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "nome": "Mariana Castro",
+      "data_nascimento": "2000-03-22",
+      "curso": "Administração de Empresas",
+      "semestre": 2,
+      "status": "Ativo",
+      "data_matricula": "2023-01-20",
+      "email": "mariana.castro@exemplo.com",
+      "telefone": "(11) 91234-5678",
+      "endereco": "Rua Teste, 89, Bairro Z, Cidade W",
+      "cpf": "234.567.890-11"
+    },
+    {
+      "id": 3,
+      "nome": "Carlos Silva",
+      "data_nascimento": "1999-08-10",
+      "curso": "Engenharia da Computação",
+      "semestre": 3,
+      "status": "Ativo",
+      "data_matricula": "2022-02-15",
+      "email": "carlos.silva@exemplo.com",
+      "telefone": "(11) 92345-6789",
+      "endereco": "Rua Centro, 123, Bairro A, Cidade X",
+      "cpf": "345.678.901-12"
+    },
+    {
+      "id": 4,
+      "nome": "Ana Souza",
+      "data_nascimento": "2001-05-25",
+      "curso": "Administração de Empresas",
+      "semestre": 1,
+      "status": "Ativo",
+      "data_matricula": "2024-03-10",
+      "email": "ana.souza@exemplo.com",
+      "telefone": "(11) 93456-7890",
+      "endereco": "Avenida Exemplo, 100, Bairro Y, Cidade Z",
+      "cpf": "456.789.012-13"
+    },
+    {
+      "id": 5,
+      "nome": "Pedro Costa",
+      "data_nascimento": "2000-11-30",
+      "curso": "Administração de Empresas",
+      "semestre": 2,
+      "status": "Suspenso",
+      "data_matricula": "2022-06-15",
+      "email": "pedro.costa@exemplo.com",
+      "telefone": "(11) 96543-2109",
+      "endereco": "Rua Fictícia, 110, Bairro B, Cidade V",
+      "cpf": "567.890.123-14"
+    }
+  ],
+  "professores": [
+  {
+    "id": 1,
+    "nome": "Ana Silva",
+    "curso_id": [1],
+    "disciplinas_id": [1]
+  },
+  {
+    "id": 2,
+    "nome": "Carlos Oliveira",
+    "curso_id": [1],
+    "disciplinas_id": [2]
+  },
+  {
+    "id": 3,
+    "nome": "Juliana Pereira",
+    "curso_id": [1],
+    "disciplinas_id": [3]
+  },
+  {
+    "id": 4,
+    "nome": "Paulo Souza",
+    "curso_id": [2],
+    "disciplinas_id": [5]
+  },
+  {
+    "id": 5,
+    "nome": "Roberta Costa",
+    "curso_id": [2],
+    "disciplinas_id": [4]
+  }
+],
+  "cursos": [
+  {
+    "id": 1,
+    "nome": "Administração de Empresas",
+    "modalidade": "Presencial",
+    "area_tecnologica": "Gestão",
+    "disciplinas_id": [1, 2, 3],
+    "professores_id": [1, 2, 3]
+  },
+  {
+    "id": 2,
+    "nome": "Engenharia da Computação",
+    "modalidade": "Presencial",
+    "area_tecnologica": "Tecnologia",
+    "disciplinas_id": [4, 5],
+    "professores_id": [4, 5]
+  }
+],
+  "disciplinas": [
+    {
+      "id": 1,
+      "nome": "Introdução à Administração",
+      "aulas_teoricas": 30,
+      "aulas_praticas": 15,
+      "sigla": "IA",
+      "curso": [1],
+      "professor": [1, 2],
+      "semestre": 1,
+      "area_tecnologica": "Gestão",
+      "modalidade": "Presencial",
+      "qtd_aulas": 45
+    },
+    {
+      "id": 2,
+      "nome": "Contabilidade Básica",
+      "aulas_teoricas": 40,
+      "aulas_praticas": 10,
+      "sigla": "CB",
+      "curso": [1],
+      "professor": [1, 2],
+      "semestre": 1,
+      "area_tecnologica": "Gestão",
+      "modalidade": "Presencial",
+      "qtd_aulas": 50
+    },
+    {
+      "id": 3,
+      "nome": "Gestão de Projetos",
+      "aulas_teoricas": 35,
+      "aulas_praticas": 15,
+      "sigla": "GP",
+      "curso": [1],
+      "professor": [1, 2],
+      "semestre": 2,
+      "area_tecnologica": "Gestão",
+      "modalidade": "Presencial",
+      "qtd_aulas": 50
+    },
+    {
+      "id": 4,
+      "nome": "Lógica de Programação",
+      "aulas_teoricas": 40,
+      "aulas_praticas": 20,
+      "sigla": "LP",
+      "curso": [2],
+      "professor": [1, 2],
+      "semestre": 1,
+      "area_tecnologica": "Tecnologia",
+      "modalidade": "Presencial",
+      "qtd_aulas": 60
+    },
+    {
+      "id": 5,
+      "nome": "Estruturas de Dados",
+      "aulas_teoricas": 35,
+      "aulas_praticas": 25,
+      "sigla": "ED",
+      "curso": [2],
+      "professor": [1, 2],
+      "semestre": 2,
+      "area_tecnologica": "Tecnologia",
+      "modalidade": "Presencial",
+      "qtd_aulas": 60
+    }
+  ],
+
+  "salas": [
+    {
+      "id": 1,
+      "nome_sala": "Sala 101",
+      "capacidade": 40,
+      "equipamentos": {
+        "Projetor": 1,
+        "Computador": 10,
+        "Quadro branco": 1
+      }
+    },
+    {
+      "id": 2,
+      "nome_sala": "Sala 202",
+      "capacidade": 30,
+      "equipamentos": {
+        "Computadores": 15,
+        "Quadro Digital": 1
+      }
+    },
+    {
+      "id": 3,
+      "nome_sala": "Sala 303",
+      "capacidade": 20,
+      "equipamentos": {
+        "Computador": 10,
+        "Projetor": 1,
+        "Quadro negro": 1
+      }
+    }
+  ],
+  "laboratorios": [
+    {
+      "id": 1,
+      "nome": "Laboratório de Computação",
+      "curso_associado": "Engenharia da Computação",
+      "equipamentos": {
+        "Computadores": 20,
+        "Placas de Circuito": 10,
+        "Máquinas de Solda": 5
+      },
+      "capacidade": "40"
+    },
+    {
+      "id": 2,
+      "nome": "Laboratório de Marketing",
+      "curso_associado": "Administração de Empresas",
+      "equipamentos": {
+        "Computadores": 15,
+        "Câmeras": 10,
+        "Projetor": 2
+      },
+      "capacidade": "50"
+    }
+  ],
+  "metricas": {
+    "matriculas_por_curso": {
+      "Engenharia da Computação": 50,
+      "Administração de Empresas": 60
+    },
+    "distribuicao_de_alunos_por_modalidade": {
+      "Presencial": 80,
+      "Híbrido": 45,
+      "EAD": 15
+    }
+  },
+  "relatorios": [
+    {
+      "id": 1,
+      "titulo": "Relatório de Matrículas por Curso",
+      "data": "2025-04-25",
+      "tipo": "Matrículas",
+      "conteudo": "Este relatório contém o número de matrículas por curso."
+    },
+    {
+      "id": 2,
+      "titulo": "Relatório de Desempenho Acadêmico",
+      "data": "2025-04-25",
+      "tipo": "Desempenho",
+      "conteudo": "Relatório com a média de notas dos alunos por curso e semestre."
+    }
+  ],
+  "configuracoes": {
+    "nome_universidade": "Universidade Exemplo",
+    "endereco": "Rua Universitária, 1000, Bairro Acadêmico, Cidade Z",
+    "email_contato": "contato@universidadeexemplo.com",
+    "telefone": "(11) 1234-5678"
+  }
+}
