@@ -43,7 +43,7 @@ export function ChartBarInteractive() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer className="aspect-auto h-[400px] w-full" config={chartConfig}>
+        <ChartContainer className="aspect-auto h-[450px] w-full" config={chartConfig}>
           <BarChart
             accessibilityLayer
             data={chartData}
