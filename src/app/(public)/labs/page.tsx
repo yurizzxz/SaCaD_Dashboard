@@ -1,14 +1,6 @@
 "use client";
 import { Content, Section } from "@/components/section";
 import { useLabs } from "@/hooks/useLabs";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-  CardDescription,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
@@ -68,6 +60,8 @@ export default function Page() {
       { key: "id", label: "ID" },
       { key: "nome", label: "Nome do Laboratório" },
       { key: "capacidade", label: "Capacidade"  },
+      { key: "predio", label: "Predio" },
+      { key: "bloco", label: "Bloco" },
       { key: "curso_associado", label: "Curso Associado" },
       { key: "equipamentosString", label: "Equipamentos" },      {
         key: "acoes",

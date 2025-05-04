@@ -40,13 +40,28 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
       {[
         {
           name: "nome",
-          label: "Nome do Laboratório",
-          placeholder: "ex: Laboratório de Informática",
+          label: "Nome da Sala",
+          placeholder: "ex: Sala 1",
         },
         {
           name: "curso_associado",
           label: "Curso Associado",
           placeholder: "ex: Engenharia da Computação",
+        },
+        {
+          name: "capacidade",
+          label: "Capacidade",
+          placeholder: "ex: 50",
+        },
+        {
+          name: "predio",
+          label: "Prédio",
+          placeholder: "ex: 1",
+        },
+        {
+          name: "bloco",
+          label: "Bloco",
+          placeholder: "ex: B",
         },
       ].map((field) => (
         <div key={field.name} className="flex flex-col gap-2 w-full">
@@ -85,7 +100,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
 
         <div>
           <p>Equipamentos:</p>
-          
+
           <div className="flex flex-wrap gap-2 mt-2">
             {Object.entries(formData.equipamentos || {}).map(
               ([equip, qtd]: any) => (

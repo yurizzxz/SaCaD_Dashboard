@@ -21,6 +21,8 @@ export default function Page() {
     { key: "nome_sala", label: "Nome da Sala" },
     { key: "capacidade", label: "Capacidade" },
     { key: "equipamentosString", label: "Equipamentos" },
+    { key: "predio", label: "Predio" },
+      { key: "bloco", label: "Bloco" },
     {
       key: "acoes",
       label: "Ações",

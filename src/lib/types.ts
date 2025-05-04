@@ -59,7 +59,9 @@ export interface Disciplina {
 export interface Sala {
   id: number;
   nome_sala: string;
+  bloco: string;
   capacidade: number;
+  predio: string;
   equipamentos: Record<string, number>;
 }
 
@@ -68,14 +70,10 @@ export interface Laboratorio {
   nome: string;
   capacidade: number;
   curso_associado: string;
+  bloco: string;
+  predio: string;
   equipamentos: Record<string, number>;
   horario: { dia: string, inicio: string, fim: string, professor_id: number, alunos_usando: string[] }[];
-}
-export interface Sala {
-  id: number;
-  nome_sala: string;
-  capacidade: number;
-  equipamentos: Record<string, number>;
 }
 
 export interface Laboratorio {

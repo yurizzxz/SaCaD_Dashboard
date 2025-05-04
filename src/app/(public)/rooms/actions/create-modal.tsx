@@ -19,6 +19,8 @@ export function Modal({
     nome: "",
     curso_associado: "",
     equipamentos: {},
+    bloco: "",
+    predio: "",
   });
 
   useEffect(() => {
@@ -28,6 +30,8 @@ export function Modal({
         nome: initialData.nome || "",
         curso_associado: initialData.curso_associado || "",
         equipamentos: initialData.equipamentos || {},
+        bloco: initialData.bloco || "",
+        predio: initialData.predio || "",
       });
     } else {
       setFormData({
@@ -35,6 +39,8 @@ export function Modal({
         nome: "",
         curso_associado: "",
         equipamentos: {},
+        bloco: "",
+        predio: "",
       });
     }
   }, [initialData]);
