@@ -7,7 +7,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 
-export function FiltroAlunos() {
+export function FilterSelect() {
   return (
     <div className="flex gap-2">
       <Select>
@@ -27,7 +27,7 @@ export function FiltroAlunos() {
         <SelectContent>
           <SelectItem value="todos">Todos</SelectItem>
           <SelectItem value="Ativo">Ativo</SelectItem>
-          <SelectItem value="Suspenso">Suspenso</SelectItem>
+          <SelectItem value="Trancado">Trancado</SelectItem>
         </SelectContent>
       </Select>
     </div>

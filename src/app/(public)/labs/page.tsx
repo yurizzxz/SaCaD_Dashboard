@@ -7,6 +7,7 @@ import { Modal as LabModal } from "./actions/create-modal";
 import { Laboratorio as Lab } from "@/lib/types";
 import { useLabsHooks } from "@/hooks/labs/actions";
 import { DataTable } from "@/components/table/data-table";
+import { FilterSelect } from "./filter";
 
 export default function Page() {
   const {
@@ -28,7 +29,11 @@ export default function Page() {
   const columns = [
     { key: "id", label: "ID" },
     { key: "nome", label: "Nome do Laboratório" },
-    { key: "capacidade", label: "Capacidade", render: (row: any) => (<>{row.capacidade} Alunos</>) },
+    {
+      key: "capacidade",
+      label: "Capacidade",
+      render: (row: any) => <>{row.capacidade} Alunos</>,
+    },
     { key: "predio", label: "Predio" },
     { key: "bloco", label: "Bloco" },
     { key: "curso_associado", label: "Curso Associado" },
@@ -36,7 +41,9 @@ export default function Page() {
       key: "equipamentosString",
       label: "Equipamentos",
       render: (row: any) => (
-        <Button variant="default" onClick={() => handleEdit(row)}>Ver Equipamentos</Button>
+        <Button variant="default" onClick={() => handleEdit(row)}>
+          Ver Equipamentos
+        </Button>
       ),
     },
     {
@@ -74,7 +81,10 @@ export default function Page() {
       <Content>
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <h1 className="text-2xl font-medium">Lista de Laboratórios</h1>
-          <Button onClick={handleAdd}>Novo Laboratório</Button>
+          <div className="flex gap-2 flex-wrap">
+            <FilterSelect />
+            <Button onClick={handleAdd}>Adicionar Laboratório</Button>
+          </div>
         </div>
 
         {loadingLabs && <p>Carregando laboratórios...</p>}

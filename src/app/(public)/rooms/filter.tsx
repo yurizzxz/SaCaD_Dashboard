@@ -7,7 +7,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 
-export function FiltroAlunos() {
+export function FilterSelect() {
   return (
     <div className="flex gap-2">
       <Select>
@@ -22,12 +22,22 @@ export function FiltroAlunos() {
       </Select>
       <Select>
         <SelectTrigger className="w-[160px]">
-          <SelectValue placeholder="Filtrar por Status" />
+          <SelectValue placeholder="Filtrar por Prédio" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="todos">Todos</SelectItem>
-          <SelectItem value="Ativo">Ativo</SelectItem>
-          <SelectItem value="Suspenso">Suspenso</SelectItem>
+          <SelectItem value="Predio A">Predio A</SelectItem>
+          <SelectItem value="Predio B">Predio B</SelectItem>
+        </SelectContent>
+      </Select>
+      <Select>
+        <SelectTrigger className="w-[160px]">
+          <SelectValue placeholder="Filtrar por Bloco" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="todos">Todos</SelectItem>
+          <SelectItem value="Bloco 1">Bloco A</SelectItem>
+          <SelectItem value="Bloco 2">Bloco B</SelectItem>
         </SelectContent>
       </Select>
     </div>

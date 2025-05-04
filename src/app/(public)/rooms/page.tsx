@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Sala } from "@/lib/types";
 import { useSalasHooks } from "@/hooks/salas/actions";
+import { FilterSelect } from "./filter";
 
 export default function Page() {
   const {
@@ -81,7 +82,8 @@ export default function Page() {
       <Content>
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <h1 className="text-2xl font-medium">Lista de Salas</h1>
-          <div className="flex gap-3 flex-wrap">
+          <div className="flex gap-2 flex-wrap">
+            <FilterSelect />
             <Button onClick={handleAdd}>Adicionar Sala</Button>
           </div>
         </div>

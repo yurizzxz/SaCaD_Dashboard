@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Section, Content } from "@/components/section";
 import { Disciplina } from "@/lib/types";
 import { GenericModal } from "@/components/generic-modal";
+import { FilterSelect } from "./filter";
 
 export default function Page() {
   const {
@@ -106,7 +107,11 @@ export default function Page() {
       <Content>
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <h1 className="text-2xl font-medium">Lista de Disciplinas</h1>
-          <Button onClick={handleAdd}>Criar Disciplina</Button>
+
+          <div className="flex flex-wrap gap-2">
+            <FilterSelect />
+            <Button onClick={handleAdd}>Criar Disciplina</Button>
+          </div>
         </div>
 
         {loading && <p>Carregando disciplinas...</p>}

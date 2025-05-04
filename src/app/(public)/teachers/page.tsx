@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Section, Content } from "@/components/section";
 import { useTeachersHooks } from "@/hooks/teachers/actions";
 import { GenericModal } from "@/components/generic-modal";
+import { FilterSelect } from "./filter";
 
 export default function Page() {
   const {
@@ -66,9 +67,13 @@ export default function Page() {
   return (
     <Section>
       <Content>
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between flex-wrap items-center mb-6">
           <h1 className="text-2xl font-medium">Lista de Professores</h1>
+          
+          <div className="flex flex-wrap gap-2">
+            <FilterSelect />
           <Button onClick={handleAdd}>Adicionar Professor</Button>
+          </div>
         </div>
 
         <DataTable columns={columns} data={data} />
