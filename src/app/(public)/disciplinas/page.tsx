@@ -1,6 +1,5 @@
 "use client";
-import { useState } from "react";
-import { useDisciplinas } from "@/hooks/useDisciplina";
+import { useDisciplinaHooks } from "@/hooks/disciplina/actions";
 import { Modal as DisciplinaModal } from "./actions/create-modal";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
@@ -8,64 +7,77 @@ import { DataTable } from "@/components/table/data-table";
 import { Button } from "@/components/ui/button";
 import { Section, Content } from "@/components/section";
 import { Disciplina } from "@/lib/types";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { GenericModal } from "@/components/generic-modal";
 
 export default function Page() {
   const {
     disciplinas,
-    cadastrarDisciplina,
-    editarDisciplina,
-    excluirDisciplina,
     loading,
     error,
-  } = useDisciplinas();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [disciplinaSelecionada, setDisciplinaSelecionada] =
-    useState<Disciplina | null>(null);
-
-  const handleAdd = () => {
-    setDisciplinaSelecionada(null);
-    setModalOpen(true);
-  };
-
-  const handleEdit = (disciplina: Disciplina) => {
-    setDisciplinaSelecionada(disciplina);
-    setModalOpen(true);
-  };
-
-  const handleDelete = (disciplina: Disciplina) => {
-    setDisciplinaSelecionada(disciplina);
-    setDeleteModalOpen(true);
-  };
-  const confirmDelete = async () => {
-    if (disciplinaSelecionada?.id) {
-      await excluirDisciplina(disciplinaSelecionada.id);
-      setDeleteModalOpen(false);
-      setDisciplinaSelecionada(null);
-    }
-  };
-
-  const handleSave = async (disciplina: any) => {
-    if (disciplina.id) {
-      await editarDisciplina(disciplina.id, disciplina);
-    } else {
-      await cadastrarDisciplina(disciplina);
-    }
-    setModalOpen(false);
-    setDisciplinaSelecionada(null);
-  };
+    modalOpen,
+    setModalOpen,
+    modalProfessoresOpen,
+    setModalProfessoresOpen,
+    modalCursosOpen,
+    setModalCursosOpen,
+    professoresSelecionados,
+    cursosSelecionados,
+    deleteModalOpen,
+    setDeleteModalOpen,
+    disciplinaSelecionada,
+    handleAdd,
+    handleEdit,
+    handleDelete,
+    confirmDelete,
+    verProfessores,
+    verCursos,
+    handleSave,
+    modalCargaHorariaOpen,
+    setModalCargaHorariaOpen,
+    verCargaHoraria,
+  } = useDisciplinaHooks();
 
   const columns = [
     { key: "id", label: "ID" },
     { key: "nome", label: "Nome" },
     { key: "sigla", label: "Sigla" },
     { key: "semestre", label: "Semestre" },
-    { key: "professor", label: "Professor" },
-    { key: "curso", label: "Curso" },
     { key: "area_tecnologica", label: "Eixo Tecnológico" },
-    { key: "aulas_teoricas", label: "Aulas Teóricas" },
-    { key: "aulas_praticas", label: "Aulas Práticas" },
     { key: "modalidade", label: "Modalidade" },
+    {
+      key: "carga_horaria",
+      label: "Carga Horária",
+      render: (row: any) => (
+        <Button variant="default" onClick={() => verCargaHoraria(row)}>
+          Ver carga horária
+        </Button>
+      ),
+    },
+    {
+      key: "professor",
+      label: "Professores",
+      render: (row: any) => (
+        <Button variant="outline" onClick={() => verProfessores(row.professor)}>
+          Ver
+        </Button>
+      ),
+    },
+    {
+      key: "curso",
+      label: "Cursos",
+      render: (row: any) => (
+        <Button variant="outline" onClick={() => verCursos(row.curso)}>
+          Ver
+        </Button>
+      ),
+    },
     {
       key: "acoes",
       label: "Ações",
@@ -85,10 +97,8 @@ export default function Page() {
   const data = disciplinas.map((disciplina: Disciplina) => ({
     id: disciplina.id,
     nome: disciplina.nome,
-    professor: Array.isArray(disciplina.professor)
-      ? disciplina.professor.join(", ")
-      : "",
-    curso: disciplina.curso,
+    professor: Array.isArray(disciplina.professor) ? disciplina.professor : [],
+    curso: Array.isArray(disciplina.curso) ? disciplina.curso : [],
     area_tecnologica: disciplina.area_tecnologica,
     aulas_teoricas: disciplina.aulas_teoricas,
     aulas_praticas: disciplina.aulas_praticas,
@@ -122,6 +132,50 @@ export default function Page() {
           onOpenChange={setDeleteModalOpen}
           onConfirm={confirmDelete}
           disciplina={disciplinaSelecionada}
+        />
+
+        {/* Professores */}
+        <GenericModal
+          open={modalProfessoresOpen}
+          onOpenChange={setModalProfessoresOpen}
+          title="Professores"
+          description={
+            <>
+              Visualize os professores que ministram a disciplina{" "}
+              <strong>{disciplinaSelecionada?.nome}</strong>
+            </>
+          }
+          items={professoresSelecionados}
+        />
+        {/* Cursos */}
+        <GenericModal
+          open={modalCursosOpen}
+          onOpenChange={setModalCursosOpen}
+          title="Cursos"
+          description={
+            <>
+              Visualize os cursos que possuem a disciplina{" "}
+              <strong>{disciplinaSelecionada?.nome}</strong>
+            </>
+          }
+          items={cursosSelecionados}
+        />
+        {/* Carga Horária */}
+        <GenericModal
+          open={modalCargaHorariaOpen}
+          onOpenChange={setModalCargaHorariaOpen}
+          title="Visualizar Carga Horária"
+          description={
+            <>
+              Visualize a carga horária da disciplina{" "}
+              <strong>{disciplinaSelecionada?.nome}</strong>
+            </>
+          }
+          items={[
+            `Aulas Teóricas: ${disciplinaSelecionada?.aulas_teoricas} aulas`,
+            `Aulas Práticas: ${disciplinaSelecionada?.aulas_praticas} aulas`,
+            `Quantidade de Aulas: ${disciplinaSelecionada?.qtd_aulas} aulas`,
+          ]}
         />
       </Content>
     </Section>
