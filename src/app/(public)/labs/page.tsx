@@ -1,96 +1,73 @@
 "use client";
 import { Content, Section } from "@/components/section";
-import { useLabs } from "@/hooks/useLabs";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Modal as LabModal } from "./actions/create-modal";
 import { Laboratorio as Lab } from "@/lib/types";
+import { useLabsHooks } from "@/hooks/labs/actions";
 import { DataTable } from "@/components/table/data-table";
 
 export default function Page() {
   const {
+    handleAdd,
+    handleEdit,
+    handleDelete,
+    confirmDelete,
     labs,
-    loading: loadingLabs,
-    error: errorLabs,
-    cadastrarLab,
-    editarLab,
-    excluirLab,
-  } = useLabs();
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [labSelecionado, setLabSelecionado] = useState<Lab | null>(null);
-
-  const handleAdd = () => {
-    setLabSelecionado(null);
-    setModalOpen(true);
-  };
-
-  const handleEdit = (lab: Lab) => {
-    setLabSelecionado(lab);
-    setModalOpen(true);
-  };
-
-  const handleDelete = (lab: Lab) => {
-    setLabSelecionado(lab);
-    setDeleteModalOpen(true);
-  };
-
-  const confirmDelete = async () => {
-    if (labSelecionado?.id) {
-      await excluirLab(labSelecionado.id);
-      setDeleteModalOpen(false);
-      setLabSelecionado(null);
-    }
-  };
-
-  const handleSave = async (lab: Lab) => {
-    if (lab.id) {
-      await editarLab(lab.id, lab);
-    } else {
-      await cadastrarLab(lab);
-    }
-    setModalOpen(false);
-    setLabSelecionado(null);
-  };
+    loadingLabs,
+    errorLabs,
+    handleSave,
+    modalOpen,
+    setModalOpen,
+    deleteModalOpen,
+    setDeleteModalOpen,
+    labSelecionado,
+  } = useLabsHooks();
 
   const columns = [
-      { key: "id", label: "ID" },
-      { key: "nome", label: "Nome do Laboratório" },
-      { key: "capacidade", label: "Capacidade"  },
-      { key: "predio", label: "Predio" },
-      { key: "bloco", label: "Bloco" },
-      { key: "curso_associado", label: "Curso Associado" },
-      { key: "equipamentosString", label: "Equipamentos" },      {
-        key: "acoes",
-        label: "Ações",
-        render: (row: any) => (
-          <div className="flex justify-end gap-1.5">
-            <Button variant="default" onClick={() => handleEdit(row)}>
-              <IconEdit />
-            </Button>
-            <Button variant="destructive" onClick={() => handleDelete(row)}>
-              <IconTrash />
-            </Button>
-          </div>
-        ),
-      },
-    ];
+    { key: "id", label: "ID" },
+    { key: "nome", label: "Nome do Laboratório" },
+    { key: "capacidade", label: "Capacidade" },
+    { key: "predio", label: "Predio" },
+    { key: "bloco", label: "Bloco" },
+    { key: "curso_associado", label: "Curso Associado" },
+    {
+      key: "equipamentosString",
+      label: "Equipamentos",
+      render: (row: any) => (
+        <Button variant="default" onClick={() => handleEdit(row)}>Ver Equipamentos</Button>
+      ),
+    },
+    {
+      key: "acoes",
+      label: "Ações",
+      render: (row: any) => (
+        <div className="flex justify-end gap-1.5">
+          <Button variant="default" onClick={() => handleEdit(row)}>
+            <IconEdit />
+          </Button>
+          <Button variant="destructive" onClick={() => handleDelete(row)}>
+            <IconTrash />
+          </Button>
+        </div>
+      ),
+    },
+  ];
 
-    const data = labs.map((sala: Lab) => ({
-      id: sala.id,
-      nome: sala.nome,
-      curso_associado: sala.curso_associado,
-      capacidade: sala.capacidade,
-      equipamentosString: Object.entries(sala.equipamentos || {})
-        .filter(([equip, qtd]) => equip && qtd > 0)
-        .map(([equip, qtd]: [string, number]) => `${equip}: ${qtd}`)
-        .join(", "),
-      equipamentos: sala.equipamentos, 
-    }));
-    
+  const data = labs.map((sala: Lab) => ({
+    id: sala.id,
+    nome: sala.nome,
+    curso_associado: sala.curso_associado,
+    predio: sala.predio,
+    bloco: sala.bloco,
+    capacidade: sala.capacidade,
+    equipamentosString: Object.entries(sala.equipamentos || {})
+      .filter(([equip, qtd]) => equip && qtd > 0)
+      .map(([equip, qtd]: [string, number]) => `${equip}: ${qtd}`)
+      .join(", "),
+    equipamentos: sala.equipamentos,
+  }));
 
   return (
     <Section>

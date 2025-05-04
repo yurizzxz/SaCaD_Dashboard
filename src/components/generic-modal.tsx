@@ -5,7 +5,7 @@ interface GenericModalProps {
   onOpenChange: (open: boolean) => void;
   title: string;
   description?: React.ReactNode;
-  items: string[];
+  items?: string[];
 }
 
 export const GenericModal = ({
@@ -23,7 +23,7 @@ export const GenericModal = ({
         </DialogHeader>
         {description && <DialogDescription>{description}</DialogDescription>}
         <ul className="space-y-2.5">
-          {items.map((item, index) => (
+          {items?.map((item, index) => (
             <li
               key={index}
               className="border border-muted py-3 px-4 rounded-lg shadow-md flex justify-between items-center hover:shadow-lg transition-shadow duration-300"

@@ -80,7 +80,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           <Label>Equipamentos</Label>
 
           <Input
-            placeholder="Tipo de Equipamento"
+            placeholder="Ex: Computador"
             value={newEquipamento}
             onChange={(e) => setNewEquipamento(e.target.value)}
           />
@@ -88,7 +88,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
         <div className="flex flex-col gap-2 w-full">
           <Label>Quantidade</Label>
           <Input
-            placeholder="Quantidade"
+            placeholder="Ex: 30"
             type="number"
             value={newQuantidade}
             onChange={(e) => setNewQuantidade(e.target.value)}
