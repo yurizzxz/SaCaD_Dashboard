@@ -1,60 +1,38 @@
 "use client";
 import { useState } from "react";
-import { useTeachers } from "@/hooks/useTeachers";
-import { Modal as TeacherModal } from "./actions/create-modal"; 
+import { useTeachers } from "@/hooks/teachers/useTeachers";
+import { Modal as TeacherModal } from "./actions/create-modal";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { DataTable } from "@/components/table/data-table";
 import { Button } from "@/components/ui/button";
 import { Section, Content } from "@/components/section";
 import { Professor as Teacher } from "@/lib/types";
+import { useTeachersHooks } from "@/hooks/teachers/actions";
 
 export default function Page() {
-  const { teachers, cadastrarTeacher, editarTeacher, excluirTeacher } = useTeachers();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [professorSelecionado, setProfessorSelecionado] = useState<Teacher | null>(null);
-
-  const handleAdd = () => {
-    setProfessorSelecionado(null);
-    setModalOpen(true);
-  };
-
-  const handleEdit = (professor: any) => {
-    setProfessorSelecionado(professor);
-    setModalOpen(true);
-  };
-
-  const handleDelete = (professor: any) => {
-    setProfessorSelecionado(professor);
-    setDeleteModalOpen(true);
-  };
-
-  const confirmDelete = async () => {
-    if (professorSelecionado?.id) {
-      await excluirTeacher(professorSelecionado.id);
-      setDeleteModalOpen(false);
-      setProfessorSelecionado(null);
-    }
-  };
-
-  const handleSave = async (professor: any) => {
-    if (professor.id) {
-      await editarTeacher(professor.id, professor);
-    } else {
-      await cadastrarTeacher(professor);
-    }
-    setModalOpen(false);
-    setProfessorSelecionado(null);
-  };
+  const {
+    teachers,
+    handleAdd,
+    handleEdit,
+    handleDelete,
+    confirmDelete,
+    handleSave,
+    modalOpen,
+    setModalOpen,
+    professorSelecionado,
+    deleteModalOpen,
+    setDeleteModalOpen,
+  } = useTeachersHooks();
 
   const columns = [
     { key: "id", label: "ID" },
     { key: "nome", label: "Nome" },
     { key: "cpf", label: "CPF" },
+    { key: "email", label: "Email" },
     { key: "disciplina", label: "Disciplina" },
     { key: "cursos", label: "Cursos", render: (row: any) => row.cursos },
-    { key: "email", label: "Email" },
+
     {
       key: "acoes",
       label: "Ações",
@@ -74,8 +52,10 @@ export default function Page() {
   const data = teachers.map((professor) => ({
     ...professor,
     cursos: Array.isArray(professor.cursos)
-  ? professor.cursos.map((curso) => `${curso.nome_curso} - Semestre ${curso.semestre}`).join(", ")
-  : "",
+      ? professor.cursos
+          .map((curso) => `${curso.nome_curso} - Semestre ${curso.semestre}`)
+          .join(", ")
+      : "",
   }));
 
   return (
