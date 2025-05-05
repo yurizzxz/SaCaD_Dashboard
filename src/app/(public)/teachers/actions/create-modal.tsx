@@ -15,10 +15,11 @@ export function Modal({
   onSave,
 }: any) {
   const [formData, setFormData] = useState({
+    id: 0,
     nome: "",
     disciplina: "",
     cpf: "",
-    cursos: [],
+    curso_id: [],
     data_admissao: "",
     status: "",
     email: "",
@@ -27,20 +28,22 @@ export function Modal({
   useEffect(() => {
     if (initialData) {
       setFormData({
+        id: initialData.id,
         nome: initialData.nome || "",
         disciplina: initialData.disciplina || "",
         cpf: initialData.cpf || "",
-        cursos: initialData.cursos || [],
+        curso_id: initialData.curso_id || [],
         data_admissao: initialData.data_admissao || "",
         status: initialData.status || "",
         email: initialData.email || "",
       });
     } else {
       setFormData({
+        id: 0,
         nome: "",
         disciplina: "",
         cpf: "",
-        cursos: [],
+        curso_id: [],
         data_admissao: "",
         status: "",
         email: "",

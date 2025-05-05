@@ -10,7 +10,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
   return (
     <div className="flex flex-col gap-4 py-2">
       {[
-        { name: "nome", label: "Nome do Curso", placeholder: "ex: Engenharia da Computação" },
+        { name: "nome_curso", label: "Nome do Curso", placeholder: "ex: Engenharia da Computação" },
         { name: "area_tecnologica", label: "Área Tecnológica", placeholder: "ex: Tecnologia da Informação" },
         { name: "duracao_em_semestres", label: "Duração (semestres)", placeholder: "ex: 10" },
         { name: "periodo", label: "Período", placeholder: "ex: Noite" },

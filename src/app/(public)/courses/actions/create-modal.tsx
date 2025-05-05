@@ -16,7 +16,7 @@ export function Modal({
 }: any) {
   const [formData, setFormData] = useState({
     id: 0,
-    nome: "",
+    nome_curso: "",
     area_tecnologica: "",
     duracao_em_semestres: "",
     periodo: "",
@@ -29,7 +29,7 @@ export function Modal({
     if (initialData) {
       setFormData({
         id: initialData.id,
-        nome: initialData.nome || "",
+        nome_curso: initialData.nome_curso || "",
         area_tecnologica: initialData.area_tecnologica || "",
         duracao_em_semestres: initialData.duracao_em_semestres?.toString() || "",
         periodo: initialData.periodo || "",
@@ -40,7 +40,7 @@ export function Modal({
     } else {
       setFormData({
         id: 0,
-        nome: "",
+        nome_curso: "",
         area_tecnologica: "",
         duracao_em_semestres: "",
         periodo: "",

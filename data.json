@@ -67,55 +67,95 @@
     }
   ],
   "professores": [
-  {
-    "id": 1,
-    "nome": "Ana Silva",
-    "curso_id": [1],
-    "disciplinas_id": [1]
-  },
-  {
-    "id": 2,
-    "nome": "Carlos Oliveira",
-    "curso_id": [1],
-    "disciplinas_id": [2]
-  },
-  {
-    "id": 3,
-    "nome": "Juliana Pereira",
-    "curso_id": [1],
-    "disciplinas_id": [3]
-  },
-  {
-    "id": 4,
-    "nome": "Paulo Souza",
-    "curso_id": [2],
-    "disciplinas_id": [5]
-  },
-  {
-    "id": 5,
-    "nome": "Roberta Costa",
-    "curso_id": [2],
-    "disciplinas_id": [4]
-  }
-],
+    {
+      "nome": "Ana Silva",
+      "disciplina": "",
+      "cpf": "123.456.789-10",
+      "curso_id": [
+        2
+      ],
+      "data_admissao": "",
+      "status": "Ativo",
+      "email": "",
+      "id": 1
+    },
+    {
+      "nome": "Carlos Oliveira",
+      "disciplina": "",
+      "cpf": "123.456.789-10",
+      "curso_id": [
+        1
+      ],
+      "data_admissao": "",
+      "status": "Afastado",
+      "email": "",
+      "id": 2
+    },
+    {
+      "id": 3,
+      "nome": "Juliana Pereira",
+      "curso_id": [
+        1
+      ],
+      "disciplinas_id": [
+        3
+      ]
+    },
+    {
+      "id": 4,
+      "nome": "Paulo Souza",
+      "curso_id": [
+        2
+      ],
+      "disciplinas_id": [
+        5
+      ]
+    },
+    {
+      "id": 5,
+      "nome": "Roberta Costa",
+      "disciplina": "Matemática Discreta",
+      "cpf": "123.456.789-10",
+      "curso_id": [
+        2
+      ],
+      "data_admissao": "",
+      "status": "",
+      "email": "teste@gmail.com"
+    }
+  ],
   "cursos": [
-  {
-    "id": 1,
-    "nome": "Administração de Empresas",
-    "modalidade": "Presencial",
-    "area_tecnologica": "Gestão",
-    "disciplinas_id": [1, 2, 3],
-    "professores_id": [1, 2, 3]
-  },
-  {
-    "id": 2,
-    "nome": "Engenharia da Computação",
-    "modalidade": "Presencial",
-    "area_tecnologica": "Tecnologia",
-    "disciplinas_id": [4, 5],
-    "professores_id": [4, 5]
-  }
-],
+    {
+      "id": 1,
+      "nome_curso": "Administração de Empresas",
+      "modalidade": "Presencial",
+      "area_tecnologica": "Gestão",
+      "disciplinas_id": [
+        1,
+        2,
+        3
+      ],
+      "professores_id": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": 2,
+      "nome_curso": "Engenharia da Computação",
+      "modalidade": "Presencial",
+      "area_tecnologica": "Tecnologia",
+      "disciplinas_id": [
+        4,
+        5
+      ],
+      "professores_id": [
+        4,
+        5
+      ]
+    }
+  ],
   "disciplinas": [
     {
       "id": 1,
@@ -123,8 +163,13 @@
       "aulas_teoricas": 30,
       "aulas_praticas": 15,
       "sigla": "IA",
-      "curso": [1],
-      "professor": [1, 2],
+      "curso": [
+        1
+      ],
+      "professor": [
+        1,
+        2
+      ],
       "semestre": 1,
       "area_tecnologica": "Gestão",
       "modalidade": "Presencial",
@@ -136,8 +181,13 @@
       "aulas_teoricas": 40,
       "aulas_praticas": 10,
       "sigla": "CB",
-      "curso": [1],
-      "professor": [1, 2],
+      "curso": [
+        1
+      ],
+      "professor": [
+        1,
+        2
+      ],
       "semestre": 1,
       "area_tecnologica": "Gestão",
       "modalidade": "Presencial",
@@ -149,8 +199,13 @@
       "aulas_teoricas": 35,
       "aulas_praticas": 15,
       "sigla": "GP",
-      "curso": [1],
-      "professor": [1, 2],
+      "curso": [
+        1
+      ],
+      "professor": [
+        1,
+        2
+      ],
       "semestre": 2,
       "area_tecnologica": "Gestão",
       "modalidade": "Presencial",
@@ -162,8 +217,13 @@
       "aulas_teoricas": 40,
       "aulas_praticas": 20,
       "sigla": "LP",
-      "curso": [2],
-      "professor": [1, 2],
+      "curso": [
+        2
+      ],
+      "professor": [
+        1,
+        2
+      ],
       "semestre": 1,
       "area_tecnologica": "Tecnologia",
       "modalidade": "Presencial",
@@ -175,15 +235,19 @@
       "aulas_teoricas": 35,
       "aulas_praticas": 25,
       "sigla": "ED",
-      "curso": [2],
-      "professor": [1, 2],
+      "curso": [
+        2
+      ],
+      "professor": [
+        1,
+        2
+      ],
       "semestre": 2,
       "area_tecnologica": "Tecnologia",
       "modalidade": "Presencial",
       "qtd_aulas": 60
     }
   ],
-
   "salas": [
     {
       "id": 1,
