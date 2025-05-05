@@ -3,7 +3,9 @@
     {
       "nome": "Lucas Fernandes",
       "cpf": "123.456.789-10",
-      "curso_id": [1],
+      "curso_id": [
+        1
+      ],
       "status": "Ativo",
       "semestre": 4,
       "email": "lucas.fernandes@exemplo.com",
@@ -17,7 +19,9 @@
       "id": 2,
       "nome": "Mariana Castro",
       "data_nascimento": "2000-03-22",
-      "curso_id": [2],
+      "curso_id": [
+        2
+      ],
       "semestre": 2,
       "status": "Ativo",
       "data_matricula": "2023-01-20",
@@ -30,7 +34,9 @@
       "id": 4,
       "nome": "Ana Souza",
       "data_nascimento": "2001-05-25",
-      "curso_id": [2],
+      "curso_id": [
+        2
+      ],
       "semestre": 1,
       "status": "Ativo",
       "data_matricula": "2024-03-10",
@@ -43,7 +49,9 @@
       "id": 5,
       "nome": "Pedro Costa",
       "data_nascimento": "2000-11-30",
-      "curso_id": [1],
+      "curso_id": [
+        1
+      ],
       "semestre": 2,
       "status": "Suspenso",
       "data_matricula": "2022-06-15",
@@ -276,7 +284,9 @@
         "Placas de Circuito": 10,
         "Máquinas de Solda": 5
       },
-      "capacidade": "40"
+      "capacidade": "40",
+      "bloco": "A",
+      "predio": "2"
     },
     {
       "id": 2,

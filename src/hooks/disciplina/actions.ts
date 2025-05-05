@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDisciplinas } from "@/hooks/disciplina/useDisciplina";
-import { Disciplina } from "@/lib/types";
+import { Disciplina, Curso, Professor } from "@/lib/types";
 
 export function useDisciplinaHooks() {
   const {
@@ -15,13 +15,19 @@ export function useDisciplinaHooks() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalProfessoresOpen, setModalProfessoresOpen] = useState(false);
   const [modalCursosOpen, setModalCursosOpen] = useState(false);
-  const [professoresSelecionados, setProfessoresSelecionados] = useState<string[]>([]);
+  const [professoresSelecionados, setProfessoresSelecionados] = useState<
+    string[]
+  >([]);
   const [cursosSelecionados, setCursosSelecionados] = useState<string[]>([]);
+
+  const [todosProfessores, setTodosProfessores] = useState<Professor[]>([]);
+  const [todosCursos, setTodosCursos] = useState<Curso[]>([]);
 
   const [modalCargaHorariaOpen, setModalCargaHorariaOpen] = useState(false);
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [disciplinaSelecionada, setDisciplinaSelecionada] = useState<Disciplina | null>(null);
+  const [disciplinaSelecionada, setDisciplinaSelecionada] =
+    useState<Disciplina | null>(null);
 
   const handleAdd = () => {
     setDisciplinaSelecionada(null);
@@ -46,13 +52,30 @@ export function useDisciplinaHooks() {
     }
   };
 
-  const verProfessores = (professores: string[]) => {
-    setProfessoresSelecionados(professores);
+  useEffect(() => {
+    fetch("http://localhost:99/professores")
+      .then((res) => res.json())
+      .then((data) => setTodosProfessores(data));
+
+    fetch("http://localhost:99/cursos")
+      .then((res) => res.json())
+      .then((data) => setTodosCursos(data));
+  }, []);
+  const verProfessores = (professoresIds: number[]) => {
+    const nomes = professoresIds.map((id) => {
+      const professor = todosProfessores.find((p) => p.id === id);
+      return professor ? professor.nome : "Desconhecido";
+    });
+    setProfessoresSelecionados(nomes);
     setModalProfessoresOpen(true);
   };
 
-  const verCursos = (cursos: string[]) => {
-    setCursosSelecionados(cursos);
+  const verCursos = (cursosIds: number[]) => {
+    const nomes = cursosIds.map((id) => {
+      const curso = todosCursos.find((c) => c.id === id);
+      return curso ? curso.nome_curso : "Desconhecido";
+    });
+    setCursosSelecionados(nomes);
     setModalCursosOpen(true);
   };
 
