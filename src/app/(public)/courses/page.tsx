@@ -27,7 +27,7 @@ export default function Page() {
 
   const columns = [
     { key: "id", label: "ID" },
-    { key: "nome", label: "Nome" },
+    { key: "nome_curso", label: "Nome" },
     { key: "sigla", label: "Sigla" },
     { key: "area_tecnologica", label: "Eixo Tecnológico" },
     { key: "periodo", label: "Turno" },
