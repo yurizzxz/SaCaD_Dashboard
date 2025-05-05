@@ -150,7 +150,7 @@
       "aulas_teoricas": 30,
       "aulas_praticas": 15,
       "sigla": "IA",
-      "curso": [
+      "curso_id": [
         1
       ],
       "professor": [
@@ -168,7 +168,7 @@
       "aulas_teoricas": 40,
       "aulas_praticas": 10,
       "sigla": "CB",
-      "curso": [
+      "curso_id": [
         1
       ],
       "professor": [
@@ -186,7 +186,7 @@
       "aulas_teoricas": 35,
       "aulas_praticas": 15,
       "sigla": "GP",
-      "curso": [
+      "curso_id": [
         1
       ],
       "professor": [
@@ -204,7 +204,7 @@
       "aulas_teoricas": 40,
       "aulas_praticas": 20,
       "sigla": "LP",
-      "curso": [
+      "curso_id": [
         2
       ],
       "professor": [
@@ -222,7 +222,7 @@
       "aulas_teoricas": 35,
       "aulas_praticas": 25,
       "sigla": "ED",
-      "curso": [
+      "curso_id": [
         2
       ],
       "professor": [

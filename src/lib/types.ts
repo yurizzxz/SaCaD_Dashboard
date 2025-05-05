@@ -49,7 +49,7 @@ export interface Disciplina {
   aulas_teoricas: number;
   aulas_praticas: number;
   sigla: string;
-  curso: number[]; 
+  curso_id: number[]; 
   professor: number[]; 
   semestre: number;
   area_tecnologica: string;

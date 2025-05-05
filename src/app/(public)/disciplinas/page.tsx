@@ -6,11 +6,15 @@ import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { DataTable } from "@/components/table/data-table";
 import { Button } from "@/components/ui/button";
 import { Section, Content } from "@/components/section";
-import { Disciplina } from "@/lib/types";
+import { Curso, Disciplina } from "@/lib/types";
 import { GenericModal } from "@/components/generic-modal";
 import { FilterSelect } from "./filter";
+import { useEffect, useState } from "react";
 
 export default function Page() {
+  const [cursoSelecionado, setCursoSelecionado] = useState("todos");
+  const [cursos, setCursos] = useState<Curso[]>([]);
+
   const {
     disciplinas,
     loading,
@@ -37,6 +41,24 @@ export default function Page() {
     setModalCargaHorariaOpen,
     verCargaHoraria,
   } = useDisciplinaHooks();
+
+  useEffect(() => {
+    fetch("http://localhost:99/cursos")
+      .then((res) => res.json())
+      .then((data: Curso[]) => setCursos(data))
+      .catch((err) => console.error("Erro ao buscar cursos:", err));
+  }, []);
+
+  const cursoIdSelecionado = cursos.find(
+    (curso) => curso.nome_curso === cursoSelecionado
+  )?.id;
+
+  const disciplinasFiltradas =
+    cursoSelecionado === "todos"
+      ? disciplinas
+      : disciplinas.filter((disciplina) =>
+          disciplina.curso_id.includes(cursoIdSelecionado!)
+        );
 
   const columns = [
     { key: "id", label: "ID" },
@@ -88,11 +110,11 @@ export default function Page() {
     },
   ];
 
-  const data = disciplinas.map((disciplina: Disciplina) => ({
+  const data = disciplinasFiltradas.map((disciplina: Disciplina) => ({
     id: disciplina.id,
     nome: disciplina.nome,
     professor: Array.isArray(disciplina.professor) ? disciplina.professor : [],
-    curso: Array.isArray(disciplina.curso) ? disciplina.curso : [],
+    curso: Array.isArray(disciplina.curso_id) ? disciplina.curso_id : [],
     area_tecnologica: disciplina.area_tecnologica,
     aulas_teoricas: disciplina.aulas_teoricas,
     aulas_praticas: disciplina.aulas_praticas,
@@ -109,7 +131,7 @@ export default function Page() {
           <h1 className="text-2xl font-medium">Lista de Disciplinas</h1>
 
           <div className="flex flex-wrap gap-2">
-            <FilterSelect />
+            <FilterSelect onCursoChange={setCursoSelecionado} cursoSelecionado={cursoSelecionado} />
             <Button onClick={handleAdd}>Criar Disciplina</Button>
           </div>
         </div>
