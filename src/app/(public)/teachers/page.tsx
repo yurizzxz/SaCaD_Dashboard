@@ -30,6 +30,7 @@ export default function Page() {
     composicaoOpen,
     setComposicaoOpen,
     verComposicaoCurricular,
+    composicaoItems
   } = useTeachersHooks();
 
   useEffect(() => {
@@ -115,18 +116,9 @@ export default function Page() {
           open={composicaoOpen}
           onOpenChange={setComposicaoOpen}
           title="Composição Curricular"
-          items={
-            Array.isArray(professorSelecionado?.curso_id) &&
-            Array.isArray(professorSelecionado?.disciplinas_id)
-              ? professorSelecionado.curso_id.map(
-                  (curso: number, index: number) => {
-                    const disciplina =
-                      professorSelecionado?.disciplinas_id?.[index];
-                    return `Disciplina: ${disciplina} - Curso: ${curso}`;
-                  }
-                )
-              : []
-          }
+          description={[`Veja os dados relacionados a ${professorSelecionado?.nome}`]}
+
+          items={composicaoItems}
         />
       </Content>
     </Section>
