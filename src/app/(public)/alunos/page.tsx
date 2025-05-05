@@ -8,9 +8,15 @@ import { Button } from "@/components/ui/button";
 import { Section, Content } from "@/components/section";
 import { FilterSelect } from "./filter";
 import { useAlunoHooks } from "@/hooks/alunos/actions";
+import { Aluno, Curso } from "@/lib/types";
+import { useEffect, useState } from "react";
 
 export default function Page() {
-  const { alunos,
+  const [cursoSelecionado, setCursoSelecionado] = useState("todos");
+  const [cursos, setCursos] = useState<Curso[]>([]);
+
+  const {
+    alunos,
     handleAdd,
     handleEdit,
     handleDelete,
@@ -23,11 +29,27 @@ export default function Page() {
     alunoSelecionado,
   } = useAlunoHooks();
 
+  useEffect(() => {
+    fetch("http://localhost:99/cursos")
+      .then((res) => res.json())
+      .then((data: Curso[]) => setCursos(data))
+      .catch((err) => console.error("Erro ao buscar cursos:", err));
+  }, []);
+
+  const cursoIdSelecionado = cursos.find(
+    (curso) => curso.nome_curso === cursoSelecionado
+  )?.id;
+
+  const alunosFiltrados =
+    cursoSelecionado === "todos"
+      ? alunos
+      : alunos.filter((aluno) => aluno.curso_id.includes(cursoIdSelecionado!));
+
   const columns = [
-    { key: "ra", label: "RA" },
+    { key: "id", label: "RA" },
     { key: "nome", label: "Nome" },
     { key: "cpf", label: "CPF" },
-    { key: "curso", label: "Curso" },
+    { key: "curso_id", label: "Curso" },
     { key: "status", label: "Status" },
     { key: "semestre", label: "Semestre" },
     { key: "email", label: "Email" },
@@ -47,11 +69,6 @@ export default function Page() {
     },
   ];
 
-  const data = alunos.map((aluno) => ({
-    ...aluno,
-    ra: aluno.id,
-  }));
-
   return (
     <Section>
       <Content>
@@ -59,12 +76,12 @@ export default function Page() {
           <h1 className="text-2xl font-medium">Lista de Alunos</h1>
 
           <div className="flex flex-wrap gap-2">
-            <FilterSelect />
+            <FilterSelect onCursoChange={setCursoSelecionado} cursoSelecionado={cursoSelecionado}  />
             <Button onClick={handleAdd}>Adicionar Aluno</Button>
           </div>
         </div>
 
-        <DataTable columns={columns} data={data} />
+        <DataTable columns={columns} data={alunosFiltrados} />
 
         <AlunoModal
           open={modalOpen}
@@ -83,5 +100,3 @@ export default function Page() {
     </Section>
   );
 }
-
-

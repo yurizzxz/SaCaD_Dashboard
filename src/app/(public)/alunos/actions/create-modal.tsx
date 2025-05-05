@@ -17,7 +17,7 @@ export function AlunoModal({
   const [formData, setFormData] = useState({
     nome: "",
     cpf: "",
-    curso: "",
+    curso_id: "",
     status: "",
     semestre: "",
     email: "",
@@ -32,7 +32,7 @@ export function AlunoModal({
       setFormData({
         nome: initialData.nome || "",
         cpf: initialData.cpf || "",
-        curso: initialData.curso || "",
+        curso_id: initialData.curso_id || "",
         status: initialData.status || "",
         semestre: initialData.semestre || "",
         email: initialData.email || "",
@@ -45,7 +45,7 @@ export function AlunoModal({
       setFormData({
         nome: "",
         cpf: "",
-        curso: "",
+        curso_id: "",
         status: "",
         semestre: "",
         email: "",

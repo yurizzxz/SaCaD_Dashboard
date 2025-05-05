@@ -2,7 +2,7 @@ export type Aluno = {
   id: number;
   nome: string;
   data_nascimento: string;
-  curso: string;
+  curso_id: number[];
   semestre: number;
   status: string;
   data_matricula: string;

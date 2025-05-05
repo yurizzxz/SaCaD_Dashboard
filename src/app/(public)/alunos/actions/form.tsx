@@ -12,7 +12,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
       {[
         { name: "nome", label: "Nome", placeholder: "ex: nome sobrenome" },
         { name: "cpf", label: "CPF", placeholder: "ex: 123.456.789-10" },
-        { name: "curso", label: "Curso", placeholder: "ex: Engenharia da Computação" },
+        { name: "curso_id", label: "Curso", placeholder: "ex: Engenharia da Computação" },
         { name: "status", label: "Status", placeholder: "ex: Ativo" },
         { name: "semestre", label: "Semestre", placeholder: "ex: 4" },
         { name: "email", label: "Email", placeholder: "ex: nome@gmail.com" },
