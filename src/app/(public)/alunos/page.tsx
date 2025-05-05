@@ -1,53 +1,27 @@
 "use client";
-import { useState } from "react";
-import { useAlunos } from "@/hooks/useAlunos";
+
 import { AlunoModal } from "./actions/create-modal";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { DataTable } from "@/components/table/data-table";
 import { Button } from "@/components/ui/button";
 import { Section, Content } from "@/components/section";
-import { Aluno } from "@/lib/types";
 import { FilterSelect } from "./filter";
+import { useAlunoHooks } from "@/hooks/alunos/actions";
 
 export default function Page() {
-  const { alunos, cadastrarAluno, editarAluno, excluirAluno } = useAlunos();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [alunoSelecionado, setAlunoSelecionado] = useState<Aluno | null>(null);
-
-  const handleAdd = () => {
-    setAlunoSelecionado(null);
-    setModalOpen(true);
-  };
-
-  const handleEdit = (aluno: any) => {
-    setAlunoSelecionado(aluno);
-    setModalOpen(true);
-  };
-
-  const handleDelete = (aluno: any) => {
-    setAlunoSelecionado(aluno);
-    setDeleteModalOpen(true);
-  };
-
-  const confirmDelete = async () => {
-    if (alunoSelecionado?.id) {
-      await excluirAluno(alunoSelecionado.id);
-      setDeleteModalOpen(false);
-      setAlunoSelecionado(null);
-    }
-  };
-
-  const handleSave = async (aluno: any) => {
-    if (aluno.id) {
-      await editarAluno(aluno.id, aluno);
-    } else {
-      await cadastrarAluno(aluno);
-    }
-    setModalOpen(false);
-    setAlunoSelecionado(null);
-  };
+  const { alunos,
+    handleAdd,
+    handleEdit,
+    handleDelete,
+    confirmDelete,
+    handleSave,
+    modalOpen,
+    setModalOpen,
+    deleteModalOpen,
+    setDeleteModalOpen,
+    alunoSelecionado,
+  } = useAlunoHooks();
 
   const columns = [
     { key: "ra", label: "RA" },
@@ -109,3 +83,5 @@ export default function Page() {
     </Section>
   );
 }
+
+
