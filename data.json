@@ -65,26 +65,30 @@
     {
       "id": 1,
       "nome": "Ana Silva",
-      "disciplina": "1",
+      "disciplinas_id": [
+        3
+      ],
       "cpf": "123.456.789-10",
       "curso_id": [
         2
       ],
       "data_admissao": "",
       "status": "Ativo",
-      "email": ""
+      "email": "teste@gmail.com"
     },
     {
+      "id": 2,
       "nome": "Carlos Oliveira",
-      "disciplina": "",
+      "disciplinas_id": [
+        3
+      ],
       "cpf": "123.456.789-10",
       "curso_id": [
-        1
+        2
       ],
       "data_admissao": "",
       "status": "Afastado",
-      "email": "",
-      "id": 2
+      "email": "teste@gmail.com"
     },
     {
       "id": 3,
@@ -103,7 +107,10 @@
     {
       "id": 4,
       "nome": "Paulo Souza",
-      "disciplinas_id": "3",
+      "disciplinas_id": [
+        1,
+        2
+      ],
       "cpf": "123.456.789-10",
       "curso_id": [
         2
@@ -115,7 +122,9 @@
     {
       "id": 5,
       "nome": "Roberta Costa",
-      "disciplinas_id": "2",
+      "disciplinas_id": [
+        2
+      ],
       "cpf": "123.456.789-10",
       "curso_id": [
         2
