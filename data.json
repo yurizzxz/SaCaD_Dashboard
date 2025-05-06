@@ -66,11 +66,13 @@
       "id": 1,
       "nome": "Ana Silva",
       "disciplinas_id": [
-        3
+        3,
+        2
       ],
       "cpf": "123.456.789-10",
       "curso_id": [
-        2
+        2,
+        1
       ],
       "data_admissao": "",
       "status": "Ativo",
@@ -154,26 +156,22 @@
     {
       "id": 2,
       "nome_curso": "Engenharia da Computação",
-      "modalidade": "Presencial",
-      "area_tecnologica": "Tecnologia",
-      "disciplinas_id": [
-        4,
-        5
-      ],
-      "professores_id": [
-        4,
-        5
-      ]
-    },
-    {
-      "nome_curso": "Análise e Desenvolvimento de Sistemas",
       "area_tecnologica": "Tecnologia",
       "duracao_em_semestres": 6,
-      "periodo": "Matutino",
+      "periodo": "",
+      "modalidade": "EAD",
+      "email_coordenador": "coord@gmail.com",
+      "forma_oferecimento": ""
+    },
+    {
+      "id": 3,
+      "nome_curso": "Análise e Desenvolvimento de Sistemas",
+      "area_tecnologica": "Tecnologia",
+      "duracao_em_semestres": "6",
+      "periodo": "Manhã",
       "modalidade": "Híbrido",
       "email_coordenador": "coord@gmail.com",
-      "forma_oferecimento": "Semestral",
-      "id": 3
+      "forma_oferecimento": "Semestral"
     }
   ],
   "disciplinas": [
@@ -273,7 +271,9 @@
       "id": 1,
       "nome_sala": "Sala 101",
       "capacidade": 40,
-      "curso_associado": [2],
+      "curso_associado": [
+        2
+      ],
       "equipamentos": {
         "Projetor": 1,
         "Computador": 10,
@@ -286,7 +286,9 @@
       "id": 2,
       "nome_sala": "Sala 202",
       "capacidade": 30,
-      "curso_associado": [1],
+      "curso_associado": [
+        1
+      ],
       "equipamentos": {
         "Computadores": 15,
         "Quadro Digital": 1
@@ -298,7 +300,9 @@
       "id": 3,
       "nome_sala": "Sala 303",
       "capacidade": 20,
-      "curso_associado": [2],
+      "curso_associado": [
+        2
+      ],
       "equipamentos": {
         "Computador": 10,
         "Projetor": 1,
@@ -312,7 +316,9 @@
     {
       "id": 1,
       "nome": "Laboratório de Computação",
-      "curso_associado": [2],
+      "curso_associado": [
+        2
+      ],
       "equipamentos": {
         "Computadores": 20,
         "Placas de Circuito": 10,
@@ -325,7 +331,9 @@
     {
       "id": 2,
       "nome": "Laboratório de Marketing",
-      "curso_associado": [1],
+      "curso_associado": [
+        1
+      ],
       "equipamentos": {
         "Computadores": 15,
         "Câmeras": 10,
