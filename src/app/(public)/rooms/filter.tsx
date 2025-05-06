@@ -1,4 +1,5 @@
 "use client";
+import { CursoSelect } from "@/components/curso-select";
 import {
   Select,
   SelectTrigger,
@@ -7,19 +8,22 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 
-export function FilterSelect() {
+interface FilterSelectProps {
+  cursoSelecionado: string;
+  onCursoChange: (curso: string) => void;
+}
+
+export function FilterSelect({
+  cursoSelecionado,
+  onCursoChange,
+}: FilterSelectProps) {
+
   return (
     <div className="flex gap-2">
-      <Select>
-        <SelectTrigger className="w-[160px]">
-          <SelectValue placeholder="Filtrar por Curso" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="todos">Todos</SelectItem>
-          <SelectItem value="Engenharia da Computação">Engenharia</SelectItem>
-          <SelectItem value="Administração de Empresas">Administração</SelectItem>
-        </SelectContent>
-      </Select>
+      <CursoSelect
+        cursoSelecionado={cursoSelecionado}
+        onCursoChange={onCursoChange}
+      />
       <Select>
         <SelectTrigger className="w-[160px]">
           <SelectValue placeholder="Filtrar por Prédio" />

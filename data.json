@@ -273,7 +273,7 @@
       "id": 1,
       "nome_sala": "Sala 101",
       "capacidade": 40,
-      "curso_associado": "2",
+      "curso_associado": [2],
       "equipamentos": {
         "Projetor": 1,
         "Computador": 10,
@@ -286,7 +286,7 @@
       "id": 2,
       "nome_sala": "Sala 202",
       "capacidade": 30,
-      "curso_associado": "1",
+      "curso_associado": [1],
       "equipamentos": {
         "Computadores": 15,
         "Quadro Digital": 1
@@ -298,7 +298,7 @@
       "id": 3,
       "nome_sala": "Sala 303",
       "capacidade": 20,
-      "curso_associado": "2",
+      "curso_associado": [2],
       "equipamentos": {
         "Computador": 10,
         "Projetor": 1,
@@ -312,7 +312,7 @@
     {
       "id": 1,
       "nome": "Laboratório de Computação",
-      "curso_associado": "Engenharia da Computação",
+      "curso_associado": [2],
       "equipamentos": {
         "Computadores": 20,
         "Placas de Circuito": 10,
@@ -325,7 +325,7 @@
     {
       "id": 2,
       "nome": "Laboratório de Marketing",
-      "curso_associado": "Administração de Empresas",
+      "curso_associado": [1],
       "equipamentos": {
         "Computadores": 15,
         "Câmeras": 10,

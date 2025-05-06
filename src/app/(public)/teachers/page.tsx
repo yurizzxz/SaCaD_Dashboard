@@ -8,13 +8,13 @@ import { Section, Content } from "@/components/section";
 import { useTeachersHooks } from "@/hooks/teachers/actions";
 import { GenericModal } from "@/components/generic-modal";
 import { FilterSelect } from "./filter";
-import { Curso } from "@/lib/types";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useCoursesFilter } from "@/hooks/useCoursesFilter";
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
-  const [cursos, setCursos] = useState<Curso[]>([]);
+   const { cursos, getNomeCurso, getIdCurso } = useCoursesFilter();
 
   const {
     teachers,
@@ -34,16 +34,7 @@ export default function Page() {
     composicaoItems
   } = useTeachersHooks();
 
-  useEffect(() => {
-    fetch("http://localhost:99/cursos")
-      .then((res) => res.json())
-      .then((data: Curso[]) => setCursos(data))
-      .catch((err) => console.error("Erro ao buscar cursos:", err));
-  }, []);
-
-  const cursoIdSelecionado = cursos.find(
-    (curso) => curso.nome_curso === cursoSelecionado
-  )?.id;
+  const cursoIdSelecionado = getIdCurso(cursoSelecionado);
 
   const professoresFiltrados =
     cursoSelecionado === "todos"

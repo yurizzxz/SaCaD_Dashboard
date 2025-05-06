@@ -18,10 +18,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useCoursesFilter } from "@/hooks/useCoursesFilter";
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
-  const [cursos, setCursos] = useState<Curso[]>([]);
+  const { cursos, getNomeCurso, getIdCurso } = useCoursesFilter();
 
   const {
     disciplinas,
@@ -50,16 +51,8 @@ export default function Page() {
     verCargaHoraria,
   } = useDisciplinaHooks();
 
-  useEffect(() => {
-    fetch("http://localhost:99/cursos")
-      .then((res) => res.json())
-      .then((data: Curso[]) => setCursos(data))
-      .catch((err) => console.error("Erro ao buscar cursos:", err));
-  }, []);
 
-  const cursoIdSelecionado = cursos.find(
-    (curso) => curso.nome_curso === cursoSelecionado
-  )?.id;
+  const cursoIdSelecionado = getIdCurso(cursoSelecionado);
 
   const disciplinasFiltradas =
     cursoSelecionado === "todos"

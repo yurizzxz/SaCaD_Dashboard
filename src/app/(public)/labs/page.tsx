@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Modal as LabModal } from "./actions/create-modal";
-import { Laboratorio as Lab } from "@/lib/types";
+import { Curso, Laboratorio as Lab } from "@/lib/types";
 import { useLabsHooks } from "@/hooks/labs/actions";
 import { DataTable } from "@/components/table/data-table";
 import { FilterSelect } from "./filter";
@@ -16,12 +16,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {  useState } from "react";
+import { useCoursesFilter } from "@/hooks/useCoursesFilter";
 
 interface LaboratorioTable extends Lab {
   equipamentosString: string;
 }
 
 export default function Page() {
+  const [cursoSelecionado, setCursoSelecionado] = useState("todos");
+  const { cursos, getNomeCurso, getIdCurso } = useCoursesFilter();
+
+
   const {
     handleAdd,
     handleEdit,
@@ -38,6 +44,15 @@ export default function Page() {
     labSelecionado,
   } = useLabsHooks();
 
+  const cursoIdSelecionado = getIdCurso(cursoSelecionado);
+
+  const labsFiltrados =
+    cursoSelecionado === "todos"
+      ? labs
+      : labs.filter((labs) =>
+          labs.curso_associado.includes(String(cursoIdSelecionado))
+        );
+
   const columns: any = [
     { key: "id", label: "ID" },
     { key: "nome", label: "Nome do Laboratório" },
@@ -48,7 +63,11 @@ export default function Page() {
     },
     { key: "predio", label: "Prédio" },
     { key: "bloco", label: "Bloco" },
-    { key: "curso_associado", label: "Curso Associado" },
+    {
+      key: "curso_associado",
+      label: "Curso Associado",
+      render: (row: any) => getNomeCurso(row.curso_associado),
+    },
     {
       key: "equipamentosString",
       label: "Equipamentos",
@@ -74,7 +93,7 @@ export default function Page() {
     },
   ];
 
-  const data: LaboratorioTable[] = labs.map((sala: Lab) => ({
+  const data: LaboratorioTable[] = labsFiltrados.map((sala: Lab) => ({
     ...sala,
     equipamentosString: Object.entries(sala.equipamentos || {})
       .filter(([equip, qtd]) => equip && qtd > 0)
@@ -87,7 +106,10 @@ export default function Page() {
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <h1 className="text-2xl font-medium">Lista de Laboratórios</h1>
           <div className="flex gap-2 flex-wrap">
-            <FilterSelect />
+            <FilterSelect
+              onCursoChange={setCursoSelecionado}
+              cursoSelecionado={cursoSelecionado}
+            />
             <Button onClick={handleAdd}>Adicionar Laboratório</Button>
           </div>
         </div>
@@ -101,11 +123,15 @@ export default function Page() {
               <CardHeader>
                 <CardDescription>ID: {lab.id}</CardDescription>
                 <CardTitle className="text-lg">{lab.nome}</CardTitle>
-                <CardDescription>Capacidade: {lab.capacidade} alunos</CardDescription>
+                <CardDescription>
+                  Capacidade: {lab.capacidade} alunos
+                </CardDescription>
                 <CardDescription>Prédio: {lab.predio}</CardDescription>
                 <CardDescription>Bloco: {lab.bloco}</CardDescription>
                 <CardDescription>Curso: {lab.curso_associado}</CardDescription>
-                <CardDescription>Equipamentos: {lab.equipamentosString || "Nenhum"}</CardDescription>
+                <CardDescription>
+                  Equipamentos: {lab.equipamentosString || "Nenhum"}
+                </CardDescription>
               </CardHeader>
               <CardFooter className="gap-2">
                 <Button variant="default" onClick={() => handleEdit(lab)}>

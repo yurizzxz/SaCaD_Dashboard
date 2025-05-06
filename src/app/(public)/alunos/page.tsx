@@ -12,16 +12,17 @@ import { Aluno, Curso } from "@/lib/types";
 import { useEffect, useState } from "react";
 import {
   Card,
-  CardAction,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useCoursesFilter } from "@/hooks/useCoursesFilter";
+import { get } from "http";
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
-  const [cursos, setCursos] = useState<Curso[]>([]);
+  const { cursos, getNomeCurso, getIdCurso } = useCoursesFilter();
 
   const {
     alunos,
@@ -37,16 +38,7 @@ export default function Page() {
     alunoSelecionado,
   } = useAlunoHooks();
 
-  useEffect(() => {
-    fetch("http://localhost:99/cursos")
-      .then((res) => res.json())
-      .then((data: Curso[]) => setCursos(data))
-      .catch((err) => console.error("Erro ao buscar cursos:", err));
-  }, []);
-
-  const cursoIdSelecionado = cursos.find(
-    (curso) => curso.nome_curso === cursoSelecionado
-  )?.id;
+  const cursoIdSelecionado = getIdCurso(cursoSelecionado);
 
   const alunosFiltrados =
     cursoSelecionado === "todos"
@@ -57,7 +49,11 @@ export default function Page() {
     { key: "id", label: "RA" },
     { key: "nome", label: "Nome" },
     { key: "cpf", label: "CPF" },
-    { key: "curso_id", label: "Curso" },
+    {
+      key: "curso_id",
+      label: "Curso",
+      render: (aluno: any) => getNomeCurso(aluno.curso_id),
+    },
     { key: "status", label: "Status" },
     { key: "semestre", label: "Semestre" },
     { key: "email", label: "Email" },

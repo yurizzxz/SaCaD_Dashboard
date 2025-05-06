@@ -6,7 +6,7 @@ import { Modal as SalaModal } from "./actions/create-modal";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { Button } from "@/components/ui/button";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
-import { Sala } from "@/lib/types";
+import { Curso, Sala } from "@/lib/types";
 import { useSalasHooks } from "@/hooks/salas/actions";
 import { FilterSelect } from "./filter";
 import {
@@ -17,8 +17,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useEffect, useState } from "react";
+import { useCoursesFilter } from "@/hooks/useCoursesFilter";
 
 export default function Page() {
+  const [cursoSelecionado, setCursoSelecionado] = useState("todos");
+  const { cursos, getNomeCurso, getIdCurso } = useCoursesFilter();
+
   const {
     salas,
     loading,
@@ -35,6 +40,15 @@ export default function Page() {
     deleteModalOpen,
     setDeleteModalOpen,
   } = useSalasHooks();
+
+  const cursoIdSelecionado = getIdCurso(cursoSelecionado);
+
+  const salasFiltradas =
+    cursoSelecionado === "todos"
+      ? salas
+      : salas.filter((salas) =>
+          salas.curso_associado.includes(String(cursoIdSelecionado))
+        );
 
   const columns = [
     { key: "id", label: "ID" },
@@ -92,7 +106,10 @@ export default function Page() {
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <h1 className="text-2xl font-medium">Lista de Salas</h1>
           <div className="flex gap-2 flex-wrap">
-            <FilterSelect />
+            <FilterSelect
+              onCursoChange={setCursoSelecionado}
+              cursoSelecionado={cursoSelecionado}
+            />
             <Button onClick={handleAdd}>Adicionar Sala</Button>
           </div>
         </div>
@@ -136,7 +153,7 @@ export default function Page() {
             </div>
 
             <div className="hidden lg:block">
-              <DataTable columns={columns} data={data} />
+              <DataTable columns={columns} data={salasFiltradas} />
             </div>
           </>
         )}
