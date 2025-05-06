@@ -164,6 +164,16 @@
         4,
         5
       ]
+    },
+    {
+      "nome_curso": "Análise e Desenvolvimento de Sistemas",
+      "area_tecnologica": "Tecnologia",
+      "duracao_em_semestres": 6,
+      "periodo": "Matutino",
+      "modalidade": "Híbrido",
+      "email_coordenador": "coord@gmail.com",
+      "forma_oferecimento": "Semestral",
+      "id": 3
     }
   ],
   "disciplinas": [

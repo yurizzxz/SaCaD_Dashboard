@@ -32,7 +32,7 @@ export default function Page() {
     { key: "area_tecnologica", label: "Eixo Tecnológico" },
     { key: "periodo", label: "Turno" },
     { key: "modalidade", label: "Modalidade" },
-    { key: "forma_oferecimento", label: "Forma de Oferecimento" },
+    { key: "forma_oferecimento", label: "Oferecimento" },
     { key: "email_coordenador", label: "Email Coordenador" },
     {
       key: "disciplinas_id",
