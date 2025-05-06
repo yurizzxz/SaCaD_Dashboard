@@ -1,5 +1,6 @@
 "use client";
 import { CursoSelect } from "@/components/curso-select";
+import { DisciplinaSelect } from "@/components/disciplina-select";
 import {
   Select,
   SelectTrigger,
@@ -7,25 +8,35 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { Curso } from "@/lib/types";
-import { useEffect, useState } from "react";
 
 interface FilterSelectProps {
-  cursoSelecionado: string;
-  onCursoChange: (curso: string) => void;
+  cursoSelecionado?: string;
+  onCursoChange?: (curso: string) => void;
+  disciplinaSelecionada?: string;
+  onDisciplinaChange?: (disciplina: string) => void;
 }
 
 export function FilterSelect({
   cursoSelecionado,
   onCursoChange,
+  disciplinaSelecionada,
+  onDisciplinaChange,
 }: FilterSelectProps) {
-
   return (
     <div className="flex gap-2">
-      <CursoSelect
-        cursoSelecionado={cursoSelecionado}
-        onCursoChange={onCursoChange}
-      />
+      {onCursoChange && (
+        <CursoSelect
+          cursoSelecionado={cursoSelecionado || ""}
+          onCursoChange={onCursoChange}
+        />
+      )}
+
+      {onDisciplinaChange && (
+        <DisciplinaSelect
+          disciplinaSelecionada={disciplinaSelecionada || ""}
+          onDisciplinaChange={onDisciplinaChange}
+        />
+      )}
 
       <Select>
         <SelectTrigger className="w-[160px]">

@@ -8,13 +8,24 @@ import { Section, Content } from "@/components/section";
 import { useTeachersHooks } from "@/hooks/teachers/actions";
 import { GenericModal } from "@/components/generic-modal";
 import { FilterSelect } from "./filter";
-import { useState} from "react";
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useCoursesFilter } from "@/hooks/useCoursesFilter";
+import { useState } from "react";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  useCoursesFilter,
+  useDisciplinaFilter,
+} from "@/hooks/useCoursesFilter";
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
-   const { cursos, getNomeCurso, getIdCurso } = useCoursesFilter();
+  const [disciplinaSelecionada, setDisciplinaSelecionada] = useState("todos");
+  const { getIdCurso } = useCoursesFilter();
+  const { disciplinas, getIdDisciplina } = useDisciplinaFilter();
 
   const {
     teachers,
@@ -31,15 +42,23 @@ export default function Page() {
     composicaoOpen,
     setComposicaoOpen,
     verComposicaoCurricular,
-    composicaoItems
+    composicaoItems,
   } = useTeachersHooks();
 
-  const cursoIdSelecionado = getIdCurso(cursoSelecionado);
+  const professoresFiltrados = teachers.filter((prof) => {
+    const cursoIdSelecionado = getIdCurso(cursoSelecionado);
+    const disciplinaIdSelecionada = getIdDisciplina(disciplinaSelecionada);
 
-  const professoresFiltrados =
-    cursoSelecionado === "todos"
-      ? teachers
-      : teachers.filter((prof) => prof.curso_id.includes(cursoIdSelecionado!));
+    const filtraPorCurso =
+      cursoSelecionado === "todos" ||
+      prof.curso_id.includes(cursoIdSelecionado!);
+
+    const filtraPorDisciplina =
+      disciplinaSelecionada === "todos" ||
+      prof.disciplinas_id.includes(disciplinaIdSelecionada!);
+
+    return filtraPorCurso && filtraPorDisciplina;
+  });
 
   const columns = [
     { key: "id", label: "ID" },
@@ -81,6 +100,8 @@ export default function Page() {
           <div className="flex flex-wrap gap-2">
             <FilterSelect
               cursoSelecionado={cursoSelecionado}
+              disciplinaSelecionada={disciplinaSelecionada}
+              onDisciplinaChange={setDisciplinaSelecionada}
               onCursoChange={setCursoSelecionado}
             />
             <Button onClick={handleAdd}>Adicionar Professor</Button>
@@ -95,14 +116,19 @@ export default function Page() {
                 <CardDescription>ID: {professor.id}</CardDescription>
                 <CardDescription>CPF: {professor.cpf}</CardDescription>
                 <CardDescription>Email: {professor.email}</CardDescription>
-                <CardDescription>Telefone: {professor.telefone}</CardDescription>
+                <CardDescription>
+                  Telefone: {professor.telefone}
+                </CardDescription>
                 <CardDescription>Status: {professor.status}</CardDescription>
               </CardHeader>
               <CardFooter className="gap-2">
                 <Button variant="default" onClick={() => handleEdit(professor)}>
                   <IconEdit /> Editar
                 </Button>
-                <Button variant="destructive" onClick={() => handleDelete(professor)}>
+                <Button
+                  variant="destructive"
+                  onClick={() => handleDelete(professor)}
+                >
                   <IconTrash /> Excluir
                 </Button>
               </CardFooter>
@@ -133,7 +159,9 @@ export default function Page() {
           open={composicaoOpen}
           onOpenChange={setComposicaoOpen}
           title="Composição Curricular"
-          description={[`Veja os dados relacionados a ${professorSelecionado?.nome}`]}
+          description={[
+            `Veja os dados relacionados a ${professorSelecionado?.nome}`,
+          ]}
           items={composicaoItems}
         />
       </Content>

@@ -6,40 +6,40 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { Curso } from "@/lib/types";
+import { Disciplina } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-interface CursoSelectProps {
-  cursoSelecionado: string;
-  onCursoChange: (curso: string) => void;
-  className?: string; 
+interface DisciplinaSelectProps {
+  disciplinaSelecionada: string;
+  onDisciplinaChange: (curso: string) => void;
+  className?: string;
 }
 
-export function CursoSelect({
-  cursoSelecionado,
-  onCursoChange,
+export function DisciplinaSelect({
+  disciplinaSelecionada,
+  onDisciplinaChange,
   className,
-}: CursoSelectProps) {
-  const [cursos, setCursos] = useState<Curso[]>([]);
+}: DisciplinaSelectProps) {
+  const [disciplinas, setDisciplinas] = useState<Disciplina[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:99/cursos")
+    fetch("http://localhost:99/disciplinas")
       .then((res) => res.json())
-      .then((data: Curso[]) => setCursos(data))
+      .then((data: Disciplina[]) => setDisciplinas(data))
       .catch((err) => console.error("Erro ao buscar cursos:", err));
   }, []);
 
   return (
-    <Select value={cursoSelecionado} onValueChange={onCursoChange}>
+    <Select value={disciplinaSelecionada} onValueChange={onDisciplinaChange}>
       <SelectTrigger className={twMerge("w-[230px]", className)}>
         <SelectValue placeholder="Filtrar por Curso" />
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="todos">Todos</SelectItem>
-        {cursos.map((curso) => (
-          <SelectItem key={curso.id} value={curso.nome_curso}>
-            {curso.nome_curso}
+        {disciplinas.map((disciplina) => (
+          <SelectItem key={disciplina.id} value={disciplina.nome}>
+            {disciplina.nome}
           </SelectItem>
         ))}
       </SelectContent>
