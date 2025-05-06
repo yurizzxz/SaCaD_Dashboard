@@ -1,4 +1,5 @@
 "use client";
+
 import { Content, Section } from "@/components/section";
 import { Button } from "@/components/ui/button";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
@@ -8,6 +9,17 @@ import { Laboratorio as Lab } from "@/lib/types";
 import { useLabsHooks } from "@/hooks/labs/actions";
 import { DataTable } from "@/components/table/data-table";
 import { FilterSelect } from "./filter";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+interface LaboratorioTable extends Lab {
+  equipamentosString: string;
+}
 
 export default function Page() {
   const {
@@ -26,7 +38,7 @@ export default function Page() {
     labSelecionado,
   } = useLabsHooks();
 
-  const columns = [
+  const columns: any = [
     { key: "id", label: "ID" },
     { key: "nome", label: "Nome do Laboratório" },
     {
@@ -34,14 +46,14 @@ export default function Page() {
       label: "Capacidade",
       render: (row: any) => <>{row.capacidade} Alunos</>,
     },
-    { key: "predio", label: "Predio" },
+    { key: "predio", label: "Prédio" },
     { key: "bloco", label: "Bloco" },
     { key: "curso_associado", label: "Curso Associado" },
     {
       key: "equipamentosString",
       label: "Equipamentos",
-      render: (row: any) => (
-        <Button variant="default" onClick={() => handleEdit(row)}>
+      render: (lab: LaboratorioTable) => (
+        <Button variant="default" onClick={() => handleEdit(lab)}>
           Ver Equipamentos
         </Button>
       ),
@@ -62,20 +74,13 @@ export default function Page() {
     },
   ];
 
-  const data = labs.map((sala: Lab) => ({
-    id: sala.id,
-    nome: sala.nome,
-    curso_associado: sala.curso_associado,
-    predio: sala.predio,
-    bloco: sala.bloco,
-    capacidade: sala.capacidade,
+  const data: LaboratorioTable[] = labs.map((sala: Lab) => ({
+    ...sala,
     equipamentosString: Object.entries(sala.equipamentos || {})
       .filter(([equip, qtd]) => equip && qtd > 0)
       .map(([equip, qtd]: [string, number]) => `${equip}: ${qtd}`)
       .join(", "),
-    equipamentos: sala.equipamentos,
   }));
-
   return (
     <Section>
       <Content>
@@ -90,7 +95,33 @@ export default function Page() {
         {loadingLabs && <p>Carregando laboratórios...</p>}
         {errorLabs && <p className="text-red-500">{errorLabs}</p>}
 
-        <DataTable columns={columns} data={data} />
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:hidden gap-2 mb-6">
+          {data.map((lab) => (
+            <Card key={lab.id}>
+              <CardHeader>
+                <CardDescription>ID: {lab.id}</CardDescription>
+                <CardTitle className="text-lg">{lab.nome}</CardTitle>
+                <CardDescription>Capacidade: {lab.capacidade} alunos</CardDescription>
+                <CardDescription>Prédio: {lab.predio}</CardDescription>
+                <CardDescription>Bloco: {lab.bloco}</CardDescription>
+                <CardDescription>Curso: {lab.curso_associado}</CardDescription>
+                <CardDescription>Equipamentos: {lab.equipamentosString || "Nenhum"}</CardDescription>
+              </CardHeader>
+              <CardFooter className="gap-2">
+                <Button variant="default" onClick={() => handleEdit(lab)}>
+                  <IconEdit /> Editar
+                </Button>
+                <Button variant="destructive" onClick={() => handleDelete(lab)}>
+                  <IconTrash /> Excluir
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+
+        <div className="hidden lg:block">
+          <DataTable columns={columns} data={data} />
+        </div>
 
         <LabModal
           open={modalOpen}

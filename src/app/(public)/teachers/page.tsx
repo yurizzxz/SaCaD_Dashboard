@@ -10,6 +10,7 @@ import { GenericModal } from "@/components/generic-modal";
 import { FilterSelect } from "./filter";
 import { Curso } from "@/lib/types";
 import { useState, useEffect } from "react";
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
@@ -95,7 +96,32 @@ export default function Page() {
           </div>
         </div>
 
-        <DataTable columns={columns} data={professoresFiltrados} />
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:hidden gap-2 mb-6">
+          {professoresFiltrados.map((professor) => (
+            <Card key={professor.id}>
+              <CardHeader>
+                <CardTitle className="text-lg">{professor.nome}</CardTitle>
+                <CardDescription>ID: {professor.id}</CardDescription>
+                <CardDescription>CPF: {professor.cpf}</CardDescription>
+                <CardDescription>Email: {professor.email}</CardDescription>
+                <CardDescription>Telefone: {professor.telefone}</CardDescription>
+                <CardDescription>Status: {professor.status}</CardDescription>
+              </CardHeader>
+              <CardFooter className="gap-2">
+                <Button variant="default" onClick={() => handleEdit(professor)}>
+                  <IconEdit /> Editar
+                </Button>
+                <Button variant="destructive" onClick={() => handleDelete(professor)}>
+                  <IconTrash /> Excluir
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+
+        <div className="hidden lg:block">
+          <DataTable columns={columns} data={professoresFiltrados} />
+        </div>
 
         {/* Modais */}
         <TeacherModal
@@ -117,7 +143,6 @@ export default function Page() {
           onOpenChange={setComposicaoOpen}
           title="Composição Curricular"
           description={[`Veja os dados relacionados a ${professorSelecionado?.nome}`]}
-
           items={composicaoItems}
         />
       </Content>

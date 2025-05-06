@@ -10,6 +10,14 @@ import { Curso, Disciplina } from "@/lib/types";
 import { GenericModal } from "@/components/generic-modal";
 import { FilterSelect } from "./filter";
 import { useEffect, useState } from "react";
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
@@ -129,7 +137,6 @@ export default function Page() {
       <Content>
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <h1 className="text-2xl font-medium">Lista de Disciplinas</h1>
-
           <div className="flex flex-wrap gap-2">
             <FilterSelect onCursoChange={setCursoSelecionado} cursoSelecionado={cursoSelecionado} />
             <Button onClick={handleAdd}>Criar Disciplina</Button>
@@ -138,7 +145,42 @@ export default function Page() {
 
         {loading && <p>Carregando disciplinas...</p>}
         {error && <p className="text-red-500">{error}</p>}
-        {!loading && !error && <DataTable columns={columns} data={data} />}
+
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:hidden gap-2 mb-6">
+          {disciplinasFiltradas.map((disciplina) => (
+            <Card key={disciplina.id}>
+              <CardHeader>
+                <CardDescription>ID: {disciplina.id}</CardDescription>
+                <CardTitle className="text-lg">{disciplina.nome}</CardTitle>
+                <CardDescription className="text-md">Sigla: {disciplina.sigla}</CardDescription>
+                <CardDescription className="text-md">Semestre: {disciplina.semestre}</CardDescription>
+                <CardDescription className="text-md">Eixo Tecnológico: {disciplina.area_tecnologica}</CardDescription>
+                <CardDescription className="text-md">Modalidade: {disciplina.modalidade}</CardDescription>
+                <CardDescription className="text-md mt-2">Quantidade de Aulas: {disciplina.qtd_aulas}</CardDescription>
+                <CardDescription className="text-md">Aulas Teóricas: {disciplina.aulas_teoricas}</CardDescription>
+                <CardDescription className="text-md">Aulas Práticas: {disciplina.aulas_praticas}</CardDescription>
+              </CardHeader>
+              <CardFooter className="flex flex-wrap gap-2">
+                <Button variant="outline" onClick={() => verProfessores(disciplina.professor)}>
+                  Ver professores
+                </Button>
+                <Button variant="outline" onClick={() => verCursos(disciplina.curso_id)}>
+                  Ver cursos
+                </Button>
+                <Button variant="default" onClick={() => handleEdit(disciplina)}>
+                  <IconEdit /> Editar
+                </Button>
+                <Button variant="destructive" onClick={() => handleDelete(disciplina)}>
+                  <IconTrash /> Excluir
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+
+        <div className="hidden lg:block">
+          <DataTable columns={columns} data={data} />
+        </div>
 
         <DisciplinaModal
           open={modalOpen}
@@ -154,41 +196,32 @@ export default function Page() {
           disciplina={disciplinaSelecionada}
         />
 
-        {/* Professores */}
+        {/* Modais */}
         <GenericModal
           open={modalProfessoresOpen}
           onOpenChange={setModalProfessoresOpen}
           title="Professores"
           description={
-            <>
-              Visualize os professores que ministram a disciplina{" "}
-              <strong>{disciplinaSelecionada?.nome}</strong>
-            </>
+            <>Visualize os professores da disciplina <strong>{disciplinaSelecionada?.nome}</strong></>
           }
           items={professoresSelecionados}
         />
-        {/* Cursos */}
         <GenericModal
           open={modalCursosOpen}
           onOpenChange={setModalCursosOpen}
           title="Cursos"
           description={
-            <>
-              Visualize os cursos que possuem a disciplina{" "}
-              <strong>{disciplinaSelecionada?.nome}</strong>
-            </>
+            <>Visualize os cursos da disciplina <strong>{disciplinaSelecionada?.nome}</strong></>
           }
           items={cursosSelecionados}
         />
-        {/* Carga Horária */}
         <GenericModal
           open={modalCargaHorariaOpen}
           onOpenChange={setModalCargaHorariaOpen}
           title="Visualizar Carga Horária"
           description={
             <>
-              Visualize a carga horária da disciplina{" "}
-              <strong>{disciplinaSelecionada?.nome}</strong>
+              Carga horária da disciplina <strong>{disciplinaSelecionada?.nome}</strong>
             </>
           }
           items={[

@@ -15,6 +15,9 @@ export type Aluno = {
 export type Curso = {
   id: number;
   nome_curso: string;
+  sigla: string;
+  area_tecnologica: string;
+  duracao_em_semestres: number;
   semestre: number;
   aulas_teoricas: number;
   aulas_praticas: number;
@@ -73,6 +76,7 @@ export interface Laboratorio {
   nome: string;
   capacidade: number;
   curso_associado: string;
+  equipamentosString: string;
   bloco: string;
   predio: string;
   equipamentos: Record<string, number>;

@@ -1,4 +1,5 @@
 "use client";
+
 import { Content, Section } from "@/components/section";
 import { DataTable } from "@/components/table/data-table";
 import { Modal as SalaModal } from "./actions/create-modal";
@@ -8,6 +9,14 @@ import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Sala } from "@/lib/types";
 import { useSalasHooks } from "@/hooks/salas/actions";
 import { FilterSelect } from "./filter";
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Page() {
   const {
@@ -35,7 +44,7 @@ export default function Page() {
       label: "Capacidade",
       render: (row: any) => <>{row.capacidade} Alunos</>,
     },
-    { key: "predio", label: "Predio" },
+    { key: "predio", label: "Prédio" },
     { key: "bloco", label: "Bloco" },
     { key: "curso_associado", label: "Curso Associado" },
     {
@@ -47,7 +56,6 @@ export default function Page() {
         </Button>
       ),
     },
-
     {
       key: "acoes",
       label: "Ações",
@@ -63,6 +71,7 @@ export default function Page() {
       ),
     },
   ];
+
   const data = salas.map((sala: Sala) => ({
     id: sala.id,
     nome_sala: sala.nome_sala,
@@ -90,7 +99,47 @@ export default function Page() {
 
         {loading && <p>Carregando salas...</p>}
         {error && <p className="text-red-500">{error}</p>}
-        {!loading && !error && <DataTable columns={columns} data={data} />}
+
+        {!loading && !error && (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-1 lg:hidden gap-2 mb-6">
+              {data.map((sala) => (
+                <Card key={sala.id}>
+                  <CardHeader>
+                    <CardDescription>ID: {sala.id}</CardDescription>
+                    <CardTitle className="text-lg">{sala.nome_sala}</CardTitle>
+                    <CardDescription>
+                      Capacidade: {sala.capacidade} alunos
+                    </CardDescription>
+                    <CardDescription>Prédio: {sala.predio}</CardDescription>
+                    <CardDescription>Bloco: {sala.bloco}</CardDescription>
+                    <CardDescription>
+                      Curso: {sala.curso_associado}
+                    </CardDescription>
+                    <CardDescription>
+                      Equipamentos: {sala.equipamentosString || "Nenhum"}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardFooter className="gap-2">
+                    <Button variant="default" onClick={() => handleEdit(sala)}>
+                      <IconEdit /> Editar
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      onClick={() => handleDelete(sala)}
+                    >
+                      <IconTrash /> Excluir
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+
+            <div className="hidden lg:block">
+              <DataTable columns={columns} data={data} />
+            </div>
+          </>
+        )}
 
         <SalaModal
           open={modalOpen}

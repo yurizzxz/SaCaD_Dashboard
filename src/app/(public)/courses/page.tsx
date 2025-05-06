@@ -7,6 +7,13 @@ import { DataTable } from "@/components/table/data-table";
 import { Modal as CursoModal } from "./actions/create-modal";
 import { FilterSelect } from "./filter";
 import { useCoursesHooks } from "@/hooks/courses/actions";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Page() {
   const {
@@ -37,18 +44,18 @@ export default function Page() {
     {
       key: "disciplinas_id",
       label: "Disciplinas",
-      render: (row: any) => <span>{row.disciplinas_id}</span>,
+      render: (curso: any) => <span>{Array.isArray(curso.disciplinas_id) ? curso.disciplinas_id.length : 0}</span>,
     },
     { key: "duracao_em_semestres", label: "Semestres" },
     {
       key: "acoes",
       label: "Ações",
-      render: (row: any) => (
+      render: (curso: any) => (
         <div className="flex justify-end gap-1.5">
-          <Button variant="default" onClick={() => handleEdit(row)}>
+          <Button variant="default" onClick={() => handleEdit(curso)}>
             <IconEdit />
           </Button>
-          <Button variant="destructive" onClick={() => handleDelete(row)}>
+          <Button variant="destructive" onClick={() => handleDelete(curso)}>
             <IconTrash />
           </Button>
         </div>
@@ -69,17 +76,45 @@ export default function Page() {
       <Content>
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <h1 className="text-2xl font-medium">Lista de Cursos</h1>
-
           <div className="flex flex-wrap gap-2">
             <FilterSelect />
-            <Button onClick={handleAdd}>Adiconar Curso</Button>
+            <Button onClick={handleAdd}>Adicionar Curso</Button>
           </div>
         </div>
 
         {loading && <p>Carregando cursos...</p>}
         {error && <p className="text-red-500">{error}</p>}
 
-        <DataTable columns={columns} data={data} />
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:hidden gap-2 mb-6">
+          {data.map((curso) => (
+            <Card key={curso.id}>
+              <CardHeader>
+                <CardDescription>ID: {curso.id}</CardDescription>
+                <CardTitle className="text-lg">{curso.nome_curso}</CardTitle>
+                <CardDescription>Sigla: {curso.sigla}</CardDescription>
+                <CardDescription>Eixo: {curso.area_tecnologica}</CardDescription>
+                <CardDescription>Turno: {curso.periodo}</CardDescription>
+                <CardDescription>Modalidade: {curso.modalidade}</CardDescription>
+                <CardDescription>Oferecimento: {curso.forma_oferecimento}</CardDescription>
+                <CardDescription>Email: {curso.email_coordenador}</CardDescription>
+                <CardDescription>Disciplinas: {curso.disciplinas_id}</CardDescription>
+                <CardDescription>Semestres: {curso.duracao_em_semestres}</CardDescription>
+              </CardHeader>
+              <CardFooter className="gap-2">
+                <Button variant="default" onClick={() => handleEdit(curso)}>
+                  <IconEdit /> Editar
+                </Button>
+                <Button variant="destructive" onClick={() => handleDelete(curso)}>
+                  <IconTrash /> Excluir
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+
+        <div className="hidden lg:block">
+          <DataTable columns={columns} data={data} />
+        </div>
 
         <CursoModal
           open={modalOpen}

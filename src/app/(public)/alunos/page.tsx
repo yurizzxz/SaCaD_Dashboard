@@ -10,6 +10,14 @@ import { FilterSelect } from "./filter";
 import { useAlunoHooks } from "@/hooks/alunos/actions";
 import { Aluno, Curso } from "@/lib/types";
 import { useEffect, useState } from "react";
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
@@ -56,12 +64,12 @@ export default function Page() {
     {
       key: "acoes",
       label: "Ações",
-      render: (row: any) => (
+      render: (aluno: any) => (
         <div className="flex justify-end gap-1.5">
-          <Button variant="default" onClick={() => handleEdit(row)}>
+          <Button variant="default" onClick={() => handleEdit(aluno)}>
             <IconEdit />
           </Button>
-          <Button variant="destructive" onClick={() => handleDelete(row)}>
+          <Button variant="destructive" onClick={() => handleDelete(aluno)}>
             <IconTrash />
           </Button>
         </div>
@@ -73,15 +81,47 @@ export default function Page() {
     <Section>
       <Content>
         <div className="flex justify-between flex-wrap items-center mb-6">
-          <h1 className="text-2xl font-medium">Lista de Alunos</h1>
+          <h1 className="text-2xl font-medium mb-3 lg:mb-0">Lista de Alunos</h1>
 
-          <div className="flex flex-wrap gap-2">
-            <FilterSelect onCursoChange={setCursoSelecionado} cursoSelecionado={cursoSelecionado}  />
+          <div className="flex flex-wrap col-gap gap-2">
+            <FilterSelect
+              onCursoChange={setCursoSelecionado}
+              cursoSelecionado={cursoSelecionado}
+            />
             <Button onClick={handleAdd}>Adicionar Aluno</Button>
           </div>
         </div>
 
-        <DataTable columns={columns} data={alunosFiltrados} />
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:hidden gap-2 mb-6">
+          {alunosFiltrados.map((aluno) => (
+            <Card key={aluno.id}>
+              <CardHeader>
+                <CardDescription>RA: {aluno.id}</CardDescription>
+                <CardTitle className="text-lg">{aluno.nome}</CardTitle>
+                <CardDescription>CPF: {aluno.cpf}</CardDescription>
+                <CardDescription>Curso: {aluno.curso_id}</CardDescription>
+                <CardDescription>Status: {aluno.status}</CardDescription>
+                <CardDescription>Semestre: {aluno.semestre}</CardDescription>
+                <CardDescription>Email: {aluno.email}</CardDescription>
+              </CardHeader>
+              <CardFooter className="gap-2">
+                <Button variant="default" onClick={() => handleEdit(aluno)}>
+                  <IconEdit /> Editar
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={() => handleDelete(aluno)}
+                >
+                  <IconTrash /> Excluir
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+
+        <div className="hidden lg:block">
+          <DataTable columns={columns} data={alunosFiltrados} />
+        </div>
 
         <AlunoModal
           open={modalOpen}

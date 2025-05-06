@@ -8,13 +8,19 @@ import {
 } from "@/components/ui/select";
 import { Curso } from "@/lib/types";
 import { useEffect, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface CursoSelectProps {
   cursoSelecionado: string;
   onCursoChange: (curso: string) => void;
+  className?: string; // <- nova prop opcional
 }
 
-export function CursoSelect({ cursoSelecionado, onCursoChange }: CursoSelectProps) {
+export function CursoSelect({
+  cursoSelecionado,
+  onCursoChange,
+  className,
+}: CursoSelectProps) {
   const [cursos, setCursos] = useState<Curso[]>([]);
 
   useEffect(() => {
@@ -26,7 +32,7 @@ export function CursoSelect({ cursoSelecionado, onCursoChange }: CursoSelectProp
 
   return (
     <Select value={cursoSelecionado} onValueChange={onCursoChange}>
-      <SelectTrigger className="w-[230px]">
+      <SelectTrigger className={twMerge("w-[230px]", className)}>
         <SelectValue placeholder="Filtrar por Curso" />
       </SelectTrigger>
       <SelectContent>
