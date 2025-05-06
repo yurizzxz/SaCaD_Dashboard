@@ -36,7 +36,7 @@ export function CursoSelect({
         <SelectValue placeholder="Filtrar por Curso" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="todos">Todos</SelectItem>
+        <SelectItem value="todos">Todos os cursos</SelectItem>
         {cursos.map((curso) => (
           <SelectItem key={curso.id} value={curso.nome_curso}>
             {curso.nome_curso}

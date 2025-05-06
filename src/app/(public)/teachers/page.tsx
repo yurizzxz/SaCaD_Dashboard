@@ -24,8 +24,9 @@ import {
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
   const [disciplinaSelecionada, setDisciplinaSelecionada] = useState("todos");
+  const [status, setStatus] = useState("todos");
   const { getIdCurso } = useCoursesFilter();
-  const { disciplinas, getIdDisciplina } = useDisciplinaFilter();
+  const { getIdDisciplina } = useDisciplinaFilter();
 
   const {
     teachers,
@@ -57,7 +58,9 @@ export default function Page() {
       disciplinaSelecionada === "todos" ||
       prof.disciplinas_id.includes(disciplinaIdSelecionada!);
 
-    return filtraPorCurso && filtraPorDisciplina;
+    const filtraPorStatus = status === "todos" || prof.status === status;
+
+    return filtraPorCurso && filtraPorDisciplina && filtraPorStatus;
   });
 
   const columns = [
@@ -95,14 +98,16 @@ export default function Page() {
   return (
     <Section>
       <Content>
-        <div className="flex justify-between flex-wrap items-center mb-6">
-          <h1 className="text-2xl font-medium">Lista de Professores</h1>
+        <div className="flex justify-between flex-wrap mb-6">
+          <h1 className="text-2xl font-medium mb-2">Lista de Professores</h1>
           <div className="flex flex-wrap gap-2">
             <FilterSelect
               cursoSelecionado={cursoSelecionado}
               disciplinaSelecionada={disciplinaSelecionada}
               onDisciplinaChange={setDisciplinaSelecionada}
               onCursoChange={setCursoSelecionado}
+              statusSelecionado={status}
+              onStatusChange={setStatus}
             />
             <Button onClick={handleAdd}>Adicionar Professor</Button>
           </div>
