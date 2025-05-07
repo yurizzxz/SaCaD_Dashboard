@@ -140,28 +140,22 @@
     {
       "id": 1,
       "nome_curso": "Administração de Empresas",
-      "modalidade": "Presencial",
       "area_tecnologica": "Gestão",
-      "disciplinas_id": [
-        1,
-        2,
-        3
-      ],
-      "professores_id": [
-        1,
-        2,
-        3
-      ]
+      "duracao_em_semestres": 6,
+      "periodo": "Integral",
+      "modalidade": "EAD",
+      "email_coordenador": "coord@gmail.com",
+      "forma_oferecimento": "Bimestral"
     },
     {
       "id": 2,
       "nome_curso": "Engenharia da Computação",
       "area_tecnologica": "Tecnologia",
-      "duracao_em_semestres": 6,
-      "periodo": "",
+      "duracao_em_semestres": "6",
+      "periodo": "Tarde",
       "modalidade": "EAD",
       "email_coordenador": "coord@gmail.com",
-      "forma_oferecimento": ""
+      "forma_oferecimento": "Anual"
     },
     {
       "id": 3,

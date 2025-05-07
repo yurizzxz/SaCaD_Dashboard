@@ -14,8 +14,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useState } from "react";
 
 export default function Page() {
+  const [eixoSelecionado, setEixoSelecionado] = useState("todos");
+
   const {
     cursos,
     loading,
@@ -44,7 +47,13 @@ export default function Page() {
     {
       key: "disciplinas_id",
       label: "Disciplinas",
-      render: (curso: any) => <span>{Array.isArray(curso.disciplinas_id) ? curso.disciplinas_id.length : 0}</span>,
+      render: (curso: any) => (
+        <span>
+          {Array.isArray(curso.disciplinas_id)
+            ? curso.disciplinas_id.length
+            : 0}
+        </span>
+      ),
     },
     { key: "duracao_em_semestres", label: "Semestres" },
     {
@@ -63,13 +72,19 @@ export default function Page() {
     },
   ];
 
-  const data = cursos.map((curso) => ({
-    ...curso,
-    id: curso.id,
-    disciplinas_id: Array.isArray(curso.disciplinas_id)
-      ? curso.disciplinas_id.length
-      : 0,
-  }));
+  const data = cursos
+    .filter(
+      (curso) =>
+        eixoSelecionado === "todos" ||
+        curso.area_tecnologica === eixoSelecionado
+    )
+    .map((curso) => ({
+      ...curso,
+      id: curso.id,
+      disciplinas_id: Array.isArray(curso.disciplinas_id)
+        ? curso.disciplinas_id.length
+        : 0,
+    }));
 
   return (
     <Section>
@@ -77,7 +92,10 @@ export default function Page() {
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <h1 className="text-2xl font-medium">Lista de Cursos</h1>
           <div className="flex flex-wrap gap-2">
-            <FilterSelect />
+            <FilterSelect
+              eixoSelecionado={eixoSelecionado}
+              onEixoChange={setEixoSelecionado}
+            />
             <Button onClick={handleAdd}>Adicionar Curso</Button>
           </div>
         </div>
@@ -92,19 +110,34 @@ export default function Page() {
                 <CardDescription>ID: {curso.id}</CardDescription>
                 <CardTitle className="text-lg">{curso.nome_curso}</CardTitle>
                 <CardDescription>Sigla: {curso.sigla}</CardDescription>
-                <CardDescription>Eixo: {curso.area_tecnologica}</CardDescription>
+                <CardDescription>
+                  Eixo: {curso.area_tecnologica}
+                </CardDescription>
                 <CardDescription>Turno: {curso.periodo}</CardDescription>
-                <CardDescription>Modalidade: {curso.modalidade}</CardDescription>
-                <CardDescription>Oferecimento: {curso.forma_oferecimento}</CardDescription>
-                <CardDescription>Email: {curso.email_coordenador}</CardDescription>
-                <CardDescription>Disciplinas: {curso.disciplinas_id}</CardDescription>
-                <CardDescription>Semestres: {curso.duracao_em_semestres}</CardDescription>
+                <CardDescription>
+                  Modalidade: {curso.modalidade}
+                </CardDescription>
+                <CardDescription>
+                  Oferecimento: {curso.forma_oferecimento}
+                </CardDescription>
+                <CardDescription>
+                  Email: {curso.email_coordenador}
+                </CardDescription>
+                <CardDescription>
+                  Disciplinas: {curso.disciplinas_id}
+                </CardDescription>
+                <CardDescription>
+                  Semestres: {curso.duracao_em_semestres}
+                </CardDescription>
               </CardHeader>
               <CardFooter className="gap-2">
                 <Button variant="default" onClick={() => handleEdit(curso)}>
                   <IconEdit /> Editar
                 </Button>
-                <Button variant="destructive" onClick={() => handleDelete(curso)}>
+                <Button
+                  variant="destructive"
+                  onClick={() => handleDelete(curso)}
+                >
                   <IconTrash /> Excluir
                 </Button>
               </CardFooter>

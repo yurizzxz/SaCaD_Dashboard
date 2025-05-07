@@ -24,6 +24,8 @@ export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
   const { cursos, getNomeCurso, getIdCurso } = useCoursesFilter();
 
+  const [modalidadeSelecionada, setModalidadeSelecionada] = useState("todos");
+
   const {
     disciplinas,
     loading,
@@ -51,16 +53,20 @@ export default function Page() {
     verCargaHoraria,
   } = useDisciplinaHooks();
 
-
   const cursoIdSelecionado = getIdCurso(cursoSelecionado);
 
-  const disciplinasFiltradas =
-    cursoSelecionado === "todos"
-      ? disciplinas
-      : disciplinas.filter((disciplina) =>
-          disciplina.curso_id.includes(cursoIdSelecionado!)
-        );
-
+  const disciplinasFiltradas = disciplinas.filter((disciplina) => {
+    const correspondeCurso =
+      cursoSelecionado === "todos" ||
+      disciplina.curso_id.includes(cursoIdSelecionado!);
+  
+    const correspondeModalidade =
+      modalidadeSelecionada === "todos" ||
+      disciplina.modalidade === modalidadeSelecionada;
+  
+    return correspondeCurso && correspondeModalidade;
+  });
+  
   const columns = [
     { key: "id", label: "ID" },
     { key: "nome", label: "Nome" },
@@ -131,7 +137,12 @@ export default function Page() {
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <h1 className="text-2xl font-medium">Lista de Disciplinas</h1>
           <div className="flex flex-wrap gap-2">
-            <FilterSelect onCursoChange={setCursoSelecionado} cursoSelecionado={cursoSelecionado} />
+            <FilterSelect
+              onCursoChange={setCursoSelecionado}
+              cursoSelecionado={cursoSelecionado}
+              onModalidadeChange={setModalidadeSelecionada}
+              modalidadeSelecionada={modalidadeSelecionada}
+            />
             <Button onClick={handleAdd}>Criar Disciplina</Button>
           </div>
         </div>
@@ -145,25 +156,51 @@ export default function Page() {
               <CardHeader>
                 <CardDescription>ID: {disciplina.id}</CardDescription>
                 <CardTitle className="text-lg">{disciplina.nome}</CardTitle>
-                <CardDescription className="text-md">Sigla: {disciplina.sigla}</CardDescription>
-                <CardDescription className="text-md">Semestre: {disciplina.semestre}</CardDescription>
-                <CardDescription className="text-md">Eixo Tecnológico: {disciplina.area_tecnologica}</CardDescription>
-                <CardDescription className="text-md">Modalidade: {disciplina.modalidade}</CardDescription>
-                <CardDescription className="text-md mt-2">Quantidade de Aulas: {disciplina.qtd_aulas}</CardDescription>
-                <CardDescription className="text-md">Aulas Teóricas: {disciplina.aulas_teoricas}</CardDescription>
-                <CardDescription className="text-md">Aulas Práticas: {disciplina.aulas_praticas}</CardDescription>
+                <CardDescription className="text-md">
+                  Sigla: {disciplina.sigla}
+                </CardDescription>
+                <CardDescription className="text-md">
+                  Semestre: {disciplina.semestre}
+                </CardDescription>
+                <CardDescription className="text-md">
+                  Eixo Tecnológico: {disciplina.area_tecnologica}
+                </CardDescription>
+                <CardDescription className="text-md">
+                  Modalidade: {disciplina.modalidade}
+                </CardDescription>
+                <CardDescription className="text-md mt-2">
+                  Quantidade de Aulas: {disciplina.qtd_aulas}
+                </CardDescription>
+                <CardDescription className="text-md">
+                  Aulas Teóricas: {disciplina.aulas_teoricas}
+                </CardDescription>
+                <CardDescription className="text-md">
+                  Aulas Práticas: {disciplina.aulas_praticas}
+                </CardDescription>
               </CardHeader>
               <CardFooter className="flex flex-wrap gap-2">
-                <Button variant="outline" onClick={() => verProfessores(disciplina.professor)}>
+                <Button
+                  variant="outline"
+                  onClick={() => verProfessores(disciplina.professor)}
+                >
                   Ver professores
                 </Button>
-                <Button variant="outline" onClick={() => verCursos(disciplina.curso_id)}>
+                <Button
+                  variant="outline"
+                  onClick={() => verCursos(disciplina.curso_id)}
+                >
                   Ver cursos
                 </Button>
-                <Button variant="default" onClick={() => handleEdit(disciplina)}>
+                <Button
+                  variant="default"
+                  onClick={() => handleEdit(disciplina)}
+                >
                   <IconEdit /> Editar
                 </Button>
-                <Button variant="destructive" onClick={() => handleDelete(disciplina)}>
+                <Button
+                  variant="destructive"
+                  onClick={() => handleDelete(disciplina)}
+                >
                   <IconTrash /> Excluir
                 </Button>
               </CardFooter>
@@ -195,7 +232,10 @@ export default function Page() {
           onOpenChange={setModalProfessoresOpen}
           title="Professores"
           description={
-            <>Visualize os professores da disciplina <strong>{disciplinaSelecionada?.nome}</strong></>
+            <>
+              Visualize os professores da disciplina{" "}
+              <strong>{disciplinaSelecionada?.nome}</strong>
+            </>
           }
           items={professoresSelecionados}
         />
@@ -204,7 +244,10 @@ export default function Page() {
           onOpenChange={setModalCursosOpen}
           title="Cursos"
           description={
-            <>Visualize os cursos da disciplina <strong>{disciplinaSelecionada?.nome}</strong></>
+            <>
+              Visualize os cursos da disciplina{" "}
+              <strong>{disciplinaSelecionada?.nome}</strong>
+            </>
           }
           items={cursosSelecionados}
         />
@@ -214,7 +257,8 @@ export default function Page() {
           title="Visualizar Carga Horária"
           description={
             <>
-              Carga horária da disciplina <strong>{disciplinaSelecionada?.nome}</strong>
+              Carga horária da disciplina{" "}
+              <strong>{disciplinaSelecionada?.nome}</strong>
             </>
           }
           items={[
