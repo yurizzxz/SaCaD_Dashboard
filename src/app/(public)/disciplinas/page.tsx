@@ -19,6 +19,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useCoursesFilter } from "@/hooks/useCoursesFilter";
+import { DisciplinaModals } from "./disciplina-modals";
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
@@ -59,14 +60,14 @@ export default function Page() {
     const correspondeCurso =
       cursoSelecionado === "todos" ||
       disciplina.curso_id.includes(cursoIdSelecionado!);
-  
+
     const correspondeModalidade =
       modalidadeSelecionada === "todos" ||
       disciplina.modalidade === modalidadeSelecionada;
-  
+
     return correspondeCurso && correspondeModalidade;
   });
-  
+
   const columns = [
     { key: "id", label: "ID" },
     { key: "nome", label: "Nome" },
@@ -226,46 +227,16 @@ export default function Page() {
           disciplina={disciplinaSelecionada}
         />
 
-        {/* Modais */}
-        <GenericModal
-          open={modalProfessoresOpen}
-          onOpenChange={setModalProfessoresOpen}
-          title="Professores"
-          description={
-            <>
-              Visualize os professores da disciplina{" "}
-              <strong>{disciplinaSelecionada?.nome}</strong>
-            </>
-          }
-          items={professoresSelecionados}
-        />
-        <GenericModal
-          open={modalCursosOpen}
-          onOpenChange={setModalCursosOpen}
-          title="Cursos"
-          description={
-            <>
-              Visualize os cursos da disciplina{" "}
-              <strong>{disciplinaSelecionada?.nome}</strong>
-            </>
-          }
-          items={cursosSelecionados}
-        />
-        <GenericModal
-          open={modalCargaHorariaOpen}
-          onOpenChange={setModalCargaHorariaOpen}
-          title="Visualizar Carga Horária"
-          description={
-            <>
-              Carga horária da disciplina{" "}
-              <strong>{disciplinaSelecionada?.nome}</strong>
-            </>
-          }
-          items={[
-            `Aulas Teóricas: ${disciplinaSelecionada?.aulas_teoricas} aulas`,
-            `Aulas Práticas: ${disciplinaSelecionada?.aulas_praticas} aulas`,
-            `Quantidade de Aulas: ${disciplinaSelecionada?.qtd_aulas} aulas`,
-          ]}
+        <DisciplinaModals
+          disciplinaSelecionada={disciplinaSelecionada}
+          professoresSelecionados={professoresSelecionados}
+          cursosSelecionados={cursosSelecionados}
+          modalProfessoresOpen={modalProfessoresOpen}
+          setModalProfessoresOpen={setModalProfessoresOpen}
+          modalCursosOpen={modalCursosOpen}
+          setModalCursosOpen={setModalCursosOpen}
+          modalCargaHorariaOpen={modalCargaHorariaOpen}
+          setModalCargaHorariaOpen={setModalCargaHorariaOpen}
         />
       </Content>
     </Section>
