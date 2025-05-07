@@ -57,11 +57,11 @@ export function FilterSelect({
       )}
 
       <Select value={statusSelecionado} onValueChange={onStatusChange}>
-        <SelectTrigger className="w-[160px]">
+        <SelectTrigger className="w-[130px]">
           <SelectValue placeholder="Filtrar por Status" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem key={"todos"} value="todos">Todos</SelectItem>
+          <SelectItem key={"todos"} value="todos">Status</SelectItem>
           <SelectItem key={"Ativo"} value="Ativo">Ativo</SelectItem>
           <SelectItem key={"Afastado"} value="Afastado">Afastado</SelectItem>
         </SelectContent>

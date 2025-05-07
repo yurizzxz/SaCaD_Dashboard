@@ -16,19 +16,19 @@
       "id": 1
     },
     {
-      "id": 2,
       "nome": "Mariana Castro",
-      "data_nascimento": "2000-03-22",
+      "cpf": "234.567.890-11",
       "curso_id": [
         2
       ],
+      "status": "Afastado",
       "semestre": 2,
-      "status": "Ativo",
-      "data_matricula": "2023-01-20",
       "email": "mariana.castro@exemplo.com",
       "telefone": "(11) 91234-5678",
       "endereco": "Rua Teste, 89, Bairro Z, Cidade W",
-      "cpf": "234.567.890-11"
+      "data_nascimento": "2000-03-22",
+      "data_matricula": "2023-01-20",
+      "id": 2
     },
     {
       "id": 4,
@@ -247,9 +247,7 @@
       "aulas_teoricas": 35,
       "aulas_praticas": 25,
       "sigla": "ED",
-      "curso_id": [
-        2
-      ],
+      "curso_id": "Análise e Desenvolvimento de Sistemas",
       "professor": [
         1,
         2

@@ -1,5 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+
 
 type FormFieldsProps = {
   formData: any;
@@ -7,6 +9,11 @@ type FormFieldsProps = {
 };
 
 export function FormFields({ formData, handleChange }: FormFieldsProps) {
+  const handleSelectChange = (name: string, value: string) => {
+    handleChange({
+      target: { name, value },
+    } as React.ChangeEvent<HTMLInputElement>);
+  }
   const disciplinasFields = [
     { name: "nome", label: "Nome", placeholder: "ex: Matemática" },
     { name: "sigla", label: "Sigla", placeholder: "ex: MAT" },
@@ -26,7 +33,6 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
       label: "Área Tecnológica",
       placeholder: "ex: Tecnologia da Informação",
     },
-    { name: "modalidade", label: "Modalidade", placeholder: "ex: Presencial" },
     { name: "qtd_aulas", label: "Quantidade de Aulas", placeholder: "ex: 80" },
     { name: "aulas_teoricas", label: "Aulas Teóricas", placeholder: "ex: 30" },
     { name: "aulas_praticas", label: "Aulas Práticas", placeholder: "ex: 15" },
@@ -46,6 +52,22 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           />
         </div>
       ))}
+      <div className="flex flex-col gap-2 w-full">
+        <Label>Modalidade</Label>
+        <Select
+          onValueChange={(value) => handleSelectChange("modalidade", value)}
+          value={formData.modalidade}
+        >
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Selecione a modalidade" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Presencial">Presencial</SelectItem>
+            <SelectItem value="EAD">EAD</SelectItem>
+            <SelectItem value="Híbrido">Híbrido</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
     </div>
   );
 }
