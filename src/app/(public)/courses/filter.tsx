@@ -28,15 +28,21 @@ export function FilterSelect({
   }, []);
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 flex-wrap mt-4 lg:mt-0">
       <Select value={eixoSelecionado} onValueChange={onEixoChange}>
         <SelectTrigger className="w-[160px]">
           <SelectValue placeholder="Eixo Tecnológico" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem key={"todos"} value="todos">Todos os eixos</SelectItem>
-          <SelectItem key={"Gestão"} value="Gestão">Gestão</SelectItem>
-          <SelectItem key={"Tecnologia"} value="Tecnologia">Tecnologia</SelectItem>
+          <SelectItem key={"todos"} value="todos">
+            Todos os eixos
+          </SelectItem>
+          <SelectItem key={"Gestão"} value="Gestão">
+            Gestão
+          </SelectItem>
+          <SelectItem key={"Tecnologia"} value="Tecnologia">
+            Tecnologia
+          </SelectItem>
         </SelectContent>
       </Select>
     </div>

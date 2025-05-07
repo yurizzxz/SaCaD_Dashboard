@@ -17,14 +17,13 @@ export function FilterSelect({
   cursoSelecionado,
   onCursoChange,
 }: FilterSelectProps) {
-
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 flex-wrap mt-4 lg:mt-0">
+      {" "}
       <CursoSelect
         cursoSelecionado={cursoSelecionado}
         onCursoChange={onCursoChange}
       />
-
       <Select>
         <SelectTrigger className="w-[160px]">
           <SelectValue placeholder="Filtrar por Status" />
