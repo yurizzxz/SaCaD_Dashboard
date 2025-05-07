@@ -1,7 +1,13 @@
+import { FormCursoSelect } from "@/components/select/formcurso-select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 type FormFieldsProps = {
   formData: any;
@@ -13,15 +19,10 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
     handleChange({
       target: { name, value },
     } as React.ChangeEvent<HTMLInputElement>);
-  }
+  };
   const disciplinasFields = [
     { name: "nome", label: "Nome", placeholder: "ex: Matemática" },
     { name: "sigla", label: "Sigla", placeholder: "ex: MAT" },
-    {
-      name: "curso_id",
-      label: "Curso",
-      placeholder: "ex: Engenharia da Computação",
-    },
     {
       name: "professor",
       label: "Professor",
@@ -52,6 +53,14 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           />
         </div>
       ))}
+      <div className="flex gap-2 flex-col w-full">
+        <Label>Curso</Label>
+        <FormCursoSelect
+          className="w-full"
+          cursoSelecionado={formData.curso_id?.toString() || ""}
+          onCursoChange={(value) => handleSelectChange("curso_id", value)}
+        />
+      </div>
       <div className="flex flex-col gap-2 w-full">
         <Label>Modalidade</Label>
         <Select

@@ -6,7 +6,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { CursoSelect } from "@/components/curso-select";
+import { CursoSelect } from "@/components/select/curso-select";
 import { useEffect, useState } from "react";
 import { Disciplina } from "@/lib/types";
 

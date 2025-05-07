@@ -1,3 +1,4 @@
+import { FormCursoSelect } from "@/components/select/formcurso-select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -7,7 +8,6 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-
 type FormFieldsProps = {
   formData: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -36,11 +36,6 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           label: "Telefone",
           placeholder: "ex: (11) 92345-6789",
         },
-        {
-          name: "curso_id",
-          label: "Curso",
-          placeholder: "ex: Engenharia da Computação",
-        },
       ].map((field) => (
         <div key={field.name} className="flex gap-2 flex-col w-full">
           <Label>{field.label}</Label>
@@ -67,6 +62,14 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
             <SelectItem value="Afastado">Afastado</SelectItem>
           </SelectContent>
         </Select>
+      </div>
+      <div className="flex gap-2 flex-col w-full">
+        <Label>Curso</Label>
+        <FormCursoSelect
+          className="w-full"
+          cursoSelecionado={formData.curso_id}
+          onCursoChange={(value) => handleSelectChange("curso_id", value)}
+        />
       </div>
 
       <div className="flex gap-2 flex-col">

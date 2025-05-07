@@ -1,6 +1,6 @@
 "use client";
-import { CursoSelect } from "@/components/curso-select";
-import { DisciplinaSelect } from "@/components/disciplina-select";
+import { CursoSelect } from "@/components/select/curso-select";
+import { DisciplinaSelect } from "@/components/select/disciplina-select";
 import {
   Select,
   SelectTrigger,

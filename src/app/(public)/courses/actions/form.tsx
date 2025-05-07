@@ -21,13 +21,14 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
   };
 
   return (
-    <div className="flex flex-col gap-4 py-2">
-      {[
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2">
+      {[ 
         { name: "nome_curso", label: "Nome do Curso", placeholder: "ex: Engenharia da Computação" },
+        { name: "sigla", label: "Sigla", placeholder: "ex: EDC" },
         { name: "area_tecnologica", label: "Área Tecnológica", placeholder: "ex: Tecnologia da Informação" },
         { name: "duracao_em_semestres", label: "Duração (semestres)", placeholder: "ex: 10" },
-        { name: "email_coordenador", label: "Email do Coordenador", placeholder: "ex: nome@exemplo.com" },
-      ].map((field) => (
+        { name: "email_coordenador", label: "Email do Coordenador", placeholder: "ex: nome@exemplo.com" }
+      ].map((field, index) => (
         <div key={field.name} className="flex gap-2 flex-col w-full">
           <Label>{field.label}</Label>
           <Input

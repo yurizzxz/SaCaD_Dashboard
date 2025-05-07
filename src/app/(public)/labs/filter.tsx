@@ -1,5 +1,5 @@
 "use client";
-import { CursoSelect } from "@/components/curso-select";
+import { CursoSelect } from "@/components/select/curso-select";
 import {
   Select,
   SelectTrigger,

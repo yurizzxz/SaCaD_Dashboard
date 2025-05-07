@@ -60,7 +60,7 @@ export default function Page() {
     },
     { key: "predio", label: "Prédio" },
     { key: "bloco", label: "Bloco" },
-    { key: "curso_associado", label: "Curso Associado" },
+    { key: "curso_associado", label: "Curso Associado", render: (row: any) => getNomeCurso(row.curso_associado) },
     {
       key: "equipamentosString",
       label: "Equipamentos",

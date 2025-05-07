@@ -53,6 +53,11 @@ export const data = {
       url: "/labs",
       icon: IconDeviceLaptop,
     },
+    {
+      title: "Horários",
+      url: "/horarios",
+      icon: IconBuilding,
+    }
     // {
     //   title: "Relatórios",
     //   url: "/reports",

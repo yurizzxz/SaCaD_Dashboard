@@ -59,6 +59,19 @@
       "telefone": "(11) 96543-2109",
       "endereco": "Rua Fictícia, 110, Bairro B, Cidade V",
       "cpf": "567.890.123-14"
+    },
+    {
+      "nome": "tesat",
+      "cpf": "",
+      "curso_id": "3",
+      "status": "",
+      "semestre": "",
+      "email": "",
+      "telefone": "",
+      "endereco": "",
+      "data_nascimento": "",
+      "data_matricula": "",
+      "id": 6
     }
   ],
   "professores": [
@@ -175,7 +188,9 @@
       "aulas_teoricas": 30,
       "aulas_praticas": 15,
       "sigla": "IA",
-      "curso_id": [2],
+      "curso_id": [
+        2
+      ],
       "professor": [
         1,
         2
@@ -245,7 +260,7 @@
       "aulas_teoricas": 35,
       "aulas_praticas": 25,
       "sigla": "ED",
-      "curso_id": "Análise e Desenvolvimento de Sistemas",
+      "curso_id": "3",
       "professor": [
         1,
         2
@@ -254,6 +269,21 @@
       "area_tecnologica": "Tecnologia",
       "modalidade": "Presencial",
       "qtd_aulas": 60
+    },
+    {
+      "id": 7,
+      "nome": "Testeeeee",
+      "aulas_teoricas": 0,
+      "aulas_praticas": 0,
+      "sigla": "",
+      "curso_id": [
+        1
+      ],
+      "professor": [],
+      "semestre": 0,
+      "area_tecnologica": "",
+      "modalidade": "",
+      "qtd_aulas": 0
     }
   ],
   "salas": [

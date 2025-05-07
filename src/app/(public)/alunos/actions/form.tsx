@@ -1,3 +1,4 @@
+import { FormCursoSelect } from "@/components/select/formcurso-select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -25,11 +26,6 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
       {[
         { name: "nome", label: "Nome", placeholder: "ex: nome sobrenome" },
         { name: "cpf", label: "CPF", placeholder: "ex: 123.456.789-10" },
-        {
-          name: "curso_id",
-          label: "Curso",
-          placeholder: "ex: Engenharia da Computação",
-        },
         { name: "semestre", label: "Semestre", placeholder: "ex: 4" },
         { name: "email", label: "Email", placeholder: "ex: nome@gmail.com" },
         {
@@ -56,7 +52,10 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
 
       <div className="flex gap-2 flex-col w-full">
         <Label>Status</Label>
-        <Select value={formData.status} onValueChange={(value) => handleSelectChange("status", value)}>
+        <Select
+          value={formData.status}
+          onValueChange={(value) => handleSelectChange("status", value)}
+        >
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Selecione o status" />
           </SelectTrigger>
@@ -65,6 +64,14 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
             <SelectItem value="Afastado">Afastado</SelectItem>
           </SelectContent>
         </Select>
+      </div>
+      <div className="flex gap-2 flex-col w-full">
+        <Label>Curso</Label>
+        <FormCursoSelect
+          className="w-full"
+          cursoSelecionado={formData.curso_id}
+          onCursoChange={(value) => handleSelectChange("curso_id", value)}
+        />
       </div>
 
       <div className="flex gap-2 flex-col">

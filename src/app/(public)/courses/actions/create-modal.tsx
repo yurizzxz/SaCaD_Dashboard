@@ -17,6 +17,7 @@ export function Modal({
   const [formData, setFormData] = useState({
     id: 0,
     nome_curso: "",
+    sigla: "",
     area_tecnologica: "",
     duracao_em_semestres: "",
     periodo: "",
@@ -30,6 +31,7 @@ export function Modal({
       setFormData({
         id: initialData.id,
         nome_curso: initialData.nome_curso || "",
+        sigla: initialData.sigla || "",
         area_tecnologica: initialData.area_tecnologica || "",
         duracao_em_semestres: initialData.duracao_em_semestres?.toString() || "",
         periodo: initialData.periodo || "",
@@ -41,6 +43,7 @@ export function Modal({
       setFormData({
         id: 0,
         nome_curso: "",
+        sigla: "",
         area_tecnologica: "",
         duracao_em_semestres: "",
         periodo: "",
@@ -67,7 +70,7 @@ export function Modal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-xl">
+      <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle className="text-xl">
             {initialData ? "Editar Curso" : "Cadastrar Curso"}
