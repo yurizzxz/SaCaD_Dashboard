@@ -175,9 +175,7 @@
       "aulas_teoricas": 30,
       "aulas_praticas": 15,
       "sigla": "IA",
-      "curso_id": [
-        1
-      ],
+      "curso_id": [2],
       "professor": [
         1,
         2

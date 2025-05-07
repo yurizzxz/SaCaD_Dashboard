@@ -18,7 +18,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
     { name: "nome", label: "Nome", placeholder: "ex: Matemática" },
     { name: "sigla", label: "Sigla", placeholder: "ex: MAT" },
     {
-      name: "curso",
+      name: "curso_id",
       label: "Curso",
       placeholder: "ex: Engenharia da Computação",
     },
