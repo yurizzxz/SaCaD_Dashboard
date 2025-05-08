@@ -52,7 +52,7 @@ export function useLabs() {
   const editarLab = async (id: number, labAtualizado: Partial<Laboratorio>) => {
     try {
       const res = await fetch(`${API_URL}/${id}`, {
-        method: "PUT",
+        method: "PACTH",
         headers: {
           "Content-Type": "application/json",
         },

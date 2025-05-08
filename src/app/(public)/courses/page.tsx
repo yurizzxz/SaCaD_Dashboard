@@ -81,9 +81,7 @@ export default function Page() {
     .map((curso) => ({
       ...curso,
       id: curso.id,
-      disciplinas_id: Array.isArray(curso.disciplinas_id)
-        ? curso.disciplinas_id.length
-        : 0,
+      disciplinas_id: curso.disciplinas_id,
     }));
 
   return (

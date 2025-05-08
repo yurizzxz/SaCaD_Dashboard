@@ -67,7 +67,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
         <Label>Curso</Label>
         <FormCursoSelect
           className="w-full"
-          cursoSelecionado={formData.curso_id}
+          cursoSelecionado={formData.curso_id || ""}
           onCursoChange={(value) => handleSelectChange("curso_id", value)}
         />
       </div>

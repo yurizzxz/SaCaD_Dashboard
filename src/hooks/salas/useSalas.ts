@@ -52,7 +52,7 @@ export function useSalas() {
   const editarSala = async (id: number, salaAtualizada: Partial<Sala>) => {
     try {
       const res = await fetch(`${API_URL}/${id}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },

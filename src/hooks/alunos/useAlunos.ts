@@ -52,7 +52,7 @@ export function useAlunos() {
   const editarAluno = async (id: number, alunoAtualizado: Partial<Aluno>) => {
     try {
       const res = await fetch(`${API_URL}/${id}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },

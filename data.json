@@ -83,10 +83,7 @@
         2
       ],
       "cpf": "123.456.789-10",
-      "curso_id": [
-        2,
-        1
-      ],
+      "curso_id": "2",
       "data_admissao": "",
       "status": "Ativo",
       "email": "teste@gmail.com"
@@ -159,7 +156,12 @@
       "periodo": "Integral",
       "modalidade": "EAD",
       "email_coordenador": "coord@gmail.com",
-      "forma_oferecimento": "Bimestral"
+      "forma_oferecimento": "Anual",
+      "disciplinas_id": [
+        1,
+        2,
+        3
+      ]
     },
     {
       "id": 2,
@@ -170,7 +172,11 @@
       "periodo": "Tarde",
       "modalidade": "EAD",
       "email_coordenador": "coord@gmail.com",
-      "forma_oferecimento": "Anual"
+      "forma_oferecimento": "Anual",
+      "disciplinas_id": [
+        3,
+        4
+      ]
     },
     {
       "id": 3,
@@ -181,7 +187,11 @@
       "periodo": "Manhã",
       "modalidade": "Híbrido",
       "email_coordenador": "coord@gmail.com",
-      "forma_oferecimento": "Semestral"
+      "forma_oferecimento": "Semestral",
+      "disciplinas_id": [
+        3,
+        4
+      ]
     }
   ],
   "disciplinas": [
@@ -276,17 +286,15 @@
     {
       "id": 7,
       "nome": "Testeeeee",
-      "aulas_teoricas": 0,
-      "aulas_praticas": 0,
-      "sigla": "",
-      "curso_id": "2",
-      "professor": [
-        1
-      ],
-      "semestre": 0,
-      "area_tecnologica": "",
-      "modalidade": "",
-      "qtd_aulas": 0
+      "aulas_teoricas": 15,
+      "aulas_praticas": 15,
+      "sigla": "TE",
+      "curso_id": "3",
+      "professor": [],
+      "semestre": "6",
+      "area_tecnologica": "Tecnologia",
+      "modalidade": "Híbrido",
+      "qtd_aulas": "30"
     }
   ],
   "salas": [

@@ -51,7 +51,7 @@ export function useCursos() {
   const editarCurso = async (id: number, cursoAtualizado: Partial<Curso>) => {
     try {
       const res = await fetch(`${API_URL}/${id}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
