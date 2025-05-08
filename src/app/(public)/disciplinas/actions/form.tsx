@@ -1,4 +1,4 @@
-import { FormCursoSelect } from "@/components/select/formcurso-select";
+import { FormCursoSelect, FormProfessorSelect } from "@/components/select/form-select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -23,11 +23,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
   const disciplinasFields = [
     { name: "nome", label: "Nome", placeholder: "ex: Matemática" },
     { name: "sigla", label: "Sigla", placeholder: "ex: MAT" },
-    {
-      name: "professor",
-      label: "Professor",
-      placeholder: "ex: Paulo Henrique",
-    },
+    
     { name: "semestre", label: "Semestre", placeholder: "ex: 1" },
     {
       name: "area_tecnologica",
@@ -59,6 +55,14 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           className="w-full"
           cursoSelecionado={formData.curso_id?.toString() || ""}
           onCursoChange={(value) => handleSelectChange("curso_id", value)}
+        />
+      </div>
+      <div className="flex gap-2 flex-col w-full">
+        <Label>Professor</Label>
+        <FormProfessorSelect
+          className="w-full"
+          professorSelecionado={formData.professor?.toString() || ""}
+          onProfessorChange={(value) => handleSelectChange("professor", value)}
         />
       </div>
       <div className="flex flex-col gap-2 w-full">

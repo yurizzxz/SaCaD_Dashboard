@@ -33,10 +33,10 @@ export function CursoSelect({
   return (
     <Select value={cursoSelecionado} onValueChange={onCursoChange}>
       <SelectTrigger className={twMerge("w-[230px]", className)}>
-        <SelectValue placeholder="Filtrar por Curso" />
+        <SelectValue placeholder="Curso" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="todos">Todos os cursos</SelectItem>
+        <SelectItem value="todos">Curso</SelectItem>
         {cursos.map((curso) => (
           <SelectItem key={curso.id} value={curso.nome_curso}>
             {curso.nome_curso}

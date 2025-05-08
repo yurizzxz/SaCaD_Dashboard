@@ -26,10 +26,10 @@ export function FilterSelect({
       />
       <Select>
         <SelectTrigger className="w-[160px]">
-          <SelectValue placeholder="Filtrar por Status" />
+          <SelectValue placeholder="Status" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="todos">Todos</SelectItem>
+          <SelectItem value="todos">Status</SelectItem>
           <SelectItem value="Ativo">Ativo</SelectItem>
           <SelectItem value="Trancado">Trancado</SelectItem>
         </SelectContent>

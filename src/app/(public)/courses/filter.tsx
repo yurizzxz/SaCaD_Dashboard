@@ -35,7 +35,7 @@ export function FilterSelect({
         </SelectTrigger>
         <SelectContent>
           <SelectItem key={"todos"} value="todos">
-            Todos os eixos
+            Eixos
           </SelectItem>
           <SelectItem key={"Gestão"} value="Gestão">
             Gestão

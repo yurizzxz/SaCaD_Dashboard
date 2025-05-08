@@ -153,8 +153,9 @@
     {
       "id": 1,
       "nome_curso": "Administração de Empresas",
+      "sigla": "AE",
       "area_tecnologica": "Gestão",
-      "duracao_em_semestres": 6,
+      "duracao_em_semestres": "6",
       "periodo": "Integral",
       "modalidade": "EAD",
       "email_coordenador": "coord@gmail.com",
@@ -163,6 +164,7 @@
     {
       "id": 2,
       "nome_curso": "Engenharia da Computação",
+      "sigla": "EC",
       "area_tecnologica": "Tecnologia",
       "duracao_em_semestres": "6",
       "periodo": "Tarde",
@@ -173,6 +175,7 @@
     {
       "id": 3,
       "nome_curso": "Análise e Desenvolvimento de Sistemas",
+      "sigla": "ADS",
       "area_tecnologica": "Tecnologia",
       "duracao_em_semestres": "6",
       "periodo": "Manhã",
@@ -276,10 +279,10 @@
       "aulas_teoricas": 0,
       "aulas_praticas": 0,
       "sigla": "",
-      "curso_id": [
+      "curso_id": "2",
+      "professor": [
         1
       ],
-      "professor": [],
       "semestre": 0,
       "area_tecnologica": "",
       "modalidade": "",

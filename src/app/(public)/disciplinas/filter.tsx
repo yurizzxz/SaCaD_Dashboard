@@ -46,7 +46,7 @@ export function FilterSelect({
         </SelectTrigger>
         <SelectContent>
           <SelectItem key={"todos"} value="todos">
-            Todas as modalidades
+            Modalidades
           </SelectItem>
           <SelectItem key={"EAD"} value="EAD">
             EAD

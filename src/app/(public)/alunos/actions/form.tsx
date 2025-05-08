@@ -1,4 +1,4 @@
-import { FormCursoSelect } from "@/components/select/formcurso-select";
+import { FormCursoSelect } from "@/components/select/form-select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {

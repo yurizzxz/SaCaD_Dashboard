@@ -36,7 +36,7 @@ export function DisciplinaSelect({
         <SelectValue placeholder="Filtrar por Curso" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="todos">Todos as disciplinas</SelectItem>
+        <SelectItem value="todos">Disciplinas</SelectItem>
         {disciplinas.map((disciplina) => (
           <SelectItem key={disciplina.id} value={disciplina.nome}>
             {disciplina.nome}
