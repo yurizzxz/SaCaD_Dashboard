@@ -89,7 +89,7 @@ export default function Page() {
       <Content>
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <h1 className="text-2xl font-medium">Lista de Cursos</h1>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex items-center flex-wrap gap-2">
             <FilterSelect
               eixoSelecionado={eixoSelecionado}
               onEixoChange={setEixoSelecionado}

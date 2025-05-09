@@ -144,6 +144,37 @@
       "data_admissao": "",
       "status": "Afastado",
       "email": "teste@gmail.com"
+    },
+    {
+      "nome": "Testeeeee",
+      "disciplinas_id": "2",
+      "cpf": "2352005050",
+      "curso_id": "3",
+      "data_admissao": "",
+      "status": "Ativo",
+      "email": "teste@gmail.com",
+      "telefone": "",
+      "id": 6
+    },
+    {
+      "nome": "Yuri",
+      "disciplinas_id": "1",
+      "cpf": "123.456.789-10",
+      "curso_id": "1",
+      "data_admissao": "",
+      "status": "Ativo",
+      "email": "teste@gmail.com",
+      "id": 7
+    },
+    {
+      "nome": "",
+      "disciplinas_id": "7",
+      "cpf": "",
+      "curso_id": "2",
+      "data_admissao": "",
+      "status": "",
+      "email": "",
+      "id": 8
     }
   ],
   "cursos": [
@@ -237,16 +268,14 @@
       "aulas_teoricas": 35,
       "aulas_praticas": 15,
       "sigla": "GP",
-      "curso_id": [
-        1
-      ],
+      "curso_id": [],
       "professor": [
         1,
         2
       ],
       "semestre": 2,
       "area_tecnologica": "Gestão",
-      "modalidade": "Presencial",
+      "modalidade": "Híbrido",
       "qtd_aulas": 50
     },
     {
@@ -273,14 +302,14 @@
       "aulas_teoricas": 35,
       "aulas_praticas": 25,
       "sigla": "ED",
-      "curso_id": "3",
+      "curso_id": [],
       "professor": [
         1,
         2
       ],
       "semestre": 2,
       "area_tecnologica": "Tecnologia",
-      "modalidade": "Presencial",
+      "modalidade": "EAD",
       "qtd_aulas": 60
     },
     {

@@ -1,4 +1,7 @@
-import { FormCursoSelect } from "@/components/select/form-select";
+import {
+  FormCursoSelect,
+  FormDisciplinaSelect,
+} from "@/components/select/form-select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -25,11 +28,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
       {[
         { name: "nome", label: "Nome", placeholder: "ex: Paulo Henrique" },
         { name: "cpf", label: "CPF", placeholder: "ex: 123.456.789-00" },
-        {
-          name: "disciplinas_id",
-          label: "Disciplina",
-          placeholder: "ex: Matemática Discreta",
-        },
+
         { name: "email", label: "Email", placeholder: "ex: nome@exemplo.com" },
         {
           name: "telefone",
@@ -47,7 +46,6 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           />
         </div>
       ))}
-
       <div className="flex gap-2 flex-col w-full">
         <Label>Status</Label>
         <Select
@@ -63,15 +61,6 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           </SelectContent>
         </Select>
       </div>
-      <div className="flex gap-2 flex-col w-full">
-        <Label>Curso</Label>
-        <FormCursoSelect
-          className="w-full"
-          cursoSelecionado={formData.curso_id || ""}
-          onCursoChange={(value) => handleSelectChange("curso_id", value)}
-        />
-      </div>
-
       <div className="flex gap-2 flex-col">
         <Label>Data de Admissão</Label>
         <Input
@@ -79,6 +68,24 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           type="date"
           value={formData.data_admissao}
           onChange={handleChange}
+        />
+      </div>
+      <div className="flex gap-2 flex-col w-full">
+        <Label>Curso</Label>
+        <FormCursoSelect
+          className="w-full"
+          cursoSelecionado={formData.curso_id?.toString() || ""}
+          onCursoChange={(value) => handleSelectChange("curso_id", value)}
+        />
+      </div>
+      <div className="flex gap-2 flex-col">
+        <Label>Disciplina</Label>
+        <FormDisciplinaSelect
+          className="w-full"
+          disciplinaSelecionada={formData.disciplinas_id?.toString() || ""}
+          onDisciplinaChange={(value) =>
+            handleSelectChange("disciplinas_id", value)
+          }
         />
       </div>
     </div>

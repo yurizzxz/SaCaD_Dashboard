@@ -137,7 +137,8 @@ export default function Page() {
       <Content>
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <h1 className="text-2xl font-medium">Lista de Disciplinas</h1>
-          <div className="flex flex-wrap gap-2">
+
+          <div className="flex items-center flex-wrap gap-2">
             <FilterSelect
               onCursoChange={setCursoSelecionado}
               cursoSelecionado={cursoSelecionado}
@@ -150,6 +151,7 @@ export default function Page() {
 
         {loading && <p>Carregando disciplinas...</p>}
         {error && <p className="text-red-500">{error}</p>}
+        {/* <p>Total de disciplinas: {disciplinas.length}</p> */}
 
         <div className="grid grid-cols-1 md:grid-cols-1 lg:hidden gap-2 mb-6">
           {disciplinasFiltradas.map((disciplina) => (

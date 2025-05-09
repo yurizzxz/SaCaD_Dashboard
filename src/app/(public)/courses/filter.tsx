@@ -28,7 +28,7 @@ export function FilterSelect({
   }, []);
 
   return (
-    <div className="flex gap-2 flex-wrap mt-4 lg:mt-0">
+    <div className="flex gap-2 flex-wrap lg:mt-0">
       <Select value={eixoSelecionado} onValueChange={onEixoChange}>
         <SelectTrigger className="w-[160px]">
           <SelectValue placeholder="Eixo Tecnológico" />
