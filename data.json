@@ -318,12 +318,20 @@
       "aulas_teoricas": 15,
       "aulas_praticas": 15,
       "sigla": "TE",
-      "curso_id": "3",
-      "professor": [],
+      "curso_id": [
+        "1",
+        "3",
+        "2"
+      ],
+      "professor": [
+        "1",
+        "2"
+      ],
       "semestre": "6",
       "area_tecnologica": "Tecnologia",
       "modalidade": "Híbrido",
-      "qtd_aulas": "30"
+      "qtd_aulas": "30",
+      "professores": "1,2,5"
     }
   ],
   "salas": [

@@ -1,4 +1,5 @@
-import { FormCursoSelect, FormProfessorSelect } from "@/components/select/form-select";
+import { FormCursoInput } from "@/components/select/curso-input";
+import { FormProfessorInput } from "@/components/select/professor-input";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -20,10 +21,29 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
       target: { name, value },
     } as React.ChangeEvent<HTMLInputElement>);
   };
+
+  const handleCursoChange = (cursoIds: string[]) => {
+    handleChange({
+      target: {
+        name: "curso_id",
+        value: Array.isArray(cursoIds) ? cursoIds : [cursoIds],
+      },
+    });
+  };
+  const handleProfessoresChange = (professoresIds: string[]) => {
+    handleChange({
+      target: {
+        name: "professor",
+        value: Array.isArray(professoresIds)
+          ? professoresIds
+          : [professoresIds],
+      },
+    });
+  };
+
   const disciplinasFields = [
     { name: "nome", label: "Nome", placeholder: "ex: Matemática" },
     { name: "sigla", label: "Sigla", placeholder: "ex: MAT" },
-    
     { name: "semestre", label: "Semestre", placeholder: "ex: 1" },
     {
       name: "area_tecnologica",
@@ -49,22 +69,6 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           />
         </div>
       ))}
-      <div className="flex gap-2 flex-col w-full">
-        <Label>Curso</Label>
-        <FormCursoSelect
-          className="w-full"
-          cursoSelecionado={formData.curso_id?.toString() || ""}
-          onCursoChange={(value) => handleSelectChange("curso_id", value)}
-        />
-      </div>
-      <div className="flex gap-2 flex-col w-full">
-        <Label>Professor</Label>
-        <FormProfessorSelect
-          className="w-full"
-          professorSelecionado={formData.professor?.toString() || ""}
-          onProfessorChange={(value) => handleSelectChange("professor", value)}
-        />
-      </div>
       <div className="flex flex-col gap-2 w-full">
         <Label>Modalidade</Label>
         <Select
@@ -80,6 +84,26 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
             <SelectItem value="Híbrido">Híbrido</SelectItem>
           </SelectContent>
         </Select>
+      </div>
+      <div className="flex gap-2 flex-col w-full">
+        <Label>Curso</Label>
+        <FormCursoInput
+          className="w-full"
+          cursosSelecionados={
+            Array.isArray(formData.curso_id) ? formData.curso_id : []
+          }
+          onCursoChange={handleCursoChange}
+        />
+      </div>
+      <div className="flex gap-2 flex-col w-full">
+        <Label>Professor</Label>
+        <FormProfessorInput
+          professoresSelecionados={
+            Array.isArray(formData.professor) ? formData.professor : []
+          }
+          onProfessorChange={handleProfessoresChange}
+          className="w-full"
+        />
       </div>
     </div>
   );
