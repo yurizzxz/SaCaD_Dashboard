@@ -146,17 +146,6 @@
       "email": "teste@gmail.com"
     },
     {
-      "nome": "Testeeeee",
-      "disciplinas_id": "2",
-      "cpf": "2352005050",
-      "curso_id": "3",
-      "data_admissao": "",
-      "status": "Ativo",
-      "email": "teste@gmail.com",
-      "telefone": "",
-      "id": 6
-    },
-    {
       "nome": "Yuri",
       "disciplinas_id": "1",
       "cpf": "123.456.789-10",
@@ -165,23 +154,6 @@
       "status": "Ativo",
       "email": "teste@gmail.com",
       "id": 7
-    },
-    {
-      "nome": "",
-      "disciplinas_id": [
-        "7"
-      ],
-      "cpf": "",
-      "curso_id": [
-        1
-      ],
-      "data_admissao": "",
-      "status": "",
-      "email": "",
-      "id": 8,
-      "disciplina_id": [
-        7
-      ]
     }
   ],
   "cursos": [
