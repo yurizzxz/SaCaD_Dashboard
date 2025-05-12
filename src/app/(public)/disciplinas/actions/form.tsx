@@ -105,6 +105,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           onProfessorChange={handleProfessoresChange}
           className="w-full"
         />
-      </div></>
+      </div>
+      </>
   );
 }

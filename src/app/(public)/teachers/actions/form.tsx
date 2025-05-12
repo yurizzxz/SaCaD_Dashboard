@@ -1,7 +1,6 @@
 import { FormCursoInput } from "@/components/select/curso-input";
-import {
-  FormDisciplinaSelect,
-} from "@/components/select/form-select";
+import { FormDisciplinaInput } from "@/components/select/disciplina-input";
+import { FormDisciplinaSelect } from "@/components/select/form-select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -28,6 +27,15 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
       target: {
         name: "curso_id",
         value: cursoIds,
+      },
+    });
+  };
+
+  const handleDisciplinaChange = (disciplinaIds: number[]) => {
+    handleChange({
+      target: {
+        name: "disciplina_id",
+        value: disciplinaIds,
       },
     });
   };
@@ -91,12 +99,12 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
       </div>
       <div className="flex gap-2 flex-col">
         <Label>Disciplina</Label>
-        <FormDisciplinaSelect
+        <FormDisciplinaInput
           className="w-full"
-          disciplinaSelecionada={formData.disciplinas_id?.toString() || ""}
-          onDisciplinaChange={(value) =>
-            handleSelectChange("disciplinas_id", value)
+          disciplinasSelecionadas={
+            Array.isArray(formData.disciplina_id) ? formData.disciplina_id : []
           }
+          onDisciplinaChange={handleDisciplinaChange}
         />
       </div>
     </div>

@@ -168,7 +168,9 @@
     },
     {
       "nome": "",
-      "disciplinas_id": "7",
+      "disciplinas_id": [
+        "7"
+      ],
       "cpf": "",
       "curso_id": [
         1
@@ -176,7 +178,10 @@
       "data_admissao": "",
       "status": "",
       "email": "",
-      "id": 8
+      "id": 8,
+      "disciplina_id": [
+        7
+      ]
     }
   ],
   "cursos": [
@@ -308,8 +313,6 @@
       "professor": [
         3,
         4,
-        6,
-        7,
         1
       ],
       "semestre": "6",

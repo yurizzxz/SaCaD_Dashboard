@@ -8,18 +8,13 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { FormFields } from "./form";
 
-export function Modal({
-  open,
-  onOpenChange,
-  initialData,
-  onSave,
-}: any) {
+export function Modal({ open, onOpenChange, initialData, onSave }: any) {
   const [formData, setFormData] = useState({
     id: 0,
     nome: "",
-    disciplinas_id: [],
+    disciplinas_id: [] as string[],
     cpf: "",
-    curso_id: [],
+    curso_id: [] as string[],
     data_admissao: "",
     status: "",
     email: "",
@@ -30,9 +25,17 @@ export function Modal({
       setFormData({
         id: initialData.id,
         nome: initialData.nome || "",
-        disciplinas_id: initialData.disciplinas_id || [],
+        disciplinas_id: Array.isArray(initialData.disciplinas_id)
+          ? initialData.disciplinas_id
+          : (typeof initialData.disciplinas_id === "string"
+              ? initialData.disciplinas_id.split(",")
+              : []) || [],
         cpf: initialData.cpf || "",
-        curso_id: initialData.curso_id || [],
+        curso_id: Array.isArray(initialData.curso_id)
+          ? initialData.curso_id
+          : (typeof initialData.curso_id === "string"
+              ? initialData.curso_id.split(",")
+              : []) || [],
         data_admissao: initialData.data_admissao || "",
         status: initialData.status || "",
         email: initialData.email || "",
@@ -51,15 +54,8 @@ export function Modal({
     }
   }, [initialData]);
 
-  const handleChange = (e: { target: { name: string; value: any } }) => {
-    const { name, value } = e.target;
-    setFormData((prev: any) => ({
-      ...prev,
-      [name]:
-        name === "aulas_teoricas" || name === "aulas_praticas"
-          ? parseInt(value || "0")
-          : value,
-    }));
+  const handleChange = (e: any) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = () => {
