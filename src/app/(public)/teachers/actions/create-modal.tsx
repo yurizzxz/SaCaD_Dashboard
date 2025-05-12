@@ -51,8 +51,15 @@ export function Modal({
     }
   }, [initialData]);
 
-  const handleChange = (e: any) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e: { target: { name: string; value: any } }) => {
+    const { name, value } = e.target;
+    setFormData((prev: any) => ({
+      ...prev,
+      [name]:
+        name === "aulas_teoricas" || name === "aulas_praticas"
+          ? parseInt(value || "0")
+          : value,
+    }));
   };
 
   const handleSubmit = () => {

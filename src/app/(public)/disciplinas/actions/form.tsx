@@ -12,9 +12,8 @@ import {
 
 type FormFieldsProps = {
   formData: any;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (e: { target: { name: string; value: any } }) => void;
 };
-
 export function FormFields({ formData, handleChange }: FormFieldsProps) {
   const handleSelectChange = (name: string, value: string) => {
     handleChange({
@@ -22,24 +21,23 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
     } as React.ChangeEvent<HTMLInputElement>);
   };
 
-  const handleCursoChange = (cursoIds: string[]) => {
+  const handleCursoChange = (cursoIds: number[]) => {
     handleChange({
       target: {
         name: "curso_id",
-        value: Array.isArray(cursoIds) ? cursoIds : [cursoIds],
+        value: cursoIds,
       },
     });
   };
-  const handleProfessoresChange = (professoresIds: string[]) => {
+  const handleProfessoresChange = (professoresIds: number[]) => {
     handleChange({
       target: {
         name: "professor",
-        value: Array.isArray(professoresIds)
-          ? professoresIds
-          : [professoresIds],
+        value: professoresIds,
       },
     });
   };
+
 
   const disciplinasFields = [
     { name: "nome", label: "Nome", placeholder: "ex: Matemática" },
@@ -56,34 +54,37 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2">
-      {disciplinasFields.map((field) => (
-        <div key={field.name} className="flex flex-col gap-2">
-          <Label>{field.label}</Label>
-          <Input
-            type={field.name.includes("aulas") ? "number" : "text"}
-            name={field.name}
-            value={formData[field.name]}
-            placeholder={field.placeholder}
-            onChange={handleChange}
-          />
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2">
+        {disciplinasFields.map((field) => (
+          <div key={field.name} className="flex flex-col gap-2">
+            <Label>{field.label}</Label>
+            <Input
+              type={field.name.includes("aulas") ? "number" : "text"}
+              name={field.name}
+              value={formData[field.name]}
+              placeholder={field.placeholder}
+              onChange={handleChange}
+            />
+          </div>
+        ))}
+        <div className="flex flex-col gap-2 w-full">
+          <Label>Modalidade</Label>
+          <Select
+            onValueChange={(value) => handleSelectChange("modalidade", value)}
+            value={formData.modalidade}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Selecione a modalidade" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Presencial">Presencial</SelectItem>
+              <SelectItem value="EAD">EAD</SelectItem>
+              <SelectItem value="Híbrido">Híbrido</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
-      ))}
-      <div className="flex flex-col gap-2 w-full">
-        <Label>Modalidade</Label>
-        <Select
-          onValueChange={(value) => handleSelectChange("modalidade", value)}
-          value={formData.modalidade}
-        >
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Selecione a modalidade" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="Presencial">Presencial</SelectItem>
-            <SelectItem value="EAD">EAD</SelectItem>
-            <SelectItem value="Híbrido">Híbrido</SelectItem>
-          </SelectContent>
-        </Select>
+
       </div>
       <div className="flex gap-2 flex-col w-full">
         <Label>Curso</Label>
@@ -104,7 +105,6 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           onProfessorChange={handleProfessoresChange}
           className="w-full"
         />
-      </div>
-    </div>
+      </div></>
   );
 }

@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { Input } from "../ui/input";
 
 interface ProfessorSelectProps {
-  professoresSelecionados: string[];
-  onProfessorChange: (professoresIds: string[]) => void;
+  professoresSelecionados: number[];
+  onProfessorChange: (professoresIds: number[]) => void;
   className?: string;
 }
 
@@ -29,15 +29,16 @@ export function FormProfessorInput({
     p.nome.toLowerCase().includes(inputValue.toLowerCase())
   );
 
-  const handleSelect = (nome: string, id: string) => {
-    if (!professoresSelecionados.includes(id)) {
-      onProfessorChange([...professoresSelecionados, id]);
+  const handleSelect = (_nome: string, id: string) => {
+    const idNum = parseInt(id, 10);
+    if (!professoresSelecionados.includes(idNum)) {
+      onProfessorChange([...professoresSelecionados, idNum]);
     }
     setInputValue("");
     setShowSuggestions(false);
   };
 
-  const handleRemoveTag = (id: string) => {
+  const handleRemoveTag = (id: number) => {
     onProfessorChange(professoresSelecionados.filter((item) => item !== id));
   };
 
@@ -70,7 +71,7 @@ export function FormProfessorInput({
 
       <div className="mt-2 flex flex-wrap gap-2">
         {professoresSelecionados.map((id) => {
-          const professor = professores.find((p) => p.id.toString() === id);
+          const professor = professores.find((p) => p.id === id);
           return (
             professor && (
               <div

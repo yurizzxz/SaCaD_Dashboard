@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { Input } from "../ui/input";
 
 interface CursoSelectProps {
-  cursosSelecionados: string[];
-  onCursoChange: (cursosIds: string[]) => void;
+  cursosSelecionados: number[];
+  onCursoChange: (cursosIds: number[]) => void;
   className?: string;
 }
 
@@ -29,15 +29,16 @@ export function FormCursoInput({
     c.nome_curso.toLowerCase().includes(inputValue.toLowerCase())
   );
 
-  const handleSelect = (nome: string, id: string) => {
-    if (!cursosSelecionados.includes(id)) {
-      onCursoChange([...cursosSelecionados, id]);
+  const handleSelect = (_nome: string, id: string) => {
+    const idNum = parseInt(id, 10);
+    if (!cursosSelecionados.includes(idNum)) {
+      onCursoChange([...cursosSelecionados, idNum]);
     }
     setInputValue("");
     setShowSuggestions(false);
   };
 
-  const handleRemoveTag = (id: string) => {
+  const handleRemoveTag = (id: number) => {
     onCursoChange(cursosSelecionados.filter((item) => item !== id));
   };
 
@@ -70,7 +71,7 @@ export function FormCursoInput({
 
       <div className="mt-2 flex flex-wrap gap-2">
         {cursosSelecionados.map((id) => {
-          const curso = cursos.find((c) => c.id.toString() === id);
+          const curso = cursos.find((c) => c.id === id);
           return (
             curso && (
               <div

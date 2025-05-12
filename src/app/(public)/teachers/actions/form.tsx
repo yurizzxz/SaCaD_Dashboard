@@ -1,5 +1,5 @@
+import { FormCursoInput } from "@/components/select/curso-input";
 import {
-  FormCursoSelect,
   FormDisciplinaSelect,
 } from "@/components/select/form-select";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 type FormFieldsProps = {
   formData: any;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (e: { target: { name: string; value: any } }) => void;
 };
 
 export function FormFields({ formData, handleChange }: FormFieldsProps) {
@@ -21,6 +21,15 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
     handleChange({
       target: { name, value },
     } as React.ChangeEvent<HTMLInputElement>);
+  };
+
+  const handleCursoChange = (cursoIds: number[]) => {
+    handleChange({
+      target: {
+        name: "curso_id",
+        value: cursoIds,
+      },
+    });
   };
 
   return (
@@ -72,10 +81,12 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
       </div>
       <div className="flex gap-2 flex-col w-full">
         <Label>Curso</Label>
-        <FormCursoSelect
+        <FormCursoInput
           className="w-full"
-          cursoSelecionado={formData.curso_id?.toString() || ""}
-          onCursoChange={(value) => handleSelectChange("curso_id", value)}
+          cursosSelecionados={
+            Array.isArray(formData.curso_id) ? formData.curso_id : []
+          }
+          onCursoChange={handleCursoChange}
         />
       </div>
       <div className="flex gap-2 flex-col">

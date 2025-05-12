@@ -15,7 +15,7 @@ export function Modal({ open, onOpenChange, initialData, onSave }: any) {
     aulas_teoricas: 0,
     aulas_praticas: 0,
     sigla: "",
-    curso_id: [],
+    curso_id: [] as string[],
     professor: [] as string[],
     semestre: 0,
     area_tecnologica: "",
@@ -31,10 +31,12 @@ export function Modal({ open, onOpenChange, initialData, onSave }: any) {
         aulas_teoricas: initialData.aulas_teoricas || 0,
         aulas_praticas: initialData.aulas_praticas || 0,
         sigla: initialData.sigla || "",
-        curso_id: initialData.curso_id || [],
+        curso_id: Array.isArray(initialData.curso_id)
+          ? initialData.curso_id
+          : (typeof initialData.curso_id === "string" ? initialData.curso_id.split(",") : []) || [],
         professor: Array.isArray(initialData.professor)
-        ? initialData.professor
-        : initialData.professor?.split(",") || [], 
+          ? initialData.professor
+          : (typeof initialData.professor === "string" ? initialData.professor.split(",") : []) || [],
         semestre: initialData.semestre || 0,
         area_tecnologica: initialData.area_tecnologica || "",
         modalidade: initialData.modalidade || "",
@@ -57,17 +59,16 @@ export function Modal({ open, onOpenChange, initialData, onSave }: any) {
     }
   }, [initialData]);
 
- const handleChange = (e: any) => {
-  const { name, value } = e.target;
-  setFormData((prev: any) => ({
-    ...prev,
-    [name]:
-      name === "aulas_teoricas" || name === "aulas_praticas"
-        ? parseInt(value || "0")
-        : Array.isArray(value) ? value : value,
-  }));
-};
-
+  const handleChange = (e: { target: { name: string; value: any } }) => {
+    const { name, value } = e.target;
+    setFormData((prev: any) => ({
+      ...prev,
+      [name]:
+        name === "aulas_teoricas" || name === "aulas_praticas"
+          ? parseInt(value || "0")
+          : value,
+    }));
+  };
 
   const handleSubmit = () => {
     const disciplina = { ...formData, id: initialData?.id };
