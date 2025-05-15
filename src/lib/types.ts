@@ -12,6 +12,17 @@ export type Aluno = {
   cpf: string;
 };
 
+export type Horario = {
+  id: number;
+  sala: string;
+  turma: string;
+  professor: string;
+  dia: string;
+  hora_inicio: string;
+  hora_fim: string;
+};
+
+
 export type Curso = {
   id: number;
   nome_curso: string;

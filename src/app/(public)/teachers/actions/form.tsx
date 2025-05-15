@@ -1,6 +1,5 @@
 import { FormCursoInput } from "@/components/select/curso-input";
 import { FormDisciplinaInput } from "@/components/select/disciplina-input";
-import { FormDisciplinaSelect } from "@/components/select/form-select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {

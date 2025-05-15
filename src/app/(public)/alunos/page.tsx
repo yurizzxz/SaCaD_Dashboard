@@ -8,8 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Section, Content } from "@/components/section";
 import { FilterSelect } from "./filter";
 import { useAlunoHooks } from "@/hooks/alunos/actions";
-import { Aluno, Curso } from "@/lib/types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Card,
   CardDescription,
@@ -18,7 +17,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useCoursesFilter } from "@/hooks/useCoursesFilter";
-import { get } from "http";
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
