@@ -342,22 +342,29 @@
   ],
   "horarios": [
     {
-      "sala": "A101",
-      "dia": "Segunda",
-      "hora_inicio": "08:00",
-      "hora_fim": "10:00",
-      "turma": "ADS-2024-T1",
-      "disciplina": "Estrutura de Dados",
-      "professor": "João Silva"
-    },
-    {
+      "id": 2,
       "sala": "A101",
       "dia": "Segunda",
       "hora_inicio": "10:10",
       "hora_fim": "12:00",
       "turma": "ADM-2024-T2",
       "disciplina": "Gestão Empresarial",
-      "professor": "Ana Costa"
+      "professor": "Ana Costa",
+      "dia_semana": "Segunda-Feira",
+      "dia_numero": "26",
+      "mes": "12"
+    },
+    {
+      "sala": "",
+      "dia_semana": "Sexta-Feira",
+      "dia_numero": "30",
+      "mes": "10",
+      "hora_inicio": "",
+      "hora_fim": "",
+      "turma": "",
+      "disciplina": "",
+      "professor": "",
+      "id": 3
     }
   ],
   "laboratorios": [
