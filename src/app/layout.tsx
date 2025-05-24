@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import "./global.css";
 import { ThemeProvider } from "@/context/theme-provider";
-import { AppSidebar } from "@/components/navigation/app-sidebar";
-import { SiteHeader } from "@/components/site-header";
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
+import { Navbar } from "@/components/navbar";
+import { HeadingTitle } from "@/components/heading-title";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,23 +24,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider
-            style={
-              {
-                "--header-height": "calc(var(--spacing) * 14)",
-              } as React.CSSProperties
-            }
-          >
-            <AppSidebar variant="inset" />
-            <SidebarInset>
-              <SiteHeader />
+          <Navbar />
+      
               <div className="flex flex-1 flex-col">
                 <div className="@container/main flex flex-1 flex-col gap-2">
+                  <HeadingTitle />
                   {children}
                 </div>
               </div>
-            </SidebarInset>
-          </SidebarProvider>
+          
           <Toaster />
         </ThemeProvider>
       </body>
