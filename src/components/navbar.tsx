@@ -25,6 +25,7 @@ import {
 import Link from "next/link";
 import { data } from "@/constants/navigationData";
 import { ModeToggle } from "./theme-toggle";
+import Image from "next/image";
 
 export interface MenuItem {
   title: string;
@@ -41,9 +42,7 @@ const Navbar = () => {
       <nav className="hidden justify-between  lg:flex">
         <div className="flex items-center gap-6">
           <Link href={logo.url} className="flex items-center gap-2">
-            <span className="text-xl font-semibold tracking-tighter">
-              {logo.title}
-            </span>
+            <Image src="/logo.png" alt="logo" width={90} height={90} />
           </Link>
           <div className="flex items-center">
             <NavigationMenu>
@@ -65,9 +64,7 @@ const Navbar = () => {
       <div className="block lg:hidden">
         <div className="flex items-center justify-between">
           <Link href={logo.url} className="flex items-center gap-2">
-            <span className="text-lg font-semibold tracking-tighter">
-              {logo.title}
-            </span>
+            <Image src="/logo.png" alt="logo" width={90} height={90} />
           </Link>
           <Sheet>
             <SheetTrigger asChild>
