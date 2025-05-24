@@ -104,7 +104,6 @@ export default function Page() {
     <Section>
       <Content>
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
-          <h1 className="text-2xl font-medium">Lista de Laboratórios</h1>
           <div className="flex gap-2 flex-wrap">
             <FilterSelect
               onCursoChange={setCursoSelecionado}

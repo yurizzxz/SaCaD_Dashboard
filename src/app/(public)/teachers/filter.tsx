@@ -41,7 +41,7 @@ export function FilterSelect({
   }, []);
 
   return (
-    <div className="flex gap-2 flex-wrap mt-4 lg:mt-0">
+    <div className="flex gap-2 flex-wrap mt-0">
       {onCursoChange && (
         <CursoSelect
           cursoSelecionado={cursoSelecionado || ""}

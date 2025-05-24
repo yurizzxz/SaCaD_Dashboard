@@ -60,9 +60,6 @@ export default function Page() {
     <Content>
       <Section>
         <div className="flex justify-between flex-wrap items-center ">
-          <h1 className="text-2xl font-medium mb-3 lg:mb-0">
-            Tabela de horários
-          </h1>
 
           <div className="flex flex-wrap col-gap gap-2">
             <Button onClick={handleAdd}>Adicionar Horário</Button>

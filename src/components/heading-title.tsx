@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { usePathname } from "next/navigation";
 
@@ -16,5 +16,9 @@ const titles: Record<string, string> = {
 export function HeadingTitle() {
   const pathname = usePathname();
   const title = titles[pathname] || "Página Não Encontrada";
-  return <h1 className="text-2xl font-medium">{title}</h1>;
+  return (
+    <div className="pt-4 px-4 lg:px-5.5">
+      <h1 className="text-2xl font-medium">{title}</h1>
+    </div>
+  );
 }

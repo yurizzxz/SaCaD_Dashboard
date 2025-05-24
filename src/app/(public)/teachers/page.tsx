@@ -99,7 +99,6 @@ export default function Page() {
     <Section>
       <Content>
         <div className="flex justify-between flex-wrap mb-6">
-          <h1 className="text-2xl font-medium mb-2">Lista de Professores</h1>
           <div className="flex flex-wrap gap-2">
             <FilterSelect
               cursoSelecionado={cursoSelecionado}
