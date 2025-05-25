@@ -5,6 +5,8 @@ import {
   IconFlask,
   IconBolt,
   IconClock,
+  IconTools,
+  IconHierarchy,
 } from "@tabler/icons-react";
 
 export const data = {
@@ -31,8 +33,27 @@ export const data = {
           icon: IconBook,
           url: "/entities/teachers",
         },
+        {
+          title: "Técnicos",
+          description: "Controle os dados e funções dos técnicos de t.i",
+          icon: IconTools,
+          url: "/entities/tecnicos",
+        },
+        {
+          title: "Coordenadores",
+          description: "Gerencie os coordenadores dos cursos e áreas",
+          icon: IconHierarchy,
+          url: "/entities/coordenadores",
+        },
+        {
+          title: "Auxiliares Docentes",
+          description: "Gerencie dados e atribuições dos auxiliares docentes",
+          icon: IconChalkboard,
+          url: "/entities/auxiliares-docentes",
+        },
       ],
     },
+
     {
       title: "Salas",
       url: "#",
