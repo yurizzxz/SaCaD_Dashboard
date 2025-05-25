@@ -82,18 +82,19 @@ const Navbar = () => {
                   </Link>
                 </SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col gap-6 p-4">
+              <div className="flex flex-col gap-6 p-4 h-screen">
                 <Accordion
                   type="single"
                   collapsible
-                  className="flex w-full flex-col gap-4"
+                  className="flex w-full flex-col gap-4 flex-1"
                 >
                   {menu.map((item) => renderMobileMenuItem(item))}
                 </Accordion>
 
-                <div className="flex flex-col gap-3">
-                  <Button asChild variant="outline">
-                    Logout
+                <div className="flex gap-2">
+                  <ModeToggle />
+                  <Button size="icon" variant="default">
+                    <LogOut className="size-4" />
                   </Button>
                 </div>
               </div>

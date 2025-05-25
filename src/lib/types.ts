@@ -80,6 +80,15 @@ export interface Coordenador {
   curso_id: (number | string)[];
 }
 
+export interface Tecnico {
+  id: number;
+  nome: string;
+  email: string;
+  telefone: string;
+  cpf: string;
+  setor: string;
+}
+
 export interface Sala {
   id: number;
   nome_sala: string;

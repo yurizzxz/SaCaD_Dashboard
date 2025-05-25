@@ -114,7 +114,10 @@
       ],
       "data_admissao": "",
       "status": "Ativo",
-      "email": "teste@gmail.com"
+      "email": "teste@gmail.com",
+      "disciplina_id": [
+        5
+      ]
     },
     {
       "id": 4,
@@ -147,13 +150,21 @@
     },
     {
       "nome": "Yuri",
-      "disciplinas_id": "1",
+      "disciplinas_id": [
+        "1"
+      ],
       "cpf": "123.456.789-10",
-      "curso_id": "1",
+      "curso_id": [
+        "1",
+        1
+      ],
       "data_admissao": "",
       "status": "Ativo",
       "email": "teste@gmail.com",
-      "id": 7
+      "id": 7,
+      "disciplina_id": [
+        1
+      ]
     }
   ],
   "coordenadores": [
@@ -163,17 +174,20 @@
       "email": "joaquim.silva@exemplo.com",
       "telefone": "(11) 98765-4321",
       "cpf": "123.456.789-10",
-      "curso_id": [1]
+      "curso_id": [
+        1
+      ]
     }
   ],
-  "tecnicos_ti": [
+  "tecnicos": [
     {
       "id": 1,
       "nome": "Joaquim Silva",
       "email": "joaquim.silva@exemplo.com",
       "cpf": "123.456.789-10",
-      "setor": "Tecnologia da Informação",
-      "status": "Ativo"
+      "setor": "TI",
+      "status": "Ativo",
+      "telefone": ""
     },
     {
       "id": 2,
@@ -181,9 +195,10 @@
       "email": "mariana.costa@exemplo.com",
       "cpf": "987.654.321-00",
       "setor": "Infraestrutura",
-      "status": "Ativo"
+      "status": "Ativo",
+      "telefone": ""
     }
-  ],	
+  ],
   "cursos": [
     {
       "id": 1,
@@ -293,7 +308,9 @@
       "aulas_teoricas": 35,
       "aulas_praticas": 25,
       "sigla": "ED",
-      "curso_id": [],
+      "curso_id": [
+        3
+      ],
       "professor": [
         1,
         2
@@ -302,24 +319,6 @@
       "area_tecnologica": "Tecnologia",
       "modalidade": "EAD",
       "qtd_aulas": 60
-    },
-    {
-      "id": 7,
-      "nome": "Testeeeee",
-      "aulas_teoricas": 15,
-      "aulas_praticas": 15,
-      "sigla": "TE",
-      "curso_id": [],
-      "professor": [
-        3,
-        4,
-        1
-      ],
-      "semestre": "6",
-      "area_tecnologica": "Tecnologia",
-      "modalidade": "Híbrido",
-      "qtd_aulas": "30",
-      "professores": "1,2,5"
     }
   ],
   "salas": [
@@ -438,7 +437,6 @@
       "EAD": 15
     }
   },
-  
   "relatorios": [
     {
       "id": 1,

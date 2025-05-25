@@ -90,5 +90,9 @@ export const data = {
         },
       ],
     },
+    {
+      title: "Comunicados",
+      url: "/comunicados",
+    }
   ],
 };
