@@ -6,11 +6,13 @@ const titles: Record<string, string> = {
   "/": "Olá, seja bem-vindo! 👋",
   "/entities/alunos": "Alunos",
   "/entities/teachers": "Professores",
+  "/entities/tecnicos": "Técnicos",
+  "/entities/coordenadores": "Coordenadores",
   "/academic/courses": "Cursos",
+  "/academic/horarios": "Horários",
   "/academic/disciplinas": "Componentes",
   "/class/rooms": "Salas",
   "/class/labs": "Laboratórios",
-  "/academic/horarios": "Horários",
 };
 
 export function HeadingTitle() {

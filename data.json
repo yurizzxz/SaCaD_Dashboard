@@ -156,6 +156,34 @@
       "id": 7
     }
   ],
+  "coordenadores": [
+    {
+      "id": 1,
+      "nome": "Joaquim Silva",
+      "email": "joaquim.silva@exemplo.com",
+      "telefone": "(11) 98765-4321",
+      "cpf": "123.456.789-10",
+      "curso_id": [1]
+    }
+  ],
+  "tecnicos_ti": [
+    {
+      "id": 1,
+      "nome": "Joaquim Silva",
+      "email": "joaquim.silva@exemplo.com",
+      "cpf": "123.456.789-10",
+      "setor": "Tecnologia da Informação",
+      "status": "Ativo"
+    },
+    {
+      "id": 2,
+      "nome": "Mariana Costa",
+      "email": "mariana.costa@exemplo.com",
+      "cpf": "987.654.321-00",
+      "setor": "Infraestrutura",
+      "status": "Ativo"
+    }
+  ],	
   "cursos": [
     {
       "id": 1,
@@ -410,6 +438,7 @@
       "EAD": 15
     }
   },
+  
   "relatorios": [
     {
       "id": 1,

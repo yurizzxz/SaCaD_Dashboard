@@ -45,12 +45,6 @@ export const data = {
           icon: IconHierarchy,
           url: "/entities/coordenadores",
         },
-        {
-          title: "Auxiliares Docentes",
-          description: "Gerencie dados e atribuições dos auxiliares docentes",
-          icon: IconChalkboard,
-          url: "/entities/auxiliares-docentes",
-        },
       ],
     },
 

@@ -71,6 +71,14 @@ export interface Disciplina {
   qtd_aulas: number;
 }
 
+export interface Coordenador {
+  id: number;
+  nome: string;
+  email: string;
+  telefone: string;
+  cpf: string;
+  curso_id: (number | string)[];
+}
 
 export interface Sala {
   id: number;
