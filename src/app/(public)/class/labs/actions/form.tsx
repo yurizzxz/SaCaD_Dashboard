@@ -37,45 +37,48 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
 
   return (
     <div className="flex flex-col gap-4 py-2">
-      {[
-        {
-          name: "nome",
-          label: "Nome do Laboratório",
-          placeholder: "ex: Laboratório de Informática",
-        },
-        {
-          name: "curso_associado",
-          label: "Curso Associado",
-          placeholder: "ex: Engenharia da Computação",
-        },
-        {
-          name: "capacidade",
-          label: "Capacidade",
-          placeholder: "ex: 30",
-        },
-        {
-          name: "predio",
-          label: "Prédio",
-          placeholder: "ex: 1",
-        },
-        {
-          name: "bloco",
-          label: "Bloco",
-          placeholder: "ex: B",
-        },
-      ].map((field) => (
-        <div key={field.name} className="flex flex-col gap-2 w-full">
-          <Label>{field.label}</Label>
-          <Input
-            name={field.name}
-            placeholder={field.placeholder}
-            value={formData[field.name]}
-            onChange={handleChange}
-          />
-        </div>
-      ))}
+      <Input
+        name="nome"
+        placeholder="ex: Laboratório de Informática"
+        value={formData.nome}
+        onChange={handleChange}
+      />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-1">
+        {[
+          {
+            name: "curso_associado",
+            label: "Curso Associado",
+            placeholder: "ex: Engenharia da Computação",
+          },
+          {
+            name: "capacidade",
+            label: "Capacidade",
+            placeholder: "ex: 30",
+          },
+          {
+            name: "predio",
+            label: "Prédio",
+            placeholder: "ex: 1",
+          },
+          {
+            name: "bloco",
+            label: "Bloco",
+            placeholder: "ex: B",
+          },
+        ].map((field) => (
+          <div key={field.name} className="flex flex-col gap-2 w-full">
+            <Label>{field.label}</Label>
+            <Input
+              name={field.name}
+              placeholder={field.placeholder}
+              value={formData[field.name]}
+              onChange={handleChange}
+            />
+          </div>
+        ))}
+      </div>
 
-      <div className="flex flex-col gap-4  w-full mt-4">
+      <div className="flex flex-col gap-4  w-full">
         <div className="flex flex-col gap-2 w-full">
           <Label>Equipamentos</Label>
 
@@ -100,7 +103,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
 
         <div>
           <p>Equipamentos:</p>
-          
+
           <div className="flex flex-wrap gap-2 mt-2">
             {Object.entries(formData.equipamentos || {}).map(
               ([equip, qtd]: any) => (

@@ -53,8 +53,8 @@ export function Modal({
   };
 
   const handleSubmit = () => {
-    const sala = { ...formData, id: initialData?.id };
-    onSave(sala);
+    const lab = { ...formData, id: initialData?.id };
+    onSave(lab);
   };
 
   return (
@@ -62,7 +62,7 @@ export function Modal({
       <DialogContent className="max-w-xl">
         <DialogHeader>
           <DialogTitle className="text-xl">
-            {initialData ? "Editar Sala" : "Cadastrar Sala"}
+            {initialData ? "Editar Laboratório" : "Cadastrar Laboratório"}
           </DialogTitle>
         </DialogHeader>
 
@@ -73,7 +73,7 @@ export function Modal({
             Cancelar
           </Button>
           <Button onClick={handleSubmit}>
-            {initialData ? "Salvar Alterações" : "Cadastrar Sala"}
+            {initialData ? "Salvar Alterações" : "Cadastrar Laboratório"}
           </Button>
         </div>
       </DialogContent>

@@ -37,45 +37,47 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
 
   return (
     <div className="flex flex-col gap-4 py-2">
-      {[
-        {
-          name: "nome_sala",
-          label: "Nome da Sala",
-          placeholder: "ex: Sala 1",
-        },
-        {
-          name: "curso_associado",
-          label: "Curso Associado",
-          placeholder: "ex: Engenharia da Computação",
-        },
-        {
-          name: "capacidade",
-          label: "Capacidade",
-          placeholder: "ex: 50",
-        },
-        {
-          name: "predio",
-          label: "Prédio",
-          placeholder: "ex: 1",
-        },
-        {
-          name: "bloco",
-          label: "Bloco",
-          placeholder: "ex: B",
-        },
-      ].map((field) => (
-        <div key={field.name} className="flex flex-col gap-2 w-full">
-          <Label>{field.label}</Label>
-          <Input
-            name={field.name}
-            placeholder={field.placeholder}
-            value={formData[field.name]}
-            onChange={handleChange}
-          />
-        </div>
-      ))}
-
-      <div className="flex flex-col gap-4  w-full mt-4">
+      <Input
+        name="nome_sala"
+        placeholder="ex: Sala 1"
+        value={formData.nome_sala}
+        onChange={handleChange}
+      />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-1">
+        {[
+          {
+            name: "curso_associado",
+            label: "Curso Associado",
+            placeholder: "ex: Engenharia da Computação",
+          },
+          {
+            name: "capacidade",
+            label: "Capacidade",
+            placeholder: "ex: 50",
+          },
+          {
+            name: "predio",
+            label: "Prédio",
+            placeholder: "ex: 1",
+          },
+          {
+            name: "bloco",
+            label: "Bloco",
+            placeholder: "ex: B",
+          },
+        ].map((field) => (
+          <div key={field.name} className="flex flex-col gap-2 w-full">
+            <Label>{field.label}</Label>
+            <Input
+              name={field.name}
+              placeholder={field.placeholder}
+              value={formData[field.name]}
+              onChange={handleChange}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-col gap-4  w-full">
         <div className="flex flex-col gap-2 w-full">
           <Label>Equipamentos</Label>
 

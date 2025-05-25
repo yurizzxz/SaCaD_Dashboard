@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Modal as LabModal } from "./actions/create-modal";
-import { Curso, Laboratorio as Lab } from "@/lib/types";
+import { Laboratorio as Lab } from "@/lib/types";
 import { useLabsHooks } from "@/hooks/labs/actions";
 import { DataTable } from "@/components/table/data-table";
 import { FilterSelect } from "./filter";
@@ -16,7 +16,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {  useState } from "react";
+import { useState } from "react";
 import { useCoursesFilter } from "@/hooks/useCoursesFilter";
 
 interface LaboratorioTable extends Lab {
@@ -25,8 +25,7 @@ interface LaboratorioTable extends Lab {
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
-  const { cursos, getNomeCurso, getIdCurso } = useCoursesFilter();
-
+  const { getNomeCurso, getIdCurso } = useCoursesFilter();
 
   const {
     handleAdd,

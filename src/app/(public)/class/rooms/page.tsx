@@ -6,7 +6,7 @@ import { Modal as SalaModal } from "./actions/create-modal";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { Button } from "@/components/ui/button";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
-import { Curso, Sala } from "@/lib/types";
+import { Sala } from "@/lib/types";
 import { useSalasHooks } from "@/hooks/salas/actions";
 import { FilterSelect } from "./filter";
 import {
@@ -17,12 +17,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCoursesFilter } from "@/hooks/useCoursesFilter";
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
-  const { cursos, getNomeCurso, getIdCurso } = useCoursesFilter();
+  const { getNomeCurso, getIdCurso } = useCoursesFilter();
 
   const {
     salas,
@@ -60,7 +60,11 @@ export default function Page() {
     },
     { key: "predio", label: "Prédio" },
     { key: "bloco", label: "Bloco" },
-    { key: "curso_associado", label: "Curso Associado", render: (row: any) => getNomeCurso(row.curso_associado) },
+    {
+      key: "curso_associado",
+      label: "Curso Associado",
+      render: (row: any) => getNomeCurso(row.curso_associado),
+    },
     {
       key: "equipamentosString",
       label: "Equipamentos",
