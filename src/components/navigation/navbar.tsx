@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { data } from "@/constants/navigationData";
-import { ModeToggle } from "./theme-toggle";
+import { ModeToggle } from "@/components/theme-toggle";
 import Image from "next/image";
 
 export interface MenuItem {
@@ -38,7 +38,7 @@ export interface MenuItem {
 const Navbar = () => {
   const { logo, menu } = data;
   return (
-    <section className="py-3 px-5 border-b border-zinc-900">
+    <section className="py-3 mx-auto px-5 border-b border-zinc-900">
       <nav className="hidden justify-between  lg:flex">
         <div className="flex items-center gap-6">
           <Link href={logo.url} className="flex items-center gap-2">

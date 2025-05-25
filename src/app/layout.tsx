@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./global.css";
 import { ThemeProvider } from "@/context/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/components/navigation/navbar";
 import { HeadingTitle } from "@/components/heading-title";
 
 export const metadata: Metadata = {
