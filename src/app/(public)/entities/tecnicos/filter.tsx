@@ -1,24 +1,51 @@
 "use client";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import { Tecnico } from "@/lib/types";
+import { useEffect, useState } from "react";
+
 interface FilterSelectProps {
-  cursoSelecionado: string;
-  onCursoChange: (curso: string) => void;
+  statusSelecionado: string;
+  onStatusChange: (status: string) => void;
 }
 
 export function FilterSelect({
-  cursoSelecionado,
-  onCursoChange,
+  statusSelecionado,
+  onStatusChange,
 }: FilterSelectProps) {
+  const [status, setStatus] = useState<string[]>([]);
+
+  useEffect(() => {
+    async function fetchStatus() {
+      try {
+        const res = await fetch("http://localhost:99/tecnicos");
+        const data: Tecnico[] = await res.json();
+
+        const statusTecnico = Array.from(new Set(data.map(tecnico => tecnico.status)));
+        setStatus(statusTecnico);
+      } catch (error) {
+        console.error("Erro ao buscar status:", error);
+      }
+    }
+
+    fetchStatus();
+  });
+
   return (
-    <div className="flex gap-2 flex-wrap mt-0">
-      <Select>
+    <div className="flex gap-2 flex-wrap lg:mt-0">
+      <Select value={statusSelecionado} onValueChange={onStatusChange}>
         <SelectTrigger className="w-[160px]">
           <SelectValue placeholder="Status" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="todos">Status</SelectItem>
           <SelectItem value="Ativo">Ativo</SelectItem>
-          <SelectItem value="Trancado">Trancado</SelectItem>
+          <SelectItem value="Afastado">Afastado</SelectItem>
         </SelectContent>
       </Select>
     </div>

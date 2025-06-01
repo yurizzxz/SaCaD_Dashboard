@@ -14,8 +14,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useTecnicoHooks } from "@/hooks/tecnicos/actions";
+import { FilterSelect } from "./filter";
+import { useState } from "react";
 
 export default function Page() {
+  const [statusSelecionado, setStatusSelecionado] = useState("todos");
+
   const {
     tecnicos,
     handleAdd,
@@ -29,6 +33,12 @@ export default function Page() {
     setDeleteModalOpen,
     tecnicoSelecionado,
   } = useTecnicoHooks();
+
+  const tecnicosFiltrados = tecnicos.filter((tecnico) => {
+    const statusFiltro = statusSelecionado === "todos" || tecnico.status === statusSelecionado;
+
+    return statusFiltro;
+  })
 
   const columns = [
     { key: "id", label: "ID" },
@@ -58,16 +68,21 @@ export default function Page() {
     },
   ];
 
-  const data = tecnicos.map((tecnico: any) => ({
+  const data = tecnicosFiltrados.map((tecnico: any) => ({
     ...tecnico,
   }));
-
 
   return (
     <Section>
       <Content>
         <div className="flex justify-between flex-wrap items-center mb-6">
-          <Button onClick={handleAdd}>Adicionar Técnico</Button>
+          <div className="flex flex-wrap items-center col-gap gap-2">
+            <Button onClick={handleAdd}>Adicionar Técnico</Button>
+            <FilterSelect
+              statusSelecionado={statusSelecionado}
+              onStatusChange={setStatusSelecionado}
+            />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-1 lg:hidden gap-2 mb-6">

@@ -20,6 +20,7 @@ import { useCoursesFilter } from "@/hooks/useCoursesFilter";
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
+  const [statusSelecionado, setStatusSelecionado] = useState("todos");
   const { getNomeCurso, getIdCurso } = useCoursesFilter();
 
   const {
@@ -38,10 +39,16 @@ export default function Page() {
 
   const cursoIdSelecionado = getIdCurso(cursoSelecionado);
 
-  const alunosFiltrados =
-    cursoSelecionado === "todos"
-      ? alunos
-      : alunos.filter((aluno) => aluno.curso_id.includes(cursoIdSelecionado!));
+  const alunosFiltrados = alunos.filter((aluno) => {
+    const filtraPorCurso =
+      cursoSelecionado === "todos" ||
+      aluno.curso_id.includes(cursoIdSelecionado!);
+
+    const filtraPorStatus =
+      statusSelecionado === "todos" || aluno.status === statusSelecionado;
+
+    return filtraPorCurso && filtraPorStatus;
+  });
 
   const columns = [
     { key: "id", label: "RA" },
@@ -71,12 +78,18 @@ export default function Page() {
     },
   ];
 
+  const data = alunosFiltrados.map((aluno) => ({
+    ...aluno,
+  }));
+
   return (
     <Section>
       <Content>
         <div className="flex justify-between flex-wrap items-center mb-6">
           <div className="flex flex-wrap items-center col-gap gap-2">
             <FilterSelect
+              statusSelecionado={statusSelecionado}
+              onStatusChange={setStatusSelecionado}
               onCursoChange={setCursoSelecionado}
               cursoSelecionado={cursoSelecionado}
             />
@@ -112,7 +125,7 @@ export default function Page() {
         </div>
 
         <div className="hidden lg:block">
-          <DataTable columns={columns} data={alunosFiltrados} />
+          <DataTable columns={columns} data={data} />
         </div>
 
         <AlunoModal

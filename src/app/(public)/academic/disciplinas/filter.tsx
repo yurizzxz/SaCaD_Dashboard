@@ -35,7 +35,6 @@ export function FilterSelect({
 
   return (
     <div className="flex gap-2 flex-wrap lg:mt-0">
-      {" "}
       <CursoSelect
         cursoSelecionado={cursoSelecionado}
         onCursoChange={onCursoChange}

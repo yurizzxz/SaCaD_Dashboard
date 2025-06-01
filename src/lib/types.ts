@@ -2,7 +2,7 @@ export type Aluno = {
   id: number;
   nome: string;
   data_nascimento: string;
-  curso_id: number[];
+  curso_id: (number | string)[];
   semestre: number;
   status: string;
   data_matricula: string;
@@ -87,6 +87,7 @@ export interface Tecnico {
   telefone: string;
   cpf: string;
   setor: string;
+  status: string
 }
 
 export interface Sala {
