@@ -20,7 +20,7 @@ import { useCoursesFilter } from "@/hooks/useCoursesFilter";
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
-  const { cursos, getNomeCurso, getIdCurso } = useCoursesFilter();
+  const { getNomeCurso, getIdCurso } = useCoursesFilter();
 
   const {
     alunos,
@@ -75,7 +75,7 @@ export default function Page() {
     <Section>
       <Content>
         <div className="flex justify-between flex-wrap items-center mb-6">
-          <div className="flex flex-wrap col-gap gap-2">
+          <div className="flex flex-wrap items-center col-gap gap-2">
             <FilterSelect
               onCursoChange={setCursoSelecionado}
               cursoSelecionado={cursoSelecionado}

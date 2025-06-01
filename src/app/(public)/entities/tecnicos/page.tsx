@@ -79,6 +79,8 @@ export default function Page() {
                 <CardDescription>CPF: {tecnico.cpf}</CardDescription>
                 <CardDescription>Setor: {tecnico.setor}</CardDescription>
                 <CardDescription>Email: {tecnico.email}</CardDescription>
+                <CardDescription>Telefone: {tecnico.telefone}</CardDescription>
+                <CardDescription>Status: {tecnico.status}</CardDescription>
               </CardHeader>
               <CardFooter className="gap-2">
                 <Button variant="default" onClick={() => handleEdit(tecnico)}>
