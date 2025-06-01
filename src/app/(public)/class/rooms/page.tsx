@@ -11,7 +11,6 @@ import { useSalasHooks } from "@/hooks/salas/actions";
 import { FilterSelect } from "./filter";
 import {
   Card,
-  CardAction,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -22,6 +21,8 @@ import { useCoursesFilter } from "@/hooks/useCoursesFilter";
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
+  const [predioSelecionado, setPredioSelecionado] = useState("todos");
+  const [blocoSelecionado, setBlocoSelecionado] = useState("todos");
   const { getNomeCurso, getIdCurso } = useCoursesFilter();
 
   const {
@@ -43,12 +44,19 @@ export default function Page() {
 
   const cursoIdSelecionado = getIdCurso(cursoSelecionado);
 
-  const salasFiltradas =
-    cursoSelecionado === "todos"
-      ? salas
-      : salas.filter((salas) =>
-          salas.curso_associado.includes(String(cursoIdSelecionado))
-        );
+  const salasFiltradas = salas.filter((lab) => {
+    const cursoMatch =
+      cursoSelecionado === "todos" ||
+      lab.curso_id.includes(cursoIdSelecionado!);
+
+    const predioMatch =
+      predioSelecionado === "todos" || lab.predio === predioSelecionado;
+
+    const blocoMatch =
+      blocoSelecionado === "todos" || lab.bloco === blocoSelecionado;
+
+    return cursoMatch && predioMatch && blocoMatch;
+  });
 
   const columns = [
     { key: "id", label: "ID" },
@@ -61,9 +69,9 @@ export default function Page() {
     { key: "predio", label: "Prédio" },
     { key: "bloco", label: "Bloco" },
     {
-      key: "curso_associado",
+      key: "curso_id",
       label: "Curso Associado",
-      render: (row: any) => getNomeCurso(row.curso_associado),
+      render: (row: any) => getNomeCurso(row.curso_id),
     },
     {
       key: "equipamentosString",
@@ -94,7 +102,7 @@ export default function Page() {
     id: sala.id,
     nome_sala: sala.nome_sala,
     capacidade: sala.capacidade,
-    curso_associado: sala.curso_associado,
+    curso_id: sala.curso_id,
     predio: sala.predio,
     bloco: sala.bloco,
     equipamentosString: Object.entries(sala.equipamentos || {})
@@ -110,6 +118,10 @@ export default function Page() {
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <div className="flex gap-2 flex-wrap">
             <FilterSelect
+              onPredioChange={setPredioSelecionado}
+              predioSelecionado={predioSelecionado}
+              onBlocoChange={setBlocoSelecionado}
+              blocoSelecionado={blocoSelecionado}
               onCursoChange={setCursoSelecionado}
               cursoSelecionado={cursoSelecionado}
             />
@@ -134,7 +146,7 @@ export default function Page() {
                     <CardDescription>Prédio: {sala.predio}</CardDescription>
                     <CardDescription>Bloco: {sala.bloco}</CardDescription>
                     <CardDescription>
-                      Curso: {sala.curso_associado}
+                      Curso: {sala.curso_id}
                     </CardDescription>
                     <CardDescription>
                       Equipamentos: {sala.equipamentosString || "Nenhum"}

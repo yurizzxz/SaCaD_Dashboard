@@ -326,7 +326,7 @@
       "id": 1,
       "nome_sala": "Sala 101",
       "capacidade": 40,
-      "curso_associado": [
+      "curso_id": [
         2
       ],
       "equipamentos": {
@@ -341,7 +341,7 @@
       "id": 2,
       "nome_sala": "Sala 202",
       "capacidade": 30,
-      "curso_associado": [
+      "curso_id": [
         1
       ],
       "equipamentos": {
@@ -355,7 +355,7 @@
       "id": 3,
       "nome_sala": "Sala 303",
       "capacidade": 20,
-      "curso_associado": [
+      "curso_id": [
         2
       ],
       "equipamentos": {
@@ -398,7 +398,7 @@
     {
       "id": 1,
       "nome": "Laboratório de Computação",
-      "curso_associado": [
+      "curso_id": [
         2
       ],
       "equipamentos": {
@@ -413,7 +413,7 @@
     {
       "id": 2,
       "nome": "Laboratório de Marketing",
-      "curso_associado": [
+      "curso_id": [
         1
       ],
       "equipamentos": {

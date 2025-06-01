@@ -25,6 +25,8 @@ interface LaboratorioTable extends Lab {
 
 export default function Page() {
   const [cursoSelecionado, setCursoSelecionado] = useState("todos");
+  const [predioSelecionado, setPredioSelecionado] = useState("todos");
+  const [blocoSelecionado, setBlocoSelecionado] = useState("todos");
   const { getNomeCurso, getIdCurso } = useCoursesFilter();
 
   const {
@@ -45,12 +47,19 @@ export default function Page() {
 
   const cursoIdSelecionado = getIdCurso(cursoSelecionado);
 
-  const labsFiltrados =
-    cursoSelecionado === "todos"
-      ? labs
-      : labs.filter((labs) =>
-          labs.curso_associado.includes(String(cursoIdSelecionado))
-        );
+  const labsFiltrados = labs.filter((lab) => {
+    const cursoMatch =
+      cursoSelecionado === "todos" ||
+      lab.curso_id.includes(cursoIdSelecionado!);
+
+    const predioMatch =
+      predioSelecionado === "todos" || lab.predio === predioSelecionado;
+
+    const blocoMatch =
+      blocoSelecionado === "todos" || lab.bloco === blocoSelecionado;
+
+    return cursoMatch && predioMatch && blocoMatch;
+  });
 
   const columns: any = [
     { key: "id", label: "ID" },
@@ -63,9 +72,9 @@ export default function Page() {
     { key: "predio", label: "Prédio" },
     { key: "bloco", label: "Bloco" },
     {
-      key: "curso_associado",
-      label: "Curso Associado",
-      render: (row: any) => getNomeCurso(row.curso_associado),
+      key: "curso_id",
+      label: "Curso id",
+      render: (row: any) => getNomeCurso(row.curso_id),
     },
     {
       key: "equipamentosString",
@@ -105,6 +114,10 @@ export default function Page() {
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <div className="flex gap-2 flex-wrap">
             <FilterSelect
+              onBlocoChange={setBlocoSelecionado}
+              blocoSelecionado={blocoSelecionado}
+              onPredioChange={setPredioSelecionado}
+              predioSelecionado={predioSelecionado}
               onCursoChange={setCursoSelecionado}
               cursoSelecionado={cursoSelecionado}
             />
@@ -126,7 +139,7 @@ export default function Page() {
                 </CardDescription>
                 <CardDescription>Prédio: {lab.predio}</CardDescription>
                 <CardDescription>Bloco: {lab.bloco}</CardDescription>
-                <CardDescription>Curso: {lab.curso_associado}</CardDescription>
+                <CardDescription>Curso: {lab.curso_id}</CardDescription>
                 <CardDescription>
                   Equipamentos: {lab.equipamentosString || "Nenhum"}
                 </CardDescription>
