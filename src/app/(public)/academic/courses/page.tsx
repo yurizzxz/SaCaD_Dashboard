@@ -94,6 +94,12 @@ export default function Page() {
               onEixoChange={setEixoSelecionado}
             />
             <Button onClick={handleAdd}>Adicionar Curso</Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setEixoSelecionado("todos");
+              }}
+            > Limpar Filtros</Button>
           </div>
         </div>
 

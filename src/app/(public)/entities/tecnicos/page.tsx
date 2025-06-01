@@ -35,10 +35,11 @@ export default function Page() {
   } = useTecnicoHooks();
 
   const tecnicosFiltrados = tecnicos.filter((tecnico) => {
-    const statusFiltro = statusSelecionado === "todos" || tecnico.status === statusSelecionado;
+    const statusFiltro =
+      statusSelecionado === "todos" || tecnico.status === statusSelecionado;
 
     return statusFiltro;
-  })
+  });
 
   const columns = [
     { key: "id", label: "ID" },
@@ -77,11 +78,19 @@ export default function Page() {
       <Content>
         <div className="flex justify-between flex-wrap items-center mb-6">
           <div className="flex flex-wrap items-center col-gap gap-2">
-            <Button onClick={handleAdd}>Adicionar Técnico</Button>
             <FilterSelect
               statusSelecionado={statusSelecionado}
               onStatusChange={setStatusSelecionado}
             />
+            <Button onClick={handleAdd}>Adicionar Técnico</Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setStatusSelecionado("todos");
+              }}
+            >
+              Limpar Filtros
+            </Button>
           </div>
         </div>
 

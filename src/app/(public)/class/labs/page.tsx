@@ -122,6 +122,14 @@ export default function Page() {
               cursoSelecionado={cursoSelecionado}
             />
             <Button onClick={handleAdd}>Adicionar Laboratório</Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setBlocoSelecionado("todos");
+                setPredioSelecionado("todos");
+                setCursoSelecionado("todos");
+              }}
+            > Limpar Filtros</Button>
           </div>
         </div>
 

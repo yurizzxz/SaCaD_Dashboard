@@ -94,6 +94,15 @@ export default function Page() {
               cursoSelecionado={cursoSelecionado}
             />
             <Button onClick={handleAdd}>Adicionar Aluno</Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setStatusSelecionado("todos");
+                setCursoSelecionado("todos");
+              }}
+            >
+              Limpar Filtros
+            </Button>
           </div>
         </div>
 

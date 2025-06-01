@@ -79,6 +79,12 @@ export default function Page() {
               cursoSelecionado={cursoSelecionado}
             />
             <Button onClick={handleAdd}>Adicionar Coordenador</Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setCursoSelecionado("todos");
+              }}
+            >Limpar Filtros</Button>
           </div>
         </div>
 

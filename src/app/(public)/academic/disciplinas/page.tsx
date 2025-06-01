@@ -144,6 +144,13 @@ export default function Page() {
               modalidadeSelecionada={modalidadeSelecionada}
             />
             <Button onClick={handleAdd}>Criar Disciplina</Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setModalidadeSelecionada("todos");
+                setCursoSelecionado("todos");
+              }}
+            >Limpar Filtros</Button>
           </div>
         </div>
 

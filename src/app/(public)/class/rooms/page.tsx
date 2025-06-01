@@ -126,6 +126,14 @@ export default function Page() {
               cursoSelecionado={cursoSelecionado}
             />
             <Button onClick={handleAdd}>Adicionar Sala</Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setBlocoSelecionado("todos");
+                setPredioSelecionado("todos");
+                setCursoSelecionado("todos");
+              }}
+            >Limpar Filtros</Button>
           </div>
         </div>
 
@@ -145,9 +153,7 @@ export default function Page() {
                     </CardDescription>
                     <CardDescription>Prédio: {sala.predio}</CardDescription>
                     <CardDescription>Bloco: {sala.bloco}</CardDescription>
-                    <CardDescription>
-                      Curso: {sala.curso_id}
-                    </CardDescription>
+                    <CardDescription>Curso: {sala.curso_id}</CardDescription>
                     <CardDescription>
                       Equipamentos: {sala.equipamentosString || "Nenhum"}
                     </CardDescription>

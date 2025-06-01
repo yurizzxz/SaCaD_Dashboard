@@ -109,6 +109,16 @@ export default function Page() {
               onStatusChange={setStatus}
             />
             <Button onClick={handleAdd}>Adicionar Professor</Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setStatus("todos");
+                setDisciplinaSelecionada("todos");
+                setCursoSelecionado("todos");
+              }}
+            >
+              Limpar Filtros
+            </Button>
           </div>
         </div>
 
