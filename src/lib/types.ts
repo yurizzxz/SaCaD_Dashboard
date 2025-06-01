@@ -94,7 +94,7 @@ export interface Sala {
   nome_sala: string;
   bloco: string;
   capacidade: number;
-  curso_id: string;
+  curso_id: (number | string)[];
   predio: string;
   equipamentos: Record<string, number>;
 }
@@ -103,7 +103,7 @@ export interface Laboratorio {
   id: number;
   nome: string;
   capacidade: number;
-  curso_id: string;
+  curso_id: (number | string)[];
   equipamentosString: string;
   bloco: string;
   predio: string;
