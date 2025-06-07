@@ -1,3 +1,4 @@
+import { Controller } from "react-hook-form";
 import { FormCursoInput } from "@/components/select/curso-input";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,27 +10,12 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 
-type FormFieldsProps = {
-  formData: any;
-  handleChange: (e: { target: { name: string; value: any } }) => void;
-};
-
-export function FormFields({ formData, handleChange }: FormFieldsProps) {
-  const handleSelectChange = (name: string, value: string) => {
-    handleChange({
-      target: { name, value },
-    } as React.ChangeEvent<HTMLInputElement>);
-  };
-
-  const handleCursoChange = (cursoIds: number[]) => {
-    handleChange({
-      target: {
-        name: "curso_id",
-        value: cursoIds,
-      },
-    });
-  };
-
+export function FormFields({
+  register,
+  control,
+  errors,
+  setValue,
+}: any) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2">
       {[
@@ -51,56 +37,69 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
         <div key={field.name} className="flex gap-2 flex-col w-full">
           <Label>{field.label}</Label>
           <Input
-            name={field.name}
+            {...register(field.name)}
             placeholder={field.placeholder}
-            value={formData[field.name]}
-            onChange={handleChange}
           />
+          {errors[field.name] && (
+            <span className="text-red-500 text-sm">{errors[field.name]?.message}</span>
+          )}
         </div>
       ))}
 
       <div className="flex gap-2 flex-col w-full">
         <Label>Status</Label>
-        <Select
-          value={formData.status}
-          onValueChange={(value) => handleSelectChange("status", value)}
-        >
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Selecione o status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="Ativo">Ativo</SelectItem>
-            <SelectItem value="Afastado">Afastado</SelectItem>
-          </SelectContent>
-        </Select>
+        <Controller
+          control={control}
+          name="status"
+          render={({ field }) => (
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Selecione o status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Ativo">Ativo</SelectItem>
+                <SelectItem value="Afastado">Afastado</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+        />
+        {errors.status && (
+          <span className="text-red-500 text-sm">{errors.status.message}</span>
+        )}
       </div>
+
       <div className="flex gap-2 flex-col">
         <Label>Data de Nascimento</Label>
-        <Input
-          name="data_nascimento"
-          type="date"
-          value={formData.data_nascimento}
-          onChange={handleChange}
-        />
+        <Input type="date" {...register("data_nascimento")} />
+        {errors.data_nascimento && (
+          <span className="text-red-500 text-sm">{errors.data_nascimento.message}</span>
+        )}
       </div>
+
       <div className="flex gap-2 flex-col">
         <Label>Data de Matrícula</Label>
-        <Input
-          name="data_matricula"
-          type="date"
-          value={formData.data_matricula}
-          onChange={handleChange}
-        />
+        <Input type="date" {...register("data_matricula")} />
+        {errors.data_matricula && (
+          <span className="text-red-500 text-sm">{errors.data_matricula.message}</span>
+        )}
       </div>
+
       <div className="flex gap-2 flex-col w-full">
         <Label>Curso</Label>
-        <FormCursoInput
-          className="w-full"
-          cursosSelecionados={
-            Array.isArray(formData.curso_id) ? formData.curso_id : []
-          }
-          onCursoChange={handleCursoChange}
+        <Controller
+          control={control}
+          name="curso_id"
+          render={({ field }) => (
+            <FormCursoInput
+              className="w-full"
+              cursosSelecionados={field.value}
+              onCursoChange={(val) => setValue("curso_id", val)}
+            />
+          )}
         />
+        {errors.curso_id && (
+          <span className="text-red-500 text-sm">{errors.curso_id.message}</span>
+        )}
       </div>
     </div>
   );
