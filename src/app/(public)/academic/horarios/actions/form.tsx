@@ -24,9 +24,9 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2">
       {[ 
         { name: "sala", label: "Sala", placeholder: "ex: A101" },
+        { name: "turma", label: "Turma", placeholder: "ex: ADS-2024-T1" },
         { name: "hora_inicio", label: "Hora de Início", placeholder: "ex: 08:00" },
         { name: "hora_fim", label: "Hora de Fim", placeholder: "ex: 10:00" },
-        { name: "turma", label: "Turma", placeholder: "ex: ADS-2024-T1" },
         { name: "disciplina", label: "Disciplina", placeholder: "ex: Estrutura de Dados" },
         { name: "professor", label: "Professor", placeholder: "ex: João Silva" },
       ].map((field) => (

@@ -23,10 +23,11 @@ export default function Page() {
   } = useHorarioHooks();
 
   const columns = [
-    { key: "Sala", label: "Sala" },
+    { key: "Dia_Numero", label: "Data" },
     { key: "Data", label: "Dia da Semana" },
-    { key: "Hora", label: "Hora" },
     { key: "Disciplina", label: "Disciplina" },
+    { key: "Sala", label: "Sala" },
+    { key: "Hora", label: "Hora" },
     { key: "Professor", label: "Professor" },
     { key: "Turma", label: "Turma" },
     {
@@ -49,7 +50,8 @@ export default function Page() {
     ...horario,
     id: horario.id,
     Sala: horario.sala,
-    Data: `${horario.dia_semana}, ${horario.dia_numero}/${horario.mes}`,
+    Dia_Numero: `${horario.dia_numero}/${horario.mes}`,
+    Data: `${horario.dia_semana}`,
     Hora: `${horario.hora_inicio} - ${horario.hora_fim}`,
     Disciplina: horario.disciplina,
     Professor: horario.professor,

@@ -15,6 +15,11 @@ export const data = {
     alt: "SaCaD Logo",
     title: "SaCaD",
   },
+  user: {
+    name: "João Silva",
+    avatar: "/avatar.png",
+    email: "p9A0E@example.com",
+  },
   menu: [
     { title: "Home", url: "/", description: "Página inicial do sistema" },
     {
@@ -93,6 +98,6 @@ export const data = {
     {
       title: "Comunicados",
       url: "/comunicados",
-    }
+    },
   ],
 };

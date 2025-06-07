@@ -379,18 +379,18 @@
       "professor": "Ana Costa",
       "dia_semana": "Segunda-Feira",
       "dia_numero": "26",
-      "mes": "12"
+      "mes": "09"
     },
     {
-      "sala": "",
+      "sala": "A101",
       "dia_semana": "Sexta-Feira",
       "dia_numero": "30",
       "mes": "10",
-      "hora_inicio": "",
-      "hora_fim": "",
-      "turma": "",
-      "disciplina": "",
-      "professor": "",
+      "hora_inicio": "8:10",
+      "hora_fim": "9:00",
+      "turma": "ADS-2025-S1",
+      "disciplina": "Matemática Discreta",
+      "professor": "Joao Paulo",
       "id": 3
     }
   ],

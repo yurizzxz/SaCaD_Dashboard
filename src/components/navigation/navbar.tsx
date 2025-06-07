@@ -1,5 +1,4 @@
 import { LogOut, Menu } from "lucide-react";
-
 import {
   Accordion,
   AccordionContent,
@@ -26,6 +25,7 @@ import Link from "next/link";
 import { data } from "@/constants/navigationData";
 import { ModeToggle } from "@/components/theme-toggle";
 import Image from "next/image";
+import { NavUser } from "./nav-user";
 
 export interface MenuItem {
   title: string;
@@ -54,9 +54,7 @@ const Navbar = () => {
         </div>
         <div className="flex gap-2">
           <ModeToggle />
-          <Button size="icon" variant="default">
-            <LogOut className="size-4" />
-          </Button>
+          <NavUser user={data.user} />
         </div>
       </nav>
 
@@ -93,9 +91,7 @@ const Navbar = () => {
 
                 <div className="flex gap-2">
                   <ModeToggle />
-                  <Button size="icon" variant="default">
-                    <LogOut className="size-4" />
-                  </Button>
+                  <NavUser user={data.user} />
                 </div>
               </div>
             </SheetContent>
