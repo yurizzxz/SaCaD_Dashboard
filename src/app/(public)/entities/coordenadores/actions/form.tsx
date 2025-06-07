@@ -1,28 +1,9 @@
 import { FormCursoInput } from "@/components/select/curso-input";
+import { Controller } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-type FormFieldsProps = {
-  formData: any;
-  handleChange: (e: { target: { name: string; value: any } }) => void;
-};
-
-export function FormFields({ formData, handleChange }: FormFieldsProps) {
-  const handleSelectChange = (name: string, value: string) => {
-    handleChange({
-      target: { name, value },
-    } as React.ChangeEvent<HTMLInputElement>);
-  };
-
-  const handleCursoChange = (cursoIds: number[]) => {
-    handleChange({
-      target: {
-        name: "curso_id",
-        value: cursoIds,
-      },
-    });
-  };
-
+export function FormFields({ register, control, errors, setValue }: any) {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2">
@@ -38,25 +19,34 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
         ].map((field) => (
           <div key={field.name} className="flex gap-2 flex-col w-full">
             <Label>{field.label}</Label>
-            <Input
-              name={field.name}
-              placeholder={field.placeholder}
-              value={formData[field.name]}
-              onChange={handleChange}
-            />
+            <Input {...register(field.name)} placeholder={field.placeholder} />
+            {errors[field.name] && (
+              <span className="text-red-500 text-sm">
+                {errors[field.name]?.message}
+              </span>
+            )}
           </div>
         ))}
       </div>
       <div>
         <div className="flex gap-2 flex-col w-full">
           <Label>Curso</Label>
-          <FormCursoInput
-            className="w-full"
-            cursosSelecionados={
-              Array.isArray(formData.curso_id) ? formData.curso_id : []
-            }
-            onCursoChange={handleCursoChange}
+          <Controller
+            control={control}
+            name="curso_id"
+            render={({ field }) => (
+              <FormCursoInput
+                className="w-full"
+                cursosSelecionados={field.value}
+                onCursoChange={(val) => setValue("curso_id", val)}
+              />
+            )}
           />
+          {errors.curso_id && (
+            <span className="text-red-500 text-sm">
+              {errors.curso_id.message}
+            </span>
+          )}
         </div>
       </div>
     </>

@@ -5,22 +5,38 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFields } from "./form";
+import { z } from "zod";
+import { tecnicoSchema } from "@/schemas/form-schema";
+
+type TecnicoData = z.infer<typeof tecnicoSchema>;
 
 export function TecnicoModal({ open, onOpenChange, initialData, onSave }: any) {
-  const [formData, setFormData] = useState({
-    nome: "",
-    cpf: "",
-    setor: "",
-    email: "",
-    status: "",
-    telefone: "",
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<TecnicoData>({
+    resolver: zodResolver(tecnicoSchema),
+    defaultValues: {
+      nome: "",
+      cpf: "",
+      setor: "",
+      email: "",
+      telefone: "",
+      status: "",
+    },
   });
 
   useEffect(() => {
     if (initialData) {
-      setFormData({
+      reset({
         nome: initialData.nome || "",
         cpf: initialData.cpf || "",
         setor: initialData.setor || "",
@@ -28,25 +44,11 @@ export function TecnicoModal({ open, onOpenChange, initialData, onSave }: any) {
         telefone: initialData.telefone || "",
         status: initialData.status || "",
       });
-    } else {
-      setFormData({
-        nome: "",
-        cpf: "",
-        setor: "",
-        email: "",
-        telefone: "",
-        status: "",
-      });
     }
-  }, [initialData]);
+  }, [initialData, reset]);
 
-  const handleChange = (e: any) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = () => {
-    const tecnico = { ...formData, id: initialData?.id };
-    onSave(tecnico);
+  const onSubmit = (data: TecnicoData) => {
+    onSave({ ...data, id: initialData?.id });
   };
 
   return (
@@ -58,16 +60,23 @@ export function TecnicoModal({ open, onOpenChange, initialData, onSave }: any) {
           </DialogTitle>
         </DialogHeader>
 
-        <FormFields formData={formData} handleChange={handleChange} />
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <FormFields
+            register={register}
+            control={control}
+            errors={errors}
+            setValue={setValue}
+          />
 
-        <div className="flex justify-end gap-2">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancelar
-          </Button>
-          <Button onClick={handleSubmit}>
-            {initialData ? "Salvar Alterações" : "Cadastrar Técnico"}
-          </Button>
-        </div>
+          <div className="flex justify-end gap-2">
+            <Button variant="outline" onClick={() => onOpenChange(false)}>
+              Cancelar
+            </Button>
+            <Button type="submit">
+              {initialData ? "Salvar Alterações" : "Cadastrar Técnico"}
+            </Button>
+          </div>
+        </form>
       </DialogContent>
     </Dialog>
   );

@@ -179,6 +179,16 @@
       "curso_id": [
         3
       ]
+    },
+    {
+      "nome": "afda",
+      "cpf": "123.456.789-10",
+      "email": "teste@gmail.com",
+      "telefone": "(11) 98765-4321",
+      "curso_id": [
+        1
+      ],
+      "id": 2
     }
   ],
   "tecnicos": [

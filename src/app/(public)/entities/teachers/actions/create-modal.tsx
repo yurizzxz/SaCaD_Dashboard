@@ -5,62 +5,50 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFields } from "./form";
+import { professorSchema } from "@/schemas/form-schema";
+import { z } from "zod";
+
+type ProfessorData = z.infer<typeof professorSchema>;
 
 export function Modal({ open, onOpenChange, initialData, onSave }: any) {
-  const [formData, setFormData] = useState({
-    id: 0,
-    nome: "",
-    disciplinas_id: [] as string[],
-    cpf: "",
-    curso_id: [] as string[],
-    data_admissao: "",
-    status: "",
-    email: "",
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<ProfessorData>({
+    resolver: zodResolver(professorSchema),
+    defaultValues: {
+      nome: "",
+      disciplinas_id: [],
+      cpf: "",
+      curso_id: [],
+      data_admissao: "",
+      status: "",
+      email: "",
+    },
   });
 
   useEffect(() => {
     if (initialData) {
-      setFormData({
-        id: initialData.id,
-        nome: initialData.nome || "",
+      reset({
+        ...initialData,
+        curso_id: Array.isArray(initialData.curso_id) ? initialData.curso_id : [],
         disciplinas_id: Array.isArray(initialData.disciplinas_id)
           ? initialData.disciplinas_id
-          : (typeof initialData.disciplinas_id === "string"
-              ? initialData.disciplinas_id.split(",")
-              : []) || [],
-        cpf: initialData.cpf || "",
-        curso_id: Array.isArray(initialData.curso_id)
-          ? initialData.curso_id
-          : (typeof initialData.curso_id === "string"
-              ? initialData.curso_id.split(",")
-              : []) || [],
-        data_admissao: initialData.data_admissao || "",
-        status: initialData.status || "",
-        email: initialData.email || "",
-      });
-    } else {
-      setFormData({
-        id: 0,
-        nome: "",
-        disciplinas_id: [],
-        cpf: "",
-        curso_id: [],
-        data_admissao: "",
-        status: "",
-        email: "",
+          : [],
       });
     }
-  }, [initialData]);
+  }, [initialData, reset]);
 
-  const handleChange = (e: any) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = () => {
-    const professor = { ...formData, id: initialData?.id };
-    onSave(professor);
+  const onSubmit = (data: ProfessorData) => {
+    onSave({ ...data, id: initialData?.id });
   };
 
   return (
@@ -72,16 +60,23 @@ export function Modal({ open, onOpenChange, initialData, onSave }: any) {
           </DialogTitle>
         </DialogHeader>
 
-        <FormFields formData={formData} handleChange={handleChange} />
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <FormFields
+            register={register}
+            control={control}
+            errors={errors}
+            setValue={setValue}
+          />
 
-        <div className="flex justify-end gap-2">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancelar
-          </Button>
-          <Button onClick={handleSubmit}>
-            {initialData ? "Salvar Alterações" : "Cadastrar Professor"}
-          </Button>
-        </div>
+          <div className="flex justify-end gap-2">
+            <Button variant="outline" onClick={() => onOpenChange(false)}>
+              Cancelar
+            </Button>
+            <Button type="submit">
+              {initialData ? "Salvar Alterações" : "Cadastrar Professor"}
+            </Button>
+          </div>
+        </form>
       </DialogContent>
     </Dialog>
   );
