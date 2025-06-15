@@ -7,65 +7,63 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { FormFields } from "./form";
+import { cursoSchema } from "@/schemas/form-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-export function Modal({
-  open,
-  onOpenChange,
-  initialData,
-  onSave,
-}: any) {
-  const [formData, setFormData] = useState({
-    id: 0,
-    nome_curso: "",
-    sigla: "",
-    area_tecnologica: "",
-    duracao_em_semestres: "",
-    periodo: "",
-    modalidade: "",
-    email_coordenador: "",
-    forma_oferecimento: "",
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+
+type CursoData = z.infer<typeof cursoSchema>;
+export function Modal({ open, onOpenChange, initialData, onSave }: any) {
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<CursoData>({
+    resolver: zodResolver(cursoSchema),
+    defaultValues: {
+      nome_curso: "",
+      sigla: "",
+      area_tecnologica: "",
+      duracao_em_semestres: "0",
+      periodo: undefined,
+      modalidade: undefined,
+      email_coordenador: "",
+      forma_oferecimento: undefined,
+    },
   });
 
   useEffect(() => {
-    if (initialData) {
-      setFormData({
-        id: initialData.id,
-        nome_curso: initialData.nome_curso || "",
-        sigla: initialData.sigla || "",
-        area_tecnologica: initialData.area_tecnologica || "",
-        duracao_em_semestres: initialData.duracao_em_semestres?.toString() || "",
-        periodo: initialData.periodo || "",
-        modalidade: initialData.modalidade || "",
-        email_coordenador: initialData.email_coordenador || "",
-        forma_oferecimento: initialData.forma_oferecimento || "",
-      });
-    } else {
-      setFormData({
-        id: 0,
-        nome_curso: "",
-        sigla: "",
-        area_tecnologica: "",
-        duracao_em_semestres: "",
-        periodo: "",
-        modalidade: "",
-        email_coordenador: "",
-        forma_oferecimento: "",
-      });
-    }
-  }, [initialData]);
+    if (!open) return;
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData((prev: any) => ({
-      ...prev,
-      [name]:
-        name === "duracao_em_semestres" ? parseInt(value || "0") : value,
-    }));
-  };
+    reset(
+      initialData
+        ? {
+            ...initialData,
+            duracao_em_semestres: initialData.duracao_em_semestres.toString(),
+          }
+        : {
+            nome_curso: "",
+            sigla: "",
+            area_tecnologica: "",
+            duracao_em_semestres: "0",
+            periodo: undefined,
+            modalidade: undefined,
+            email_coordenador: "",
+            forma_oferecimento: undefined,
+          }
+    );
+  }, [open, reset, initialData?.id]);
 
-  const handleSubmit = () => {
-    const curso = { ...formData, id: initialData?.id };
-    onSave(curso);
+  const onSubmit = (data: CursoData) => {
+    const finalData = {
+      ...data,
+      id: initialData?.id || 0,
+    };
+    onSave(finalData);
   };
 
   return (
@@ -77,13 +75,22 @@ export function Modal({
           </DialogTitle>
         </DialogHeader>
 
-        <FormFields formData={formData} handleChange={handleChange} />
-
+        <FormFields
+          register={register}
+          control={control}
+          errors={errors}
+          setValue={setValue}
+        />
         <div className="flex justify-end gap-2">
+          {!initialData && (
+            <Button variant="secondary" onClick={() => reset()}>
+              Limpar Campos
+            </Button>
+          )}
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancelar
           </Button>
-          <Button onClick={handleSubmit}>
+          <Button onClick={handleSubmit(onSubmit)}>
             {initialData ? "Salvar Alterações" : "Cadastrar Curso"}
           </Button>
         </div>

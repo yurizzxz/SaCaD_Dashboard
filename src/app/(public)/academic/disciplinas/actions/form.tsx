@@ -9,35 +9,16 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import { Controller } from "react-hook-form";
 
-type FormFieldsProps = {
-  formData: any;
-  handleChange: (e: { target: { name: string; value: any } }) => void;
-};
-export function FormFields({ formData, handleChange }: FormFieldsProps) {
-  const handleSelectChange = (name: string, value: string) => {
-    handleChange({
-      target: { name, value },
-    } as React.ChangeEvent<HTMLInputElement>);
-  };
-
+export function FormFields({ control, register, errors, setValue }: any) {
   const handleCursoChange = (cursoIds: number[]) => {
-    handleChange({
-      target: {
-        name: "curso_id",
-        value: cursoIds,
-      },
-    });
-  };
-  const handleProfessoresChange = (professoresIds: number[]) => {
-    handleChange({
-      target: {
-        name: "professor",
-        value: professoresIds,
-      },
-    });
+    setValue("curso_id", cursoIds, { shouldValidate: true });
   };
 
+  const handleProfessoresChange = (professoresIds: number[]) => {
+    setValue("professor", professoresIds, { shouldValidate: true });
+  };
 
   const disciplinasFields = [
     { name: "nome", label: "Nome", placeholder: "ex: Matemática" },
@@ -60,52 +41,75 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           <div key={field.name} className="flex flex-col gap-2">
             <Label>{field.label}</Label>
             <Input
-              type={field.name.includes("aulas") ? "number" : "text"}
-              name={field.name}
-              value={formData[field.name]}
+              type={field.name.includes("aulas") || field.name === "semestre" || field.name === "qtd_aulas" ? "number" : "text"}
+              {...register(field.name)}
               placeholder={field.placeholder}
-              onChange={handleChange}
             />
+            {errors[field.name] && (
+              <span className="text-red-500 text-sm">{errors[field.name]?.message}</span>
+            )}
           </div>
         ))}
+
         <div className="flex flex-col gap-2 w-full">
           <Label>Modalidade</Label>
-          <Select
-            onValueChange={(value) => handleSelectChange("modalidade", value)}
-            value={formData.modalidade}
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Selecione a modalidade" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Presencial">Presencial</SelectItem>
-              <SelectItem value="EAD">EAD</SelectItem>
-              <SelectItem value="Híbrido">Híbrido</SelectItem>
-            </SelectContent>
-          </Select>
+          <Controller
+            control={control}
+            name="modalidade"
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Selecione a modalidade" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Presencial">Presencial</SelectItem>
+                  <SelectItem value="EAD">EAD</SelectItem>
+                  <SelectItem value="Híbrido">Híbrido</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
+          {errors.modalidade && (
+            <span className="text-red-500 text-sm">{errors.modalidade?.message}</span>
+          )}
         </div>
-
       </div>
+
       <div className="flex gap-2 flex-col w-full">
         <Label>Curso</Label>
-        <FormCursoInput
-          className="w-full"
-          cursosSelecionados={
-            Array.isArray(formData.curso_id) ? formData.curso_id : []
-          }
-          onCursoChange={handleCursoChange}
+        <Controller
+          control={control}
+          name="curso_id"
+          render={({ field }) => (
+            <FormCursoInput
+              className="w-full"
+              cursosSelecionados={Array.isArray(field.value) ? field.value : []}
+              onCursoChange={(ids: number[]) => field.onChange(ids)}
+            />
+          )}
         />
+        {errors.curso_id && (
+          <span className="text-red-500 text-sm -mt-2">{errors.curso_id?.message}</span>
+        )}
       </div>
+
       <div className="flex gap-2 flex-col w-full">
         <Label>Professor</Label>
-        <FormProfessorInput
-          professoresSelecionados={
-            Array.isArray(formData.professor) ? formData.professor : []
-          }
-          onProfessorChange={handleProfessoresChange}
-          className="w-full"
+        <Controller
+          control={control}
+          name="professor"
+          render={({ field }) => (
+            <FormProfessorInput
+              className="w-full"
+              professoresSelecionados={Array.isArray(field.value) ? field.value : []}
+              onProfessorChange={(ids: number[]) => field.onChange(ids)}
+            />
+          )}
         />
+        {errors.professor && (
+          <span className="text-red-500 text-sm -mt-2">{errors.professor?.message}</span>
+        )}
       </div>
-      </>
+    </>
   );
 }

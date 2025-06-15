@@ -42,43 +42,111 @@ export const tecnicoSchema = z.object({
   telefone: z.string().min(1, "Telefone é obrigatório"),
 });
 
-// Class Schemas
+// Academic Schemas
 
 export const cursoSchema = z.object({
-  nome_curso: z.string().min(1, "Nome é obrigatório"),
-  sigla: z.string().min(1, "Sigla é obrigatória"),
-  area_tecnologica: z.string().min(1, "Area tecnológica é obrigatória"),
-  modalidade: z.string().min(1, "Modalidade é obrigatória"),
-  periodo: z.string().min(1, "Período é obrigatório"),
-  duracao_em_semestres: z.string().min(1, "Duração é obrigatória"),
-  email_coordenador: z.string().email("Email inválido"),
-  forma_oferecimento: z.string().min(1, "Forma de oferta é obrigatória"),
+  nome_curso: z.string().min(1, "O nome do curso é obrigatório"),
+  sigla: z.string().min(1, "A sigla é obrigatória"),
+  area_tecnologica: z.string().min(1, "A área tecnológica é obrigatória"),
+  duracao_em_semestres: z
+    .string({
+      required_error: "A duração é obrigatória",
+      invalid_type_error: "A duração deve ser um número",
+    })
+    .min(1, "A duração deve ser maior que 0"),
+  email_coordenador: z
+    .string()
+    .email("Email inválido")
+    .min(1, "Email é obrigatório"),
+  periodo: z.enum(["Manhã", "Tarde", "Noite", "Integral"], {
+    errorMap: () => ({ message: "Selecione um período válido" }),
+  }),
+  forma_oferecimento: z.enum(["Semestral", "Anual", "Bimestral", "Modular"], {
+    errorMap: () => ({ message: "Selecione uma forma de oferecimento válida" }),
+  }),
+  modalidade: z.enum(["Presencial", "EAD", "Híbrido"], {
+    errorMap: () => ({ message: "Selecione uma modalidade válida" }),
+  }),
 });
 
 export const disciplinaSchema = z.object({
-  nome_disciplina: z.string().min(1, "Nome é obrigatório"),
-  sigla: z.string().min(1, "Sigla é obrigatória"),
-  area_tecnologica: z.string().min(1, "Area tecnológica é obrigatória"),
-  modalidade: z.string().min(1, "Modalidade é obrigatória"),
-  qtd_aulas: z.string().min(1, "Quantidade de aulas é obrigatória"),
-  aulas_praticas: z
-    .string()
-    .min(1, "Quantidade de aulas práticas é obrigatória"),
+  nome: z.string().min(1, "O nome da disciplina é obrigatório"),
+  sigla: z.string().min(1, "A sigla é obrigatória"),
+  semestre: z
+    .number({ invalid_type_error: "O semestre deve ser um número" })
+    .int()
+    .min(1, "O semestre é obrigatório"),
+  area_tecnologica: z.string().min(1, "A área tecnológica é obrigatória"),
+
+  qtd_aulas: z
+    .number({ invalid_type_error: "A quantidade deve ser um número" })
+    .int()
+    .min(1, "A quantidade de aulas é obrigatória"),
+
   aulas_teoricas: z
-    .string()
-    .min(1, "Quantidade de aulas teóricas é obrigatória"),
-  curso_id: z.string().min(1, "Curso é obrigatório"),
-  professor: z.string().min(1, "Professor é obrigatório"),
+    .number({ invalid_type_error: "Deve ser um número" })
+    .int()
+    .min(0, "Informe a quantidade de aulas teóricas"),
+
+  aulas_praticas: z
+    .number({ invalid_type_error: "Deve ser um número" })
+    .int()
+    .min(0, "Informe a quantidade de aulas práticas"),
+
+  modalidade: z.enum(["Presencial", "EAD", "Híbrido"], {
+    errorMap: () => ({ message: "Selecione uma modalidade válida" }),
+  }),
+
+  curso_id: z.array(z.number()).nonempty("Selecione ao menos um curso"),
+
+  professor: z.array(z.number()).nonempty("Selecione ao menos um professor"),
 });
 
-export const horarioSchema = z.object({
-  sala: z.string().min(1, "Sala é obrigatória"),
-  turma: z.string().min(1, "Turma é obrigatória"),
-  professor: z.string().min(1, "Professor é obrigatório"),
-  dia: z.string().min(1, "Dia é obrigatório"),
-  hora_inicio: z.string().min(1, "Hora de inicio é obrigatória"),
-  hora_fim: z.string().min(1, "Hora de fim é obrigatória"),
+export const horarioAulaSchema = z.object({
+  sala: z.string().min(1, "A sala é obrigatória"),
+  turma: z.string().min(1, "A turma é obrigatória"),
+  hora_inicio: z
+    .string()
+    .min(1, "A hora de início é obrigatória")
+    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Formato inválido (ex: 08:00)"),
+
+  hora_fim: z
+    .string()
+    .min(1, "A hora de fim é obrigatória")
+    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Formato inválido (ex: 10:00)"),
+
+  disciplina: z.string().min(1, "A disciplina é obrigatória"),
+  professor: z.string().min(1, "O professor é obrigatório"),
+
+  dia_semana: z.enum(
+    [
+      "Segunda-Feira",
+      "Terça-Feira",
+      "Quarta-Feira",
+      "Quinta-Feira",
+      "Sexta-Feira",
+      "Sábado",
+      "Domingo",
+    ],
+    { errorMap: () => ({ message: "Selecione um dia válido da semana" }) }
+  ),
+
+  dia_numero: z
+    .string()
+    .min(1, "O dia do mês é obrigatório")
+    .regex(/^\d+$/, "O dia deve ser um número")
+    .transform((val) => parseInt(val, 10))
+    .refine((val) => val >= 1 && val <= 31, {
+      message: "Dia do mês deve estar entre 1 e 31",
+    }),
+
+  mes: z.enum(
+    ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+    { errorMap: () => ({ message: "Selecione um mês válido" }) }
+  ),
 });
+
+// Class Schemas
 
 export const laboratorioSchema = z.object({
   nome: z.string().min(1, "Nome é obrigatório"),

@@ -5,73 +5,71 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { FormFields } from "./form";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { disciplinaSchema } from "@/schemas/form-schema";
+import type { z } from "zod";
+
+type DisciplinaData = z.infer<typeof disciplinaSchema>;
 
 export function Modal({ open, onOpenChange, initialData, onSave }: any) {
-  const [formData, setFormData] = useState({
-    id: 0,
-    nome: "",
-    aulas_teoricas: 0,
-    aulas_praticas: 0,
-    sigla: "",
-    curso_id: [] as string[],
-    professor: [] as string[],
-    semestre: 0,
-    area_tecnologica: "",
-    modalidade: "",
-    qtd_aulas: 0,
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm<DisciplinaData>({
+    resolver: zodResolver(disciplinaSchema),
+    defaultValues: {
+      nome: "",
+      sigla: "",
+      semestre: 0,
+      area_tecnologica: "",
+      qtd_aulas: 0,
+      aulas_teoricas: 0,
+      aulas_praticas: 0,
+      modalidade: "Presencial",
+      curso_id: [],
+      professor: [],
+    },
   });
 
   useEffect(() => {
-    if (initialData) {
-      setFormData({
-        id: initialData.id,
-        nome: initialData.nome || "",
-        aulas_teoricas: initialData.aulas_teoricas || 0,
-        aulas_praticas: initialData.aulas_praticas || 0,
-        sigla: initialData.sigla || "",
-        curso_id: Array.isArray(initialData.curso_id)
-          ? initialData.curso_id
-          : (typeof initialData.curso_id === "string" ? initialData.curso_id.split(",") : []) || [],
-        professor: Array.isArray(initialData.professor)
-          ? initialData.professor
-          : (typeof initialData.professor === "string" ? initialData.professor.split(",") : []) || [],
-        semestre: initialData.semestre || 0,
-        area_tecnologica: initialData.area_tecnologica || "",
-        modalidade: initialData.modalidade || "",
-        qtd_aulas: initialData.qtd_aulas || 0,
-      });
-    } else {
-      setFormData({
-        id: 0,
-        nome: "",
-        aulas_teoricas: 0,
-        aulas_praticas: 0,
-        sigla: "",
-        curso_id: [],
-        professor: [],
-        semestre: 0,
-        area_tecnologica: "",
-        modalidade: "",
-        qtd_aulas: 0,
-      });
-    }
-  }, [initialData]);
+    if (!open) return;
 
-  const handleChange = (e: { target: { name: string; value: any } }) => {
-    const { name, value } = e.target;
-    setFormData((prev: any) => ({
-      ...prev,
-      [name]:
-        name === "aulas_teoricas" || name === "aulas_praticas"
-          ? parseInt(value || "0")
-          : value,
-    }));
-  };
+    reset(
+      initialData
+        ? {
+            ...initialData,
+            semestre: initialData.semestre.toString(),
+            qtd_aulas: initialData.qtd_aulas.toString(),
+            aulas_teoricas: initialData.aulas_teoricas.toString(),
+            aulas_praticas: initialData.aulas_praticas.toString(),
+          }
+        : {
+            nome: "",
+            sigla: "",
+            semestre: 0,
+            area_tecnologica: "",
+            qtd_aulas: 0,
+            aulas_teoricas: 0,
+            aulas_praticas: 0,
+            modalidade: "Presencial",
+            curso_id: [],
+            professor: [],
+          }
+    );
+  }, [open, reset, initialData]);
 
-  const handleSubmit = () => {
-    const disciplina = { ...formData, id: initialData?.id };
+  const onSubmit = (data: DisciplinaData) => {
+    const disciplina = {
+      ...data,
+      id: initialData?.id || 0,
+    };
     onSave(disciplina);
   };
 
@@ -84,13 +82,21 @@ export function Modal({ open, onOpenChange, initialData, onSave }: any) {
           </DialogTitle>
         </DialogHeader>
 
-        <FormFields formData={formData} handleChange={handleChange} />
+        <FormFields
+          register={register}
+          control={control}
+          errors={errors}
+          setValue={setValue}
+        />
 
         <div className="flex justify-end gap-2">
+          <Button variant="secondary" onClick={() => reset()}>
+            Limpar Campos
+          </Button>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancelar
           </Button>
-          <Button onClick={handleSubmit}>
+          <Button onClick={handleSubmit(onSubmit)}>
             {initialData ? "Salvar Alterações" : "Cadastrar Disciplina"}
           </Button>
         </div>
