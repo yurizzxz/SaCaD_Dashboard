@@ -1,48 +1,49 @@
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
+import { useState } from "react";
+import { Controller } from "react-hook-form";
 
-type FormFieldsProps = {
-  formData: any;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-export function FormFields({ formData, handleChange }: FormFieldsProps) {
+export function FormFields({ register, control, errors, setValue }: any) {
   const [newEquipamento, setNewEquipamento] = useState("");
   const [newQuantidade, setNewQuantidade] = useState("");
 
-  const handleAddEquipamento = () => {
+  const handleAddEquipamento = (
+    currentEquipamentos: Record<string, number>
+  ) => {
     if (newEquipamento && newQuantidade) {
-      const updatedEquipamentos = {
-        ...formData.equipamentos,
+      const updated = {
+        ...currentEquipamentos,
         [newEquipamento]: parseInt(newQuantidade, 10),
       };
-      handleChange({
-        target: { name: "equipamentos", value: updatedEquipamentos },
-      } as React.ChangeEvent<HTMLInputElement>);
+      setValue("equipamentos", updated);
       setNewEquipamento("");
       setNewQuantidade("");
     }
   };
 
-  const handleRemoveEquipamento = (equipamento: string) => {
-    const updatedEquipamentos = { ...formData.equipamentos };
-    delete updatedEquipamentos[equipamento];
-    handleChange({
-      target: { name: "equipamentos", value: updatedEquipamentos },
-    } as React.ChangeEvent<HTMLInputElement>);
+  const handleRemoveEquipamento = (
+    currentEquipamentos: Record<string, number>,
+    equipamento: string
+  ) => {
+    const updated = { ...currentEquipamentos };
+    delete updated[equipamento];
+    setValue("equipamentos", updated);
   };
 
   return (
     <div className="flex flex-col gap-4 py-2">
-      <Input
-        name="nome_sala"
-        placeholder="ex: Sala 1"
-        value={formData.nome_sala}
-        onChange={handleChange}
-      />
+      <div className="flex flex-col gap-2 w-full">
+        <Label>Nome</Label>
+        <Input {...register("nome_sala")} placeholder="ex: Sala 001" />
+        {errors.nome_sala && (
+          <span className="text-red-500 text-sm">
+            {errors.nome_sala.message}
+          </span>
+        )}
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-1">
         {[
           {
@@ -53,7 +54,7 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
           {
             name: "capacidade",
             label: "Capacidade",
-            placeholder: "ex: 50",
+            placeholder: "ex: 30",
           },
           {
             name: "predio",
@@ -68,60 +69,73 @@ export function FormFields({ formData, handleChange }: FormFieldsProps) {
         ].map((field) => (
           <div key={field.name} className="flex flex-col gap-2 w-full">
             <Label>{field.label}</Label>
-            <Input
-              name={field.name}
-              placeholder={field.placeholder}
-              value={formData[field.name]}
-              onChange={handleChange}
-            />
+            <Input {...register(field.name)} placeholder={field.placeholder} />
+            {errors[field.name] && (
+              <span className="text-red-500 text-sm">
+                {errors[field.name]?.message}
+              </span>
+            )}
           </div>
         ))}
       </div>
-      <div className="flex flex-col gap-4  w-full">
-        <div className="flex flex-col gap-2 w-full">
-          <Label>Equipamentos</Label>
 
-          <Input
-            placeholder="Tipo de Equipamento"
-            value={newEquipamento}
-            onChange={(e) => setNewEquipamento(e.target.value)}
-          />
-        </div>
-        <div className="flex flex-col gap-2 w-full">
-          <Label>Quantidade</Label>
-          <Input
-            placeholder="Quantidade"
-            type="number"
-            value={newQuantidade}
-            onChange={(e) => setNewQuantidade(e.target.value)}
-          />
-        </div>
-        <Button onClick={handleAddEquipamento} className="w-fit">
-          Adicionar Equipamento
-        </Button>
+      <Controller
+        control={control}
+        name="equipamentos"
+        defaultValue={{}}
+        render={({ field }) => (
+          <div className="flex flex-col gap-4 w-full">
+            <div className="flex flex-col gap-2 w-full">
+              <Label>Equipamentos</Label>
+              <Input
+                placeholder="Ex: Computador"
+                value={newEquipamento}
+                onChange={(e) => setNewEquipamento(e.target.value)}
+              />
+            </div>
 
-        <div>
-          <p>Equipamentos:</p>
+            <div className="flex flex-col gap-2 w-full">
+              <Label>Quantidade</Label>
+              <Input
+                placeholder="Ex: 30"
+                type="number"
+                value={newQuantidade}
+                onChange={(e) => setNewQuantidade(e.target.value)}
+              />
+            </div>
 
-          <div className="flex flex-wrap gap-2 mt-2">
-            {Object.entries(formData.equipamentos || {}).map(
-              ([equip, qtd]: any) => (
-                <div key={equip} className="flex flex-row items-center gap-2">
-                  <span className="px-2 py-2 bg-primary text-primary-foreground rounded-md text-sm flex items-center">
-                    {equip}: {qtd}
-                    <button
-                      onClick={() => handleRemoveEquipamento(equip)}
-                      className="ml-2 cursor-pointer text-primary-foreground"
-                    >
-                      <X size={16} />
-                    </button>
-                  </span>
-                </div>
-              )
-            )}
+            <Button
+              type="button"
+              onClick={() => handleAddEquipamento(field.value)}
+              className="w-fit"
+            >
+              Adicionar Equipamento
+            </Button>
+
+            <div>
+              <p>Equipamentos:</p>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {Object.entries(field.value || {}).map(([equip, qtd]) => (
+                  <div key={equip} className="flex flex-row items-center gap-2">
+                    <span className="px-2 py-2 bg-primary text-primary-foreground rounded-md text-sm flex items-center">
+                      {equip}: {qtd as number}
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleRemoveEquipamento(field.value, equip)
+                        }
+                        className="ml-2 cursor-pointer text-primary-foreground"
+                      >
+                        <X size={16} />
+                      </button>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        )}
+      />
     </div>
   );
 }

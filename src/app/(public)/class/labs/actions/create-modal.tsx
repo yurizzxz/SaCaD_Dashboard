@@ -5,56 +5,58 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFields } from "./form";
+import { laboratorioSchema } from "@/schemas/form-schema";
 
-export function Modal({
-  open,
-  onOpenChange,
-  initialData,
-  onSave,
-}: any) {
-  const [formData, setFormData] = useState({
-    id: 0,
-    nome: "",
-    curso_associado: "",
-    equipamentos: {},
-    capacidade: 0,
-    bloco: "",
-    predio: "",
+type LaboratorioData = z.infer<typeof laboratorioSchema>;
+
+export function Modal({ open, onOpenChange, initialData, onSave }: any) {
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm<LaboratorioData>({
+    resolver: zodResolver(laboratorioSchema),
+    defaultValues: {
+      nome: "",
+      curso_associado: "",
+      equipamentos: {},
+      capacidade: 0,
+      bloco: "",
+      predio: "",
+    },
   });
 
   useEffect(() => {
-    if (initialData) {
-      setFormData({
-        id: initialData.id || 0,
-        nome: initialData.nome || "",
-        curso_associado: initialData.curso_associado || "",
-        equipamentos: initialData.equipamentos || {},
-        capacidade: initialData.capacidade || 0,
-        bloco: initialData.bloco || "",
-        predio: initialData.predio || "",
-      });
-    } else {
-      setFormData({
-        id: 0,
-        nome: "",
-        curso_associado: "",
-        equipamentos: {},
-        capacidade: 0,
-        bloco: "",
-        predio: "",
-      });
-    }
-  }, [initialData]);
+    if (!open) return;
 
-  const handleChange = (e: any) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    reset(
+      initialData
+        ? {
+            ...initialData,
+            equipamentos: initialData.equipamentos || {},
+          }
+        : {
+            nome: "",
+            curso_associado: "",
+            equipamentos: {},
+            capacidade: 0,
+            bloco: "",
+            predio: "",
+          }
+    );
+  }, [open, reset, initialData?.id]);
 
-  const handleSubmit = () => {
-    const lab = { ...formData, id: initialData?.id };
-    onSave(lab);
+  const onSubmit = (data: LaboratorioData) => {
+    onSave({ ...data, id: initialData?.id });
   };
 
   return (
@@ -66,16 +68,34 @@ export function Modal({
           </DialogTitle>
         </DialogHeader>
 
-        <FormFields formData={formData} handleChange={handleChange} />
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <FormFields
+            register={register}
+            control={control}
+            errors={errors}
+            setValue={setValue}
+            watch={watch}
+          />
 
-        <div className="flex justify-end gap-2">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancelar
-          </Button>
-          <Button onClick={handleSubmit}>
-            {initialData ? "Salvar Alterações" : "Cadastrar Laboratório"}
-          </Button>
-        </div>
+          <div className="flex justify-end gap-2">
+            {!initialData && (
+              <Button variant="secondary" type="button" onClick={() => reset()}>
+                Limpar campos
+              </Button>
+            )}
+
+            <Button
+              variant="outline"
+              type="button"
+              onClick={() => onOpenChange(false)}
+            >
+              Cancelar
+            </Button>
+            <Button type="submit">
+              {initialData ? "Salvar Alterações" : "Cadastrar Laboratório"}
+            </Button>
+          </div>
+        </form>
       </DialogContent>
     </Dialog>
   );

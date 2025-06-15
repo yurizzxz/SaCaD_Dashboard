@@ -67,7 +67,7 @@
         3
       ],
       "status": "Ativo",
-      "semestre": "4",
+      "semestre": "5",
       "email": "teste@gmail.com",
       "telefone": "(11) 98765-4321",
       "endereco": "Rua Exemplo, 45, Bairro X, Cidade Y",
@@ -347,7 +347,8 @@
         "Quadro branco": 1
       },
       "bloco": "B",
-      "predio": "2"
+      "predio": "2",
+      "curso_associado": "Engenharia de Software"
     },
     {
       "id": 2,
@@ -376,7 +377,8 @@
         "Quadro negro": 1
       },
       "bloco": "C",
-      "predio": "2"
+      "predio": "2",
+      "curso_associado": ""
     }
   ],
   "horarios": [
@@ -418,9 +420,10 @@
         "Placas de Circuito": 10,
         "Máquinas de Solda": 5
       },
-      "capacidade": "40",
+      "capacidade": 40,
       "bloco": "A",
-      "predio": "2"
+      "predio": "2",
+      "curso_associado": "Engenharia de Software"
     },
     {
       "id": 2,
