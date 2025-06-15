@@ -13,6 +13,7 @@ export type Aluno = {
 };
 
 export type Horario = {
+  disciplina: any;
   id: number;
   sala: string;
   turma: string;

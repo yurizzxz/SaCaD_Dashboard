@@ -1,4 +1,5 @@
 import { FormDisciplinaInput } from "@/components/select/disciplina-input";
+import { DisciplinaSelect } from "@/components/select/disciplina-select";
 import { FormProfessorInput } from "@/components/select/professor-input";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,8 +37,6 @@ export function FormFields({
           placeholder: "ex: 08:00",
         },
         { name: "hora_fim", label: "Hora de Fim", placeholder: "ex: 10:00" },
-        // { name: "disciplina", label: "Disciplina", placeholder: "ex: Estrutura de Dados" },
-        // { name: "professor", label: "Professor", placeholder: "ex: João Silva" },
       ].map((field) => (
         <div key={field.name} className="flex gap-2 flex-col w-full">
           <Label>{field.label}</Label>
@@ -78,12 +77,9 @@ export function FormFields({
           control={control}
           name="disciplina"
           render={({ field }) => (
-            <FormDisciplinaInput
-              className="w-full"
-              disciplinasSelecionadas={
-                Array.isArray(field.value) ? field.value : []
-              }
-              onDisciplinaChange={(ids: number[]) => field.onChange(ids)}
+            <DisciplinaSelect
+              disciplinaSelecionada={field.value}
+              onDisciplinaChange={field.onChange}
             />
           )}
         />
@@ -127,14 +123,15 @@ export function FormFields({
         <Label>Dia do Mês</Label>
         <Input
           type="number"
-          {...register("dia_do_mes")}
+          {...register("dia_numero", { valueAsNumber: true })}
           placeholder="ex: 22"
           min={1}
           max={31}
         />
-        {errors.dia_do_mes && (
+
+        {errors.dia_numero && (
           <span className="text-red-500 text-sm">
-            {errors.dia_do_mes?.message}
+            {errors.dia_numero?.message}
           </span>
         )}
       </div>

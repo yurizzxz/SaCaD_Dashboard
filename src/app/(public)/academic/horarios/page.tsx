@@ -6,18 +6,23 @@ import { useHorarioHooks } from "@/hooks/horarios/actions";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Modal as HorarioModal } from "./actions/create-modal";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
+import { ModalProfessor } from "./professor-modal";
 
 export default function Page() {
   const {
     horarios,
     handleAdd,
     handleEdit,
+    setModalProfessoresOpen,
+    modalProfessoresOpen,
     handleDelete,
     confirmDelete,
     handleSave,
     modalOpen,
     setModalOpen,
     deleteModalOpen,
+    verProfessores,
+    professoresSelecionados,
     setDeleteModalOpen,
     horarioSelecionado,
   } = useHorarioHooks();
@@ -28,7 +33,15 @@ export default function Page() {
     { key: "Disciplina", label: "Disciplina" },
     { key: "Sala", label: "Sala" },
     { key: "Hora", label: "Hora" },
-    { key: "Professor", label: "Professor" },
+    {
+      key: "Professor",
+      label: "Professores",
+      render: (row: any) => (
+        <Button variant="outline" onClick={() => verProfessores(row.professor)}>
+          Ver
+        </Button>
+      ),
+    },
     { key: "Turma", label: "Turma" },
     {
       key: "acoes",
@@ -54,7 +67,7 @@ export default function Page() {
     Data: `${horario.dia_semana}`,
     Hora: `${horario.hora_inicio} - ${horario.hora_fim}`,
     Disciplina: horario.disciplina,
-    Professor: horario.professor,
+    Professor: Array.isArray(horario.professor) ? horario.professor : [],
     Turma: horario.turma,
   }));
 
@@ -82,6 +95,13 @@ export default function Page() {
           onOpenChange={setDeleteModalOpen}
           onConfirm={confirmDelete}
           horario={horarioSelecionado}
+        />
+
+        <ModalProfessor
+          horarioSelecionado={horarioSelecionado}
+          professoresSelecionados={professoresSelecionados}
+          modalProfessoresOpen={modalProfessoresOpen}
+          setModalProfessoresOpen={setModalProfessoresOpen}
         />
       </Section>
     </Content>

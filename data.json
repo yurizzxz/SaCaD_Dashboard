@@ -381,15 +381,17 @@
     },
     {
       "sala": "A101",
-      "dia_semana": "Sexta-Feira",
-      "dia_numero": "30",
-      "mes": "10",
-      "hora_inicio": "8:10",
-      "hora_fim": "9:00",
       "turma": "ADS-2025-S1",
-      "disciplina": "Matemática Discreta",
-      "professor": "Joao Paulo",
-      "id": 3
+      "hora_inicio": "10:10",
+      "hora_fim": "12:00",
+      "disciplina": "Lógica de Programação",
+      "professor": [
+        1
+      ],
+      "dia_semana": "Segunda-Feira",
+      "dia_numero": 33,
+      "mes": "01",
+      "id": 5
     }
   ],
   "laboratorios": [

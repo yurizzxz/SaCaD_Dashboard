@@ -87,9 +87,14 @@ export const disciplinaSchema = z.object({
     errorMap: () => ({ message: "Selecione uma modalidade válida" }),
   }),
 
-  curso_id: z.array(z.number()).nonempty("Selecione ao menos um curso").optional(),
-professor: z.array(z.number()).nonempty("Selecione ao menos um professor").optional(),
-
+  curso_id: z
+    .array(z.number())
+    .nonempty("Selecione ao menos um curso")
+    .optional(),
+  professor: z
+    .array(z.number())
+    .nonempty("Selecione ao menos um professor")
+    .optional(),
 });
 
 export const horarioAulaSchema = z.object({
@@ -105,8 +110,9 @@ export const horarioAulaSchema = z.object({
     .min(1, "A hora de fim é obrigatória")
     .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Formato inválido (ex: 10:00)"),
 
-  disciplina: z.string().min(1, "A disciplina é obrigatória"),
-  professor: z.string().min(1, "O professor é obrigatório"),
+  disciplina: z.string().min(1, "Selecione uma disciplina"),
+
+  professor: z.array(z.number()).min(1, "Selecione ao menos um professor"),
 
   dia_semana: z.enum(
     [

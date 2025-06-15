@@ -33,7 +33,7 @@ export function Modal({ open, onOpenChange, initialData, onSave }: any) {
       hora_fim: "",
       turma: "",
       disciplina: "",
-      professor: "",
+      professor: [],
     },
   });
 
@@ -58,7 +58,7 @@ export function Modal({ open, onOpenChange, initialData, onSave }: any) {
             hora_fim: "",
             turma: "",
             disciplina: "",
-            professor: "",
+            professor: [],
           }
     );
   }, [open, reset, initialData]);
