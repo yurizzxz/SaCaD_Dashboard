@@ -29,7 +29,7 @@ export function FormFields({ control, register, errors, setValue }: any) {
       label: "Área Tecnológica",
       placeholder: "ex: Tecnologia da Informação",
     },
-    { name: "qtd_aulas", label: "Quantidade de Aulas", placeholder: "ex: 80" },
+    { name: "qtd_aulas", label: "Quantidade de Aulas", placeholder: "ex: 80", },
     { name: "aulas_teoricas", label: "Aulas Teóricas", placeholder: "ex: 30" },
     { name: "aulas_praticas", label: "Aulas Práticas", placeholder: "ex: 15" },
   ];
@@ -41,7 +41,6 @@ export function FormFields({ control, register, errors, setValue }: any) {
           <div key={field.name} className="flex flex-col gap-2">
             <Label>{field.label}</Label>
             <Input
-              type={field.name.includes("aulas") || field.name === "semestre" || field.name === "qtd_aulas" ? "number" : "text"}
               {...register(field.name)}
               placeholder={field.placeholder}
             />
