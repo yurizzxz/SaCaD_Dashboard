@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
+import { FormCursoInput } from "@/components/select/curso-input";
 
 export function FormFields({ register, control, errors, setValue }: any) {
   const [newEquipamento, setNewEquipamento] = useState("");
@@ -38,13 +39,9 @@ export function FormFields({ register, control, errors, setValue }: any) {
         {errors.nome && <span className="text-red-500 text-sm">{errors.nome.message}</span>}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-1">
+      <div className="grid grid-cols-3 gap-4 py-1">
         {[
-          {
-            name: "curso_associado",
-            label: "Curso Associado",
-            placeholder: "ex: Engenharia da Computação",
-          },
+         
           {
             name: "capacidade",
             label: "Capacidade",
@@ -71,6 +68,24 @@ export function FormFields({ register, control, errors, setValue }: any) {
             )}
           </div>
         ))}
+      </div>
+
+      <div className="flex gap-2 flex-col w-full">
+        <Label>Curso</Label>
+        <Controller
+          control={control}
+          name="curso_id"
+          render={({ field }) => (
+            <FormCursoInput
+              className="w-full"
+              cursosSelecionados={field.value}
+              onCursoChange={(val) => setValue("curso_id", val)}
+            />
+          )}
+        />
+        {errors.curso_id && (
+          <span className="text-red-500 text-sm">{errors.curso_id.message}</span>
+        )}
       </div>
 
       <Controller

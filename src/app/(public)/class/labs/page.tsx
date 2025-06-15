@@ -73,7 +73,7 @@ export default function Page() {
     { key: "bloco", label: "Bloco" },
     {
       key: "curso_id",
-      label: "Curso id",
+      label: "Curso",
       render: (row: any) => getNomeCurso(row.curso_id),
     },
     {

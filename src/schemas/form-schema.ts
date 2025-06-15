@@ -140,7 +140,7 @@ export const horarioAulaSchema = z.object({
 
 export const laboratorioSchema = z.object({
   nome: z.string().min(1, "Nome é obrigatório"),
-  curso_associado: z.string().min(1, "Curso associado é obrigatório"),
+  curso_id: z.array(z.number()).min(1, "Selecione ao menos um curso"),
   equipamentos: z.record(z.string(), z.any(), {
     required_error: "Equipamentos são obrigatórios",
   }),
@@ -151,7 +151,7 @@ export const laboratorioSchema = z.object({
 
 export const salaSchema = z.object({
   nome_sala: z.string().min(1, "O nome é obrigatorio"),
-  curso_associado: z.string().min(1, "Curso associado é obrigatório"),
+  curso_id: z.array(z.number()).min(1, "Selecione ao menos um curso"),
   equipamentos: z.record(z.string(), z.any(), {
     required_error: "Equipamentos são obrigatórios",
   }),

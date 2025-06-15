@@ -363,22 +363,6 @@
       },
       "bloco": "A",
       "predio": "1"
-    },
-    {
-      "id": 3,
-      "nome_sala": "Sala 303",
-      "capacidade": 20,
-      "curso_id": [
-        2
-      ],
-      "equipamentos": {
-        "Computador": 10,
-        "Projetor": 1,
-        "Quadro negro": 1
-      },
-      "bloco": "C",
-      "predio": "2",
-      "curso_associado": ""
     }
   ],
   "horarios": [
@@ -439,6 +423,17 @@
       "capacidade": "50",
       "bloco": "B",
       "predio": "1"
+    },
+    {
+      "nome": "Yuri",
+      "curso_id": [
+        2
+      ],
+      "equipamentos": {},
+      "capacidade": 6,
+      "bloco": "C",
+      "predio": "1",
+      "id": 3
     }
   ],
   "metricas": {

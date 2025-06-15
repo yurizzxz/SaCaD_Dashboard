@@ -27,7 +27,7 @@ export function Modal({ open, onOpenChange, initialData, onSave }: any) {
     resolver: zodResolver(salaSchema),
     defaultValues: {
       nome_sala: "",
-      curso_associado: "",
+      curso_id: [],
       equipamentos: {},
       capacidade: 0,
       bloco: "",
@@ -46,7 +46,7 @@ export function Modal({ open, onOpenChange, initialData, onSave }: any) {
           }
         : {
             nome_sala: "",
-            curso_associado: "",
+            curso_id: [],
             equipamentos: {},
             capacidade: 0,
             bloco: "",
@@ -77,7 +77,7 @@ export function Modal({ open, onOpenChange, initialData, onSave }: any) {
             watch={watch}
           />
 
-          <div className="flex justify-end gap-2">
+          <div className="flex justify-end flex-wrap gap-2">
             {!initialData && (
               <Button variant="secondary" type="button" onClick={() => reset()}>
                 Limpar campos
