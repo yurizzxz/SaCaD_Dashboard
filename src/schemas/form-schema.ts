@@ -121,14 +121,7 @@ export const horarioAulaSchema = z.object({
     { errorMap: () => ({ message: "Selecione um dia válido da semana" }) }
   ),
 
-  dia_numero: z
-    .string()
-    .min(1, "O dia do mês é obrigatório")
-    .regex(/^\d+$/, "O dia deve ser um número")
-    .transform((val) => parseInt(val, 10))
-    .refine((val) => val >= 1 && val <= 31, {
-      message: "Dia do mês deve estar entre 1 e 31",
-    }),
+  dia_numero: z.number().min(1, "O dia é obrigatório"),
 
   mes: z.enum(
     ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],

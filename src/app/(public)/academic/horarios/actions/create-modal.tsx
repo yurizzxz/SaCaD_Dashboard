@@ -5,69 +5,69 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { FormFields } from "./form";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { z } from "zod";
+import { horarioAulaSchema } from "@/schemas/form-schema";
 
-export function Modal({
-  open,
-  onOpenChange,
-  initialData,
-  onSave,
-}: any) {
-  const [formData, setFormData] = useState({
-    id: 0,
-    sala: "",
-    dia_semana: "",
-    dia_numero: "",
-    mes: "",
-    hora_inicio: "",
-    hora_fim: "",
-    turma: "",
-    disciplina: "",
-    professor: "",
+type HorarioAulaData = z.infer<typeof horarioAulaSchema>;
+
+export function Modal({ open, onOpenChange, initialData, onSave }: any) {
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm<HorarioAulaData>({
+    resolver: zodResolver(horarioAulaSchema),
+    defaultValues: {
+      sala: "",
+      dia_semana: "Segunda-Feira",
+      dia_numero: 0,
+      mes: "01",
+      hora_inicio: "",
+      hora_fim: "",
+      turma: "",
+      disciplina: "",
+      professor: "",
+    },
   });
 
   useEffect(() => {
-    console.log(initialData);
-    if (initialData) {
-      setFormData({
-        id: initialData.id,
-        sala: initialData.sala || "",
-        dia_semana: initialData.dia_semana || "",
-        dia_numero: initialData.dia_numero || "",
-        mes: initialData.mes || "",
-        hora_inicio: initialData.hora_inicio || "",
-        hora_fim: initialData.hora_fim || "",
-        turma: initialData.turma || "",
-        disciplina: initialData.disciplina || "",
-        professor: initialData.professor || "",
-      });
-    } else {
-      setFormData({
-        id: 0,
-        sala: "",
-        dia_semana: "",
-        dia_numero: "",
-        mes: "",
-        hora_inicio: "",
-        hora_fim: "",
-        turma: "",
-        disciplina: "",
-        professor: "",
-      });
-    }
-  }, [initialData]);
+    if (!open) return;
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData((prev: any) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+    reset(
+      initialData
+        ? {
+            ...initialData,
+            dia_numero:
+              typeof initialData.dia_numero === "number"
+                ? initialData.dia_numero.toString()
+                : initialData.dia_numero || "",
+          }
+        : {
+            sala: "",
+            dia_semana: "Segunda-Feira",
+            dia_numero: "",
+            mes: "01",
+            hora_inicio: "",
+            hora_fim: "",
+            turma: "",
+            disciplina: "",
+            professor: "",
+          }
+    );
+  }, [open, reset, initialData]);
 
-  const handleSubmit = () => {
-    const horario = { ...formData, id: initialData?.id };
+  const onSubmit = (data: HorarioAulaData) => {
+    const horario = {
+      ...data,
+      id: initialData?.id || 0,
+    };
     onSave(horario);
   };
 
@@ -80,13 +80,18 @@ export function Modal({
           </DialogTitle>
         </DialogHeader>
 
-        <FormFields formData={formData} handleChange={handleChange} />
+        <FormFields
+          register={register}
+          control={control}
+          errors={errors}
+          setValue={setValue}
+        />
 
         <div className="flex justify-end gap-2">
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancelar
           </Button>
-          <Button onClick={handleSubmit}>
+          <Button onClick={handleSubmit(onSubmit)}>
             {initialData ? "Salvar Alterações" : "Cadastrar Horário"}
           </Button>
         </div>
