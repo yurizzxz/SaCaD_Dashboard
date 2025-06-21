@@ -1,10 +1,16 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { Curso } from "@/lib/types";
 import { toast } from "sonner";
 
 const API_URL = process.env.NEXT_PUBLIC_CURSOS_URL;
+
+if (!API_URL) {
+  throw new Error(
+    "A variável de ambiente NEXT_PUBLIC_CURSOS_URL não está definida."
+  );
+}
 
 export function useCursos() {
   const [cursos, setCursos] = useState<Curso[]>([]);
@@ -23,8 +29,10 @@ export function useCursos() {
 
       const data: Curso[] = await res.json();
       setCursos(data);
-    } catch (err) {
-      setError("Erro ao buscar cursos");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -43,8 +51,10 @@ export function useCursos() {
 
       toast.success("Curso cadastrado com sucesso!");
       await fetchCursos();
-    } catch (err) {
-      setError("Erro ao cadastrar curso");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -61,8 +71,10 @@ export function useCursos() {
 
       toast.success("Curso editado com sucesso!");
       await fetchCursos();
-    } catch (err) {
-      setError("Erro ao editar curso");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -76,8 +88,10 @@ export function useCursos() {
       toast.success("Curso excluido com sucesso!");
 
       await fetchCursos();
-    } catch (err) {
-      setError("Erro ao excluir curso");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 

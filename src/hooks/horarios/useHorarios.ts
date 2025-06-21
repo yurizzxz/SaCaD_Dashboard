@@ -1,10 +1,16 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { Horario } from "@/lib/types";
 import { toast } from "sonner";
 
 const API_URL = process.env.NEXT_PUBLIC_HORARIOS_URL;
+
+if (!API_URL) {
+  throw new Error(
+    "A variável de ambiente NEXT_PUBLIC_HORARIOS_URL não está definida."
+  );
+}
 
 export function useHorarios() {
   const [horarios, setHorarios] = useState<Horario[]>([]);
@@ -23,8 +29,10 @@ export function useHorarios() {
 
       const data: Horario[] = await res.json();
       setHorarios(data);
-    } catch (err) {
-      setError("Erro ao buscar horários");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -43,12 +51,17 @@ export function useHorarios() {
 
       toast.success("Horário cadastrado com sucesso!");
       await fetchHorarios();
-    } catch (err) {
-      setError("Erro ao cadastrar horário");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
-  const editarHorario = async (id: number, horarioAtualizado: Partial<Horario>) => {
+  const editarHorario = async (
+    id: number,
+    horarioAtualizado: Partial<Horario>
+  ) => {
     try {
       const res = await fetch(`${API_URL}/${id}`, {
         method: "PATCH",
@@ -61,8 +74,10 @@ export function useHorarios() {
 
       toast.success("Horário editado com sucesso!");
       await fetchHorarios();
-    } catch (err) {
-      setError("Erro ao editar horário");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -75,8 +90,10 @@ export function useHorarios() {
 
       toast.success("Horário excluído com sucesso!");
       await fetchHorarios();
-    } catch (err) {
-      setError("Erro ao excluir horário");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 

@@ -1,10 +1,16 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { Tecnico } from "@/lib/types";
 import { toast } from "sonner";
 
 const API_URL = process.env.NEXT_PUBLIC_TECNICOS_URL;
+
+if (!API_URL) {
+  throw new Error(
+    "A variável de ambiente NEXT_PUBLIC_TECNICOS_URL não está definida."
+  );
+}
 
 export function useTecnicos() {
   const [tecnicos, setTecnicos] = useState<Tecnico[]>([]);
@@ -23,8 +29,10 @@ export function useTecnicos() {
 
       const data: Tecnico[] = await res.json();
       setTecnicos(data);
-    } catch (err) {
-      setError("Erro ao buscar técnicos");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -44,12 +52,17 @@ export function useTecnicos() {
       toast.success("Técnico cadastrado com sucesso!");
 
       await fetchTecnicos();
-    } catch (err) {
-      setError("Erro ao cadastrar técnico");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
-  const editarTecnico = async (id: number, tecnicoAtualizado: Partial<Tecnico>) => {
+  const editarTecnico = async (
+    id: number,
+    tecnicoAtualizado: Partial<Tecnico>
+  ) => {
     try {
       const res = await fetch(`${API_URL}/${id}`, {
         method: "PATCH",
@@ -63,8 +76,10 @@ export function useTecnicos() {
       toast.success("Técnico editado com sucesso!");
 
       await fetchTecnicos();
-    } catch (err) {
-      setError("Erro ao editar técnico");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -78,8 +93,10 @@ export function useTecnicos() {
       toast.success("Técnico excluído com sucesso!");
 
       await fetchTecnicos();
-    } catch (err) {
-      setError("Erro ao excluir técnico");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 

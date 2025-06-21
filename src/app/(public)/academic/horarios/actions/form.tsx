@@ -1,4 +1,3 @@
-import { FormDisciplinaInput } from "@/components/select/disciplina-input";
 import { DisciplinaSelect } from "@/components/select/disciplina-select";
 import { FormProfessorInput } from "@/components/select/professor-input";
 import { Input } from "@/components/ui/input";
@@ -12,20 +11,7 @@ import {
 } from "@/components/ui/select";
 import { Controller } from "react-hook-form";
 
-export function FormFields({
-  formData,
-  handleChange,
-  control,
-  register,
-  errors,
-  setValue,
-}: any) {
-  const handleSelectChange = (name: string, value: string) => {
-    handleChange({
-      target: { name, value },
-    } as React.ChangeEvent<HTMLInputElement>);
-  };
-
+export function FormFields({ control, register, errors }: any) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2">
       {[
@@ -78,6 +64,7 @@ export function FormFields({
           name="disciplina"
           render={({ field }) => (
             <DisciplinaSelect
+              className="w-full"
               disciplinaSelecionada={field.value}
               onDisciplinaChange={field.onChange}
             />

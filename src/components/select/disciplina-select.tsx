@@ -32,7 +32,7 @@ export function DisciplinaSelect({
 
   return (
     <Select value={disciplinaSelecionada || "todos"} onValueChange={onDisciplinaChange}>
-      <SelectTrigger className={twMerge("w-full", className)}>
+      <SelectTrigger className={twMerge("w-[230px]", className)}>
         <SelectValue placeholder="Filtrar por Curso" />
       </SelectTrigger>
       <SelectContent>

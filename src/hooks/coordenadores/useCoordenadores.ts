@@ -1,10 +1,16 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { Coordenador } from "@/lib/types";
 import { toast } from "sonner";
 
 const API_URL = process.env.NEXT_PUBLIC_COORDENADORES_URL;
+
+if (!API_URL) {
+  throw new Error(
+    "A variável de ambiente NEXT_PUBLIC_COORDENADORES_URL não está definida."
+  );
+}
 
 export function useCoordenadores() {
   const [coordenadores, setCoordenadores] = useState<Coordenador[]>([]);
@@ -23,14 +29,18 @@ export function useCoordenadores() {
 
       const data: Coordenador[] = await res.json();
       setCoordenadores(data);
-    } catch (err) {
-      setError("Erro ao buscar coordenadores");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
   };
 
-  const cadastrarCoordenador = async (novoCoordenador: Partial<Coordenador>) => {
+  const cadastrarCoordenador = async (
+    novoCoordenador: Partial<Coordenador>
+  ) => {
     try {
       const res = await fetch(API_URL!, {
         method: "POST",
@@ -44,12 +54,17 @@ export function useCoordenadores() {
       toast.success("Coordenador cadastrado com sucesso!");
 
       await fetchCoordenadores();
-    } catch (err) {
-      setError("Erro ao cadastrar coordenador");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
-  const editarCoordenador = async (id: number, coordenadorAtualizado: Partial<Coordenador>) => {
+  const editarCoordenador = async (
+    id: number,
+    coordenadorAtualizado: Partial<Coordenador>
+  ) => {
     try {
       const res = await fetch(`${API_URL}/${id}`, {
         method: "PATCH",
@@ -63,8 +78,10 @@ export function useCoordenadores() {
       toast.success("Coordenador editado com sucesso!");
 
       await fetchCoordenadores();
-    } catch (err) {
-      setError("Erro ao editar coordenador");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -78,8 +95,10 @@ export function useCoordenadores() {
       toast.success("Coordenador excluído com sucesso!");
 
       await fetchCoordenadores();
-    } catch (err) {
-      setError("Erro ao excluir coordenador");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 

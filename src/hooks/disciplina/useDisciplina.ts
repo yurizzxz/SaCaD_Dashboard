@@ -6,6 +6,12 @@ import { Disciplina } from "@/lib/types";
 
 const API_URL = process.env.NEXT_PUBLIC_DISCIPLINAS_URL;
 
+if (!API_URL) {
+  throw new Error(
+    "A variável de ambiente NEXT_PUBLIC_DISCIPLINAS_URL não está definida."
+  );
+}
+
 export function useDisciplinas() {
   const [disciplinas, setDisciplinas] = useState<Disciplina[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -23,8 +29,10 @@ export function useDisciplinas() {
 
       const data: Disciplina[] = await res.json();
       setDisciplinas(data);
-    } catch (err) {
-      setError("Erro ao buscar Disciplinas");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -44,8 +52,10 @@ export function useDisciplinas() {
       toast.success("Disciplina cadastrado com sucesso!");
 
       await fetchDisciplinas();
-    } catch (err) {
-      setError("Erro ao cadastrar disciplina");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -66,8 +76,10 @@ export function useDisciplinas() {
       toast.success("Disciplina editada com sucesso!");
 
       await fetchDisciplinas();
-    } catch (err) {
-      setError("Erro ao editar disciplina");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -81,8 +93,10 @@ export function useDisciplinas() {
       toast.success("Disciplina excluída com sucesso!");
 
       await fetchDisciplinas();
-    } catch (err) {
-      setError("Erro ao excluir disciplina");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 

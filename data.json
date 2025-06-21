@@ -374,9 +374,11 @@
       "hora_fim": "12:00",
       "turma": "ADM-2024-T2",
       "disciplina": "Gestão Empresarial",
-      "professor": "Ana Costa",
+      "professor": [
+        2
+      ],
       "dia_semana": "Segunda-Feira",
-      "dia_numero": "26",
+      "dia_numero": 26,
       "mes": "09"
     },
     {
@@ -389,7 +391,7 @@
         1
       ],
       "dia_semana": "Segunda-Feira",
-      "dia_numero": 33,
+      "dia_numero": 30,
       "mes": "01",
       "id": 5
     }
@@ -425,17 +427,6 @@
       "capacidade": "50",
       "bloco": "B",
       "predio": "1"
-    },
-    {
-      "nome": "Yuri",
-      "curso_id": [
-        2
-      ],
-      "equipamentos": {},
-      "capacidade": 6,
-      "bloco": "C",
-      "predio": "1",
-      "id": 3
     }
   ],
   "metricas": {

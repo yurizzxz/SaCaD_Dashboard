@@ -1,10 +1,16 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Sala } from "@/lib/types";
 
 const API_URL = process.env.NEXT_PUBLIC_SALAS_URL;
+
+if (!API_URL) {
+  throw new Error(
+    "A variável de ambiente NEXT_PUBLIC_SALAS_URL não está definida."
+  );
+}
 
 export function useSalas() {
   const [salas, setSalas] = useState<Sala[]>([]);
@@ -23,8 +29,10 @@ export function useSalas() {
 
       const data: Sala[] = await res.json();
       setSalas(data);
-    } catch (err) {
-      setError("Erro ao buscar salas");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -44,8 +52,10 @@ export function useSalas() {
       toast.success("Sala cadastrada com sucesso!");
 
       await fetchSalas();
-    } catch (err) {
-      setError("Erro ao cadastrar sala");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -63,8 +73,10 @@ export function useSalas() {
       toast.success("Sala editada com sucesso!");
 
       await fetchSalas();
-    } catch (err) {
-      setError("Erro ao editar sala");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -78,8 +90,10 @@ export function useSalas() {
       toast.success("Sala excluida com sucesso!");
 
       await fetchSalas();
-    } catch (err) {
-      setError("Erro ao excluir sala");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 

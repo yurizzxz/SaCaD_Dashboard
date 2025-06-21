@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { Professor } from "@/lib/types";
@@ -23,8 +23,10 @@ export function useTeachers() {
 
       const data: Professor[] = await res.json();
       setTeachers(data);
-    } catch (err) {
-      setError("Erro ao buscar professores");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -44,12 +46,17 @@ export function useTeachers() {
       toast.success("Professor cadastrado com sucesso!");
 
       await fetchTeachers();
-    } catch (err) {
-      setError("Erro ao cadastrar professor");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
-  const editarTeacher = async (id: number, teacherAtualizado: Partial<Professor>) => {
+  const editarTeacher = async (
+    id: number,
+    teacherAtualizado: Partial<Professor>
+  ) => {
     try {
       const res = await fetch(`${API_URL}/${id}`, {
         method: "PATCH",
@@ -63,8 +70,10 @@ export function useTeachers() {
       toast.success("Professor editado com sucesso!");
 
       await fetchTeachers();
-    } catch (err) {
-      setError("Erro ao editar professor");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -78,8 +87,10 @@ export function useTeachers() {
       toast.success("Professor excluído com sucesso!");
 
       await fetchTeachers();
-    } catch (err) {
-      setError("Erro ao excluir professor");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 

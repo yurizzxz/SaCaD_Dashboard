@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { Aluno } from "@/lib/types";
-import { toast } from "sonner"
+import { toast } from "sonner";
 
 const API_URL = process.env.NEXT_PUBLIC_ALUNOS_URL;
 
@@ -23,8 +23,10 @@ export function useAlunos() {
 
       const data: Aluno[] = await res.json();
       setAlunos(data);
-    } catch (err) {
-      setError("Erro ao buscar alunos");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -44,8 +46,10 @@ export function useAlunos() {
       toast.success("Aluno cadastrado com sucesso!");
 
       await fetchAlunos();
-    } catch (err) {
-      setError("Erro ao cadastrar aluno");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -63,8 +67,10 @@ export function useAlunos() {
       toast.success("Aluno editado com sucesso!");
 
       await fetchAlunos();
-    } catch (err) {
-      setError("Erro ao editar aluno");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -78,8 +84,10 @@ export function useAlunos() {
       toast.success("Aluno excluído com sucesso!");
 
       await fetchAlunos();
-    } catch (err) {
-      setError("Erro ao excluir aluno");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 

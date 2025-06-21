@@ -1,10 +1,16 @@
-'use client';
+"use client";
 
 import { Laboratorio } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const API_URL = process.env.NEXT_PUBLIC_LABS_URL;
+
+if (!API_URL) {
+  throw new Error(
+    "A variável de ambiente NEXT_PUBLIC_LABS_URL não está definida."
+  );
+}
 
 export function useLabs() {
   const [labs, setLabs] = useState<Laboratorio[]>([]);
@@ -23,8 +29,10 @@ export function useLabs() {
 
       const data = await res.json();
       setLabs(data);
-    } catch (err) {
-      setError("Erro ao buscar laboratórios");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -44,8 +52,10 @@ export function useLabs() {
       toast.success("Laboratório cadastrado com sucesso!");
 
       await fetchLabs();
-    } catch (err) {
-      setError("Erro ao cadastrar laboratório");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -63,8 +73,10 @@ export function useLabs() {
       toast.success("Laboratório editado com sucesso!");
 
       await fetchLabs();
-    } catch (err) {
-      setError("Erro ao editar laboratório");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
@@ -78,8 +90,10 @@ export function useLabs() {
       toast.success("Laboratório excluído com sucesso!");
 
       await fetchLabs();
-    } catch (err) {
-      setError("Erro ao excluir laboratório");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Erro desconhecido";
+      setError(errorMessage);
     }
   };
 
