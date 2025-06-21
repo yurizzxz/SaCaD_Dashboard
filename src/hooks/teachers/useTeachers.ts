@@ -3,6 +3,12 @@
 import { useEffect, useState } from "react";
 import { Professor } from "@/lib/types";
 import { toast } from "sonner";
+import {
+  cadastrarProfessor,
+  editarProfessor,
+  excluirProfessor,
+  fetchProfessores,
+} from "@/lib/api/teachers";
 
 const API_URL = process.env.NEXT_PUBLIC_TEACHERS_URL;
 
@@ -11,86 +17,50 @@ export function useTeachers() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchTeachers();
-  }, []);
-
-  const fetchTeachers = async () => {
+  const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch(API_URL!);
-      if (!res.ok) throw new Error("Erro ao buscar professores");
-
-      const data: Professor[] = await res.json();
+      const data = await fetchProfessores();
       setTeachers(data);
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      setError(null);
+    } catch (err: any) {
+      setError(err.message || "Erro ao buscar professores");
     } finally {
       setLoading(false);
     }
   };
 
-  const cadastrarTeacher = async (novoTeacher: Partial<Professor>) => {
-    try {
-      const res = await fetch(API_URL!, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(novoTeacher),
-      });
-      if (!res.ok) throw new Error("Erro ao cadastrar professor");
+  useEffect(() => {
+    load();
+  }, []);
 
+  const cadastrar = async (professor: Partial<Professor>) => {
+    try {
+      await cadastrarProfessor(professor);
       toast.success("Professor cadastrado com sucesso!");
-
-      await fetchTeachers();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao cadastrar professor");
     }
   };
 
-  const editarTeacher = async (
-    id: number,
-    teacherAtualizado: Partial<Professor>
-  ) => {
+  const editar = async (id: number, professor: Professor) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(teacherAtualizado),
-      });
-      if (!res.ok) throw new Error("Erro ao editar professor");
-
+      await editarProfessor(id, professor);
       toast.success("Professor editado com sucesso!");
-
-      await fetchTeachers();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao editar professor");
     }
   };
 
-  const excluirTeacher = async (id: number) => {
+  const excluir = async (id: number) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Erro ao excluir professor");
-
-      toast.success("Professor excluído com sucesso!");
-
-      await fetchTeachers();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await excluirProfessor(id);
+      toast.success("Professor excluido com sucesso!");
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao excluir professor");
     }
   };
 
@@ -98,9 +68,9 @@ export function useTeachers() {
     teachers,
     loading,
     error,
-    cadastrarTeacher,
-    editarTeacher,
-    excluirTeacher,
-    refetch: fetchTeachers,
+    cadastrarTeacher: cadastrar,
+    editarTeacher: editar,
+    excluirTeacher: excluir,
+    refetch: fetchProfessores,
   };
 }

@@ -39,15 +39,30 @@ export function AlunoModal({ open, onOpenChange, initialData, onSave }: any) {
   });
 
   useEffect(() => {
-    if (initialData) {
-      reset({
-        ...initialData,
-        curso_id: Array.isArray(initialData.curso_id)
-          ? initialData.curso_id
-          : [],
-      });
-    }
-  }, [initialData, reset]);
+    if (!open) return;
+    reset(
+      initialData
+        ? {
+            ...initialData,
+            curso_id: Array.isArray(initialData.curso_id)
+              ? initialData.curso_id
+              : [],
+          }
+        : {
+            nome: "",
+            cpf: "",
+            curso_id: [],
+            status: "",
+            semestre: "",
+            email: "",
+            telefone: "",
+            endereco: "",
+            data_nascimento: "",
+            data_matricula: "",
+          }
+    );
+  }, [open, initialData, reset]);
+
 
   const onSubmit = (data: AlunoData) => {
     onSave({ ...data, id: initialData?.id });

@@ -3,101 +3,71 @@
 import { useEffect, useState } from "react";
 import { Aluno } from "@/lib/types";
 import { toast } from "sonner";
-
-const API_URL = process.env.NEXT_PUBLIC_ALUNOS_URL;
+import {
+  fetchAlunos,
+  cadastrarAluno,
+  editarAluno,
+  excluirAluno,
+} from "@/lib/api/alunos";
 
 export function useAlunos() {
   const [alunos, setAlunos] = useState<Aluno[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchAlunos();
-  }, []);
-
-  const fetchAlunos = async () => {
+  const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch(API_URL!);
-      if (!res.ok) throw new Error("Erro ao buscar alunos");
-
-      const data: Aluno[] = await res.json();
+      const data = await fetchAlunos();
       setAlunos(data);
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      setError(null);
+    } catch (err: any) {
+      setError(err.message || "Erro ao buscar alunos");
     } finally {
       setLoading(false);
     }
   };
 
-  const cadastrarAluno = async (novoAluno: Partial<Aluno>) => {
-    try {
-      const res = await fetch(API_URL!, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(novoAluno),
-      });
-      if (!res.ok) throw new Error("Erro ao cadastrar aluno");
+  useEffect(() => {
+    load();
+  }, []);
 
+  const cadastrar = async (novoAluno: Partial<Aluno>) => {
+    try {
+      await cadastrarAluno(novoAluno);
       toast.success("Aluno cadastrado com sucesso!");
-
-      await fetchAlunos();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao cadastrar aluno");
     }
   };
 
-  const editarAluno = async (id: number, alunoAtualizado: Partial<Aluno>) => {
+  const editar = async (id: number, dados: Partial<Aluno>) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(alunoAtualizado),
-      });
-      if (!res.ok) throw new Error("Erro ao editar aluno");
-
+      await editarAluno(id, dados);
       toast.success("Aluno editado com sucesso!");
-
-      await fetchAlunos();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao editar aluno");
     }
   };
 
-  const excluirAluno = async (id: number) => {
+  const excluir = async (id: number) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Erro ao excluir aluno");
-
+      await excluirAluno(id);
       toast.success("Aluno excluído com sucesso!");
-
-      await fetchAlunos();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao excluir aluno");
     }
   };
-
   return {
     alunos,
     loading,
     error,
-    cadastrarAluno,
-    editarAluno,
-    excluirAluno,
-    refetch: fetchAlunos,
+    cadastrarAluno: cadastrar,
+    editarAluno: editar,
+    excluirAluno: excluir,
+    refetch: load,
   };
 }

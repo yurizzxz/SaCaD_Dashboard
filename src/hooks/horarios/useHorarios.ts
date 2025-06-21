@@ -1,99 +1,64 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from "react";
 import { Horario } from "@/lib/types";
+import {
+  fetchHorarios,
+  criarHorario,
+  editarHorario,
+  excluirHorario,
+} from "@/lib/api/horarios";
 import { toast } from "sonner";
-
-const API_URL = process.env.NEXT_PUBLIC_HORARIOS_URL;
-
-if (!API_URL) {
-  throw new Error(
-    "A variável de ambiente NEXT_PUBLIC_HORARIOS_URL não está definida."
-  );
-}
 
 export function useHorarios() {
   const [horarios, setHorarios] = useState<Horario[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchHorarios();
-  }, []);
-
-  const fetchHorarios = async () => {
+  const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch(API_URL!);
-      if (!res.ok) throw new Error("Erro ao buscar horários");
-
-      const data: Horario[] = await res.json();
+      const data = await fetchHorarios();
       setHorarios(data);
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      setError(null);
+    } catch (err: any) {
+      setError(err.message || "Erro ao buscar horários");
     } finally {
       setLoading(false);
     }
   };
 
-  const cadastrarHorario = async (novoHorario: Partial<Horario>) => {
-    try {
-      const res = await fetch(API_URL!, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(novoHorario),
-      });
-      if (!res.ok) throw new Error("Erro ao cadastrar horário");
+  useEffect(() => {
+    load();
+  }, []);
 
+  const cadastrar = async (novoHorario: Partial<Horario>) => {
+    try {
+      await criarHorario(novoHorario);
       toast.success("Horário cadastrado com sucesso!");
-      await fetchHorarios();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao cadastrar horário");
     }
   };
 
-  const editarHorario = async (
-    id: number,
-    horarioAtualizado: Partial<Horario>
-  ) => {
+  const editar = async (id: number, dados: Partial<Horario>) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(horarioAtualizado),
-      });
-      if (!res.ok) throw new Error("Erro ao editar horário");
-
+      await editarHorario(id, dados);
       toast.success("Horário editado com sucesso!");
-      await fetchHorarios();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao editar horário");
     }
   };
 
-  const excluirHorario = async (id: number) => {
+  const excluir = async (id: number) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Erro ao excluir horário");
-
+      await excluirHorario(id);
       toast.success("Horário excluído com sucesso!");
-      await fetchHorarios();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao excluir horário");
     }
   };
 
@@ -101,9 +66,9 @@ export function useHorarios() {
     horarios,
     loading,
     error,
-    cadastrarHorario,
-    editarHorario,
-    excluirHorario,
-    refetch: fetchHorarios,
+    cadastrarHorario: cadastrar,
+    editarHorario: editar,
+    excluirHorario: excluir,
+    refetch: load,
   };
 }

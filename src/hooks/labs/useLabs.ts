@@ -1,99 +1,59 @@
 "use client";
 
+import { fetchLabs, cadastrarLab, editarLab, excluirLab } from "@/lib/api/labs";
 import { Laboratorio } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-
-const API_URL = process.env.NEXT_PUBLIC_LABS_URL;
-
-if (!API_URL) {
-  throw new Error(
-    "A variável de ambiente NEXT_PUBLIC_LABS_URL não está definida."
-  );
-}
 
 export function useLabs() {
   const [labs, setLabs] = useState<Laboratorio[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchLabs();
-  }, []);
-
-  const fetchLabs = async () => {
+  const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch(API_URL!);
-      if (!res.ok) throw new Error("Erro ao buscar laboratórios");
-
-      const data = await res.json();
+      const data = await fetchLabs();
       setLabs(data);
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      setError(null);
+    } catch (err: any) {
+      setError(err.message || "Erro ao buscar laboratórios");
     } finally {
       setLoading(false);
     }
   };
 
-  const cadastrarLab = async (novoLab: Partial<Laboratorio>) => {
-    try {
-      const res = await fetch(API_URL!, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(novoLab),
-      });
-      if (!res.ok) throw new Error("Erro ao cadastrar laboratório");
+  useEffect(() => {
+    load();
+  }, []);
 
+  const cadastrar = async (lab: Partial<Laboratorio>) => {
+    try {
+      await cadastrarLab(lab);
       toast.success("Laboratório cadastrado com sucesso!");
-
-      await fetchLabs();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao cadastrar laboratório");
     }
   };
 
-  const editarLab = async (id: number, labAtualizado: Partial<Laboratorio>) => {
+  const editar = async (id: number, lab: Laboratorio) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(labAtualizado),
-      });
-      if (!res.ok) throw new Error("Erro ao editar laboratório");
-
+      await editarLab(id, lab);
       toast.success("Laboratório editado com sucesso!");
-
-      await fetchLabs();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao editar laboratório");
     }
   };
 
-  const excluirLab = async (id: number) => {
+  const excluir = async (id: number) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Erro ao excluir laboratório");
-
-      toast.success("Laboratório excluído com sucesso!");
-
-      await fetchLabs();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await excluirLab(id);
+      toast.success("Laboratório excluido com sucesso!");
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao excluir laboratório");
     }
   };
 
@@ -101,9 +61,9 @@ export function useLabs() {
     labs,
     loading,
     error,
-    cadastrarLab,
-    editarLab,
-    excluirLab,
+    cadastrarLab : cadastrar,
+    editarLab : editar,
+    excluirLab : excluir,
     refetch: fetchLabs,
   };
 }

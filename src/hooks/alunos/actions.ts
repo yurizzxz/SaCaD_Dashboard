@@ -13,12 +13,12 @@ export const useAlunoHooks = () => {
     setModalOpen(true);
   };
 
-  const handleEdit = (aluno: any) => {
+  const handleEdit = (aluno: Aluno) => {
     setAlunoSelecionado(aluno);
     setModalOpen(true);
   };
 
-  const handleDelete = (aluno: any) => {
+  const handleDelete = (aluno: Aluno) => {
     setAlunoSelecionado(aluno);
     setDeleteModalOpen(true);
   };

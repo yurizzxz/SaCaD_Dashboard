@@ -3,10 +3,13 @@ import { useState } from "react";
 import { useTecnicos } from "./useTecnicos";
 
 export const useTecnicoHooks = () => {
-  const { tecnicos, cadastrarTecnico, editarTecnico, excluirTecnico } = useTecnicos();
+  const { tecnicos, cadastrarTecnico, editarTecnico, excluirTecnico } =
+    useTecnicos();
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [tecnicoSelecionado, setTecnicoSelecionado] = useState<Tecnico | null>(null);
+  const [tecnicoSelecionado, setTecnicoSelecionado] = useState<Tecnico | null>(
+    null
+  );
 
   const handleAdd = () => {
     setTecnicoSelecionado(null);

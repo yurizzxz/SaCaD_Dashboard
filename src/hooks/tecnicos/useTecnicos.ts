@@ -3,100 +3,62 @@
 import { useEffect, useState } from "react";
 import { Tecnico } from "@/lib/types";
 import { toast } from "sonner";
-
-const API_URL = process.env.NEXT_PUBLIC_TECNICOS_URL;
-
-if (!API_URL) {
-  throw new Error(
-    "A variável de ambiente NEXT_PUBLIC_TECNICOS_URL não está definida."
-  );
-}
+import {
+  cadastrarTecnico,
+  editarTecnico,
+  excluirTecnico,
+  fetchTecnicos,
+} from "@/lib/api/tecnicos";
 
 export function useTecnicos() {
   const [tecnicos, setTecnicos] = useState<Tecnico[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchTecnicos();
-  }, []);
-
-  const fetchTecnicos = async () => {
+  const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch(API_URL!);
-      if (!res.ok) throw new Error("Erro ao buscar técnicos");
-
-      const data: Tecnico[] = await res.json();
+      const data = await fetchTecnicos();
       setTecnicos(data);
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      setError(null);
+    } catch (err: any) {
+      setError(err.message || "Erro ao buscar tecnicos");
     } finally {
       setLoading(false);
     }
   };
 
-  const cadastrarTecnico = async (novoTecnico: Partial<Tecnico>) => {
+  useEffect(() => {
+    load();
+  }, []);
+
+  const cadastrar = async (tecnicos: Partial<Tecnico>) => {
     try {
-      const res = await fetch(API_URL!, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(novoTecnico),
-      });
-      if (!res.ok) throw new Error("Erro ao cadastrar técnico");
-
-      toast.success("Técnico cadastrado com sucesso!");
-
-      await fetchTecnicos();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await cadastrarTecnico(tecnicos);
+      toast.success("Tecnico cadastrado com sucesso!");
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao cadastrar tecnico");
     }
   };
 
-  const editarTecnico = async (
-    id: number,
-    tecnicoAtualizado: Partial<Tecnico>
-  ) => {
+  const editar = async (id: number, tecnicos: Partial<Tecnico>) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(tecnicoAtualizado),
-      });
-      if (!res.ok) throw new Error("Erro ao editar técnico");
-
-      toast.success("Técnico editado com sucesso!");
-
-      await fetchTecnicos();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await editarTecnico(id, tecnicos);
+      toast.success("Tecnico editado com sucesso!");
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao editar tecnico");
     }
   };
 
-  const excluirTecnico = async (id: number) => {
+  const excluir = async (id: number) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Erro ao excluir técnico");
-
-      toast.success("Técnico excluído com sucesso!");
-
-      await fetchTecnicos();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await excluirTecnico(id);
+      toast.success("Tecnico excluido com sucesso!");
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao excluir tecnico");
     }
   };
 
@@ -104,9 +66,9 @@ export function useTecnicos() {
     tecnicos,
     loading,
     error,
-    cadastrarTecnico,
-    editarTecnico,
-    excluirTecnico,
+    cadastrarTecnico: cadastrar,
+    editarTecnico: editar,
+    excluirTecnico: excluir,
     refetch: fetchTecnicos,
   };
 }

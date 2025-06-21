@@ -3,102 +3,62 @@
 import { useEffect, useState } from "react";
 import { Coordenador } from "@/lib/types";
 import { toast } from "sonner";
-
-const API_URL = process.env.NEXT_PUBLIC_COORDENADORES_URL;
-
-if (!API_URL) {
-  throw new Error(
-    "A variável de ambiente NEXT_PUBLIC_COORDENADORES_URL não está definida."
-  );
-}
+import {
+  cadastrarCoordenador,
+  editarCoordenador,
+  excluirCoordenador,
+  fetchCoordenadores,
+} from "@/lib/api/coordenadores";
 
 export function useCoordenadores() {
   const [coordenadores, setCoordenadores] = useState<Coordenador[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchCoordenadores();
-  }, []);
-
-  const fetchCoordenadores = async () => {
+  const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch(API_URL!);
-      if (!res.ok) throw new Error("Erro ao buscar coordenadores");
-
-      const data: Coordenador[] = await res.json();
+      const data = await fetchCoordenadores();
       setCoordenadores(data);
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      setError(null);
+    } catch (err: any) {
+      setError(err.message || "Erro ao buscar coordenadores");
     } finally {
       setLoading(false);
     }
   };
 
-  const cadastrarCoordenador = async (
-    novoCoordenador: Partial<Coordenador>
-  ) => {
-    try {
-      const res = await fetch(API_URL!, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(novoCoordenador),
-      });
-      if (!res.ok) throw new Error("Erro ao cadastrar coordenador");
+  useEffect(() => {
+    load();
+  }, []);
 
+  const cadastrar = async (novoCoordenador: Partial<Coordenador>) => {
+    try {
+      await cadastrarCoordenador(novoCoordenador);
       toast.success("Coordenador cadastrado com sucesso!");
-
-      await fetchCoordenadores();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao cadastrar coordenador");
     }
   };
 
-  const editarCoordenador = async (
-    id: number,
-    coordenadorAtualizado: Partial<Coordenador>
-  ) => {
+  const editar = async (id: number, dados: Partial<Coordenador>) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(coordenadorAtualizado),
-      });
-      if (!res.ok) throw new Error("Erro ao editar coordenador");
-
+      await editarCoordenador(id, dados);
       toast.success("Coordenador editado com sucesso!");
-
-      await fetchCoordenadores();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao editar coordenador");
     }
   };
 
-  const excluirCoordenador = async (id: number) => {
+  const excluir = async (id: number) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Erro ao excluir coordenador");
-
+      await excluirCoordenador(id);
       toast.success("Coordenador excluído com sucesso!");
-
-      await fetchCoordenadores();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao excluir coordenador");
     }
   };
 
@@ -106,9 +66,9 @@ export function useCoordenadores() {
     coordenadores,
     loading,
     error,
-    cadastrarCoordenador,
-    editarCoordenador,
-    excluirCoordenador,
-    refetch: fetchCoordenadores,
+    cadastrarCoordenador: cadastrar,
+    editarCoordenador: editar,
+    excluirCoordenador: excluir,
+    refetch: load,
   };
 }

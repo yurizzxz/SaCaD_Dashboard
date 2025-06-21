@@ -3,6 +3,12 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Sala } from "@/lib/types";
+import {
+  fetchSalas,
+  cadastrarSala,
+  editarSala,
+  excluirSala,
+} from "@/lib/api/salas";
 
 const API_URL = process.env.NEXT_PUBLIC_SALAS_URL;
 
@@ -17,83 +23,50 @@ export function useSalas() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchSalas();
-  }, []);
-
-  const fetchSalas = async () => {
+  const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}`);
-      if (!res.ok) throw new Error("Erro ao buscar salas");
-
-      const data: Sala[] = await res.json();
+      const data = await fetchSalas();
       setSalas(data);
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      setError(null);
+    } catch (err: any) {
+      setError(err.message || "Erro ao buscar salas");
     } finally {
       setLoading(false);
     }
   };
 
-  const cadastrarSala = async (novaSala: Partial<Sala>) => {
-    try {
-      const res = await fetch(`${API_URL}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(novaSala),
-      });
-      if (!res.ok) throw new Error("Erro ao cadastrar sala");
+  useEffect(() => {
+    load();
+  }, []);
 
+  const cadastrar = async (sala: Partial<Sala>) => {
+    try {
+      await cadastrarSala(sala);
       toast.success("Sala cadastrada com sucesso!");
-
-      await fetchSalas();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao cadastrar sala");
     }
   };
 
-  const editarSala = async (id: number, salaAtualizada: Partial<Sala>) => {
+  const editar = async (id: number, sala: Sala) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(salaAtualizada),
-      });
-      if (!res.ok) throw new Error("Erro ao editar sala");
-
+      await editarSala(id, sala);
       toast.success("Sala editada com sucesso!");
-
-      await fetchSalas();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao editar sala");
     }
   };
 
-  const excluirSala = async (id: number) => {
+  const excluir = async (id: number) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Erro ao excluir sala");
-
+      await excluirSala(id);
       toast.success("Sala excluida com sucesso!");
-
-      await fetchSalas();
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Erro desconhecido";
-      setError(errorMessage);
+      await load();
+    } catch (err: any) {
+      setError(err.message || "Erro ao excluir sala");
     }
   };
 
@@ -101,9 +74,9 @@ export function useSalas() {
     salas,
     loading,
     error,
-    cadastrarSala,
-    editarSala,
-    excluirSala,
+    cadastrarSala: cadastrar,
+    editarSala: editar,
+    excluirSala: excluir,
     refetch: fetchSalas,
   };
 }
