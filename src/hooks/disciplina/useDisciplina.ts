@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Disciplina } from "@/lib/types";
+import { Disciplina } from "@/types/types";
 import {
   fetchDisciplinas,
   cadastrarDisciplina,

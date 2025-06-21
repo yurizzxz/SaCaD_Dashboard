@@ -8,7 +8,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { Professor } from "@/lib/types";
+import { Professor } from "@/types/types";
 import { useEffect, useState } from "react";
 
 interface FilterSelectProps {

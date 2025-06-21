@@ -1,4 +1,4 @@
-import { Curso } from "@/lib/types";
+import { Curso } from "@/types/types";
 import { X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Input } from "../ui/input";

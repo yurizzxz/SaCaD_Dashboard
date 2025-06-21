@@ -1,4 +1,4 @@
-import { Curso } from "@/lib/types";
+import { Curso } from "@/types/types";
 import { useState } from "react";
 import { useCursos } from "./useCourses";
 

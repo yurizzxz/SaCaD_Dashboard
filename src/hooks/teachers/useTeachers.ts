@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Professor } from "@/lib/types";
+import { Professor } from "@/types/types";
 import { toast } from "sonner";
 import {
   cadastrarProfessor,

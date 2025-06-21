@@ -1,4 +1,4 @@
-import { Professor } from "@/lib/types";
+import { Professor } from "@/types/types";
 import { X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Input } from "../ui/input";

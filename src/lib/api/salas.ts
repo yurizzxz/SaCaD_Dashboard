@@ -1,4 +1,4 @@
-import { Sala } from "../types";
+import { Sala } from "../../types/types";
 
 const API_URL = process.env.NEXT_PUBLIC_SALAS_URL;
 

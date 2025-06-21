@@ -6,7 +6,7 @@ import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { DataTable } from "@/components/table/data-table";
 import { Button } from "@/components/ui/button";
 import { Section, Content } from "@/components/section";
-import { Curso, Disciplina } from "@/lib/types";
+import { Curso, Disciplina } from "@/types/types";
 import { FilterSelect } from "./filter";
 import { useEffect, useState } from "react";
 import {

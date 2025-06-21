@@ -1,4 +1,4 @@
-import { Horario } from "@/lib/types";
+import { Horario } from "@/types/types";
 
 const API_URL = process.env.NEXT_PUBLIC_HORARIOS_URL;
 

@@ -6,7 +6,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { Disciplina } from "@/lib/types";
+import { Disciplina } from "@/types/types";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 

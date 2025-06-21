@@ -6,7 +6,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { Tecnico } from "@/lib/types";
+import { Tecnico } from "@/types/types";
 import { useEffect, useState } from "react";
 
 interface FilterSelectProps {

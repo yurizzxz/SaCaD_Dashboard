@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Coordenador } from "@/lib/types";
+import { Coordenador } from "@/types/types";
 import { toast } from "sonner";
 import {
   cadastrarCoordenador,

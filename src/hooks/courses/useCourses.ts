@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Curso } from "@/lib/types";
+import { Curso } from "@/types/types";
 import { toast } from "sonner";
 import {
   fetchCursos,

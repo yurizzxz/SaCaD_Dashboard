@@ -1,4 +1,4 @@
-import { Professor } from "../types";
+import { Professor } from "../../types/types";
 
 const API_URL = process.env.NEXT_PUBLIC_TEACHERS_URL;
 

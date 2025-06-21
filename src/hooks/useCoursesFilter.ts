@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Curso, Disciplina } from "@/lib/types";
+import { Curso, Disciplina } from "@/types/types";
 
 export function useCoursesFilter() {
   const [cursos, setCursos] = useState<Curso[]>([]);

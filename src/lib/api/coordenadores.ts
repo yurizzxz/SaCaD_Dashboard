@@ -1,4 +1,4 @@
-import { Coordenador } from "../types";
+import { Coordenador } from "../../types/types";
 
 const API_URL = process.env.NEXT_PUBLIC_COORDENADORES_URL;
 

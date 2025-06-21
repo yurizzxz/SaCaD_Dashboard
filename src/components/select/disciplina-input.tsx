@@ -1,4 +1,4 @@
-import { Disciplina } from "@/lib/types";
+import { Disciplina } from "@/types/types";
 import { X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Input } from "../ui/input";

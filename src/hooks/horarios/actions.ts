@@ -1,4 +1,4 @@
-import { Horario, Professor } from "@/lib/types";
+import { Horario, Professor } from "@/types/types";
 import { useEffect, useState } from "react";
 import { useHorarios } from "./useHorarios";
 

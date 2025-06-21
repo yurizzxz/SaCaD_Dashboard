@@ -1,7 +1,7 @@
 "use client";
 
 import { fetchLabs, cadastrarLab, editarLab, excluirLab } from "@/lib/api/labs";
-import { Laboratorio } from "@/lib/types";
+import { Laboratorio } from "@/types/types";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 

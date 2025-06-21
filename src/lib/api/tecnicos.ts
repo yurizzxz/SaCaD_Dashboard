@@ -1,4 +1,4 @@
-import { Tecnico } from "../types";
+import { Tecnico } from "../../types/types";
 
 const API_URL = process.env.NEXT_PUBLIC_TECNICOS_URL;
 

@@ -7,7 +7,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { Aluno } from "@/lib/types";
+import { Aluno } from "@/types/types";
 import { useEffect, useState } from "react";
 
 interface FilterSelectProps {

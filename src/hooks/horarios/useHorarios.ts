@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { Horario } from "@/lib/types";
+import { Horario } from "@/types/types";
 import {
   fetchHorarios,
   criarHorario,

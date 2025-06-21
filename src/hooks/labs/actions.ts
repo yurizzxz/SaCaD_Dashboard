@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLabs } from "./useLabs";
-import { Laboratorio as Lab } from "@/lib/types";
+import { Laboratorio as Lab } from "@/types/types";
 
 export function useLabsHooks() {
   const {

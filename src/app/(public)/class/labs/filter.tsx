@@ -8,7 +8,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { Laboratorio } from "@/lib/types";
+import { Laboratorio } from "@/types/types";
 
 interface FilterSelectProps {
   cursoSelecionado: string;

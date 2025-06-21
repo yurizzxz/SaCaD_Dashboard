@@ -6,7 +6,7 @@ import { Modal as SalaModal } from "./actions/create-modal";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { Button } from "@/components/ui/button";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
-import { Sala } from "@/lib/types";
+import { Sala } from "@/types/types";
 import { useSalasHooks } from "@/hooks/salas/actions";
 import { FilterSelect } from "./filter";
 import {

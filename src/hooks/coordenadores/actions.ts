@@ -1,4 +1,4 @@
-import { Coordenador } from "@/lib/types";
+import { Coordenador } from "@/types/types";
 import { useState } from "react";
 import { useCoordenadores } from "./useCoordenadores";
 

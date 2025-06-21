@@ -6,7 +6,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { Curso } from "@/lib/types";
+import { Curso } from "@/types/types";
 import { useEffect, useState } from "react";
 
 interface EixoSelectProps {

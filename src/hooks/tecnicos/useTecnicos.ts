@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Tecnico } from "@/lib/types";
+import { Tecnico } from "@/types/types";
 import { toast } from "sonner";
 import {
   cadastrarTecnico,

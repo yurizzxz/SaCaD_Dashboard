@@ -1,4 +1,4 @@
-import { Sala } from "@/lib/types";
+import { Sala } from "@/types/types";
 import { useState } from "react";
 import { useSalas } from "./useSalas";
 

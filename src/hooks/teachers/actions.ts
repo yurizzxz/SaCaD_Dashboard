@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTeachers } from "./useTeachers";
-import { Curso, Disciplina, Professor as Teacher } from "@/lib/types";
+import { Curso, Disciplina, Professor as Teacher } from "@/types/types";
 
 export function useTeachersHooks() {
   const { teachers, cadastrarTeacher, editarTeacher, excluirTeacher } =

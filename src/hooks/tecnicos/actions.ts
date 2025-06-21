@@ -1,4 +1,4 @@
-import { Tecnico } from "@/lib/types";
+import { Tecnico } from "@/types/types";
 import { useState } from "react";
 import { useTecnicos } from "./useTecnicos";
 

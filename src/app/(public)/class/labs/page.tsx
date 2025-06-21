@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ConfirmDeleteModal } from "./actions/delete-modal";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Modal as LabModal } from "./actions/create-modal";
-import { Laboratorio as Lab } from "@/lib/types";
+import { Laboratorio as Lab } from "@/types/types";
 import { useLabsHooks } from "@/hooks/labs/actions";
 import { DataTable } from "@/components/table/data-table";
 import { FilterSelect } from "./filter";

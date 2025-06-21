@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Sala } from "@/lib/types";
+import { Sala } from "@/types/types";
 import {
   fetchSalas,
   cadastrarSala,

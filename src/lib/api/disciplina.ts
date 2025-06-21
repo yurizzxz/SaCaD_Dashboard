@@ -1,4 +1,4 @@
-import { Disciplina } from "../types";
+import { Disciplina } from "../../types/types";
 
 const API_URL = process.env.NEXT_PUBLIC_DISCIPLINAS_URL;
 

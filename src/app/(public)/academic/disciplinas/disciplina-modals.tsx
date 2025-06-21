@@ -1,6 +1,6 @@
 "use client";
 import { GenericModal } from "@/components/generic-modal";
-import { Disciplina } from "@/lib/types";
+import { Disciplina } from "@/types/types";
 
 interface DisciplinaModalsProps {
   disciplinaSelecionada: Disciplina | null;

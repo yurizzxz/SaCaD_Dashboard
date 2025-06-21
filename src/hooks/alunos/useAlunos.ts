@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Aluno } from "@/lib/types";
+import { Aluno } from "@/types/types";
 import { toast } from "sonner";
 import {
   fetchAlunos,

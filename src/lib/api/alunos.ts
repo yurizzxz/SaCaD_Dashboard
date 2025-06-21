@@ -1,4 +1,4 @@
-import { Aluno } from "../types";
+import { Aluno } from "../../types/types";
 
 const API_URL = process.env.NEXT_PUBLIC_ALUNOS_URL;
 

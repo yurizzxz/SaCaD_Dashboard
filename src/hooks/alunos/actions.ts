@@ -1,4 +1,4 @@
-import { Aluno } from "@/lib/types";
+import { Aluno } from "@/types/types";
 import { useState } from "react";
 import { useAlunos } from "./useAlunos";
 

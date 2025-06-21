@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/select";
 import { CursoSelect } from "@/components/select/curso-select";
 import { useEffect, useState } from "react";
-import { Disciplina } from "@/lib/types";
+import { Disciplina } from "@/types/types";
 
 interface FilterSelectProps {
   cursoSelecionado: string;

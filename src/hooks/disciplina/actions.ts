@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDisciplinas } from "@/hooks/disciplina/useDisciplina";
-import { Disciplina, Curso, Professor } from "@/lib/types";
+import { Disciplina, Curso, Professor } from "@/types/types";
 
 export function useDisciplinaHooks() {
   const {
