@@ -104,7 +104,7 @@ export default function Page() {
         </div>
 
         {loading && <p>Carregando cursos...</p>}
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-red-500">{error?.message}</p>}
 
         <div className="grid grid-cols-1 md:grid-cols-1 lg:hidden gap-2 mb-6">
           {data.map((curso) => (

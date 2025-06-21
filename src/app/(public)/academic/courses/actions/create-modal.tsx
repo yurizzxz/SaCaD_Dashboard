@@ -7,7 +7,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { FormFields } from "./form";
-import { cursoSchema } from "@/schemas/form-schema";
+import { cursoSchema } from "@/schemas/academic/cursoSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { z } from "zod";

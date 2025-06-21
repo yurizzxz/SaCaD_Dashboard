@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFields } from "./form";
-import { alunoSchema } from "@/schemas/form-schema";
+import { alunoSchema } from "@/schemas/entities/alunoSchema";
 import { z } from "zod";
 
 type AlunoData = z.infer<typeof alunoSchema>;

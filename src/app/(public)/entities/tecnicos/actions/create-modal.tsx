@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFields } from "./form";
 import { z } from "zod";
-import { tecnicoSchema } from "@/schemas/form-schema";
+import { tecnicoSchema } from "@/schemas/entities/tecnicoSchema";
 
 type TecnicoData = z.infer<typeof tecnicoSchema>;
 

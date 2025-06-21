@@ -10,7 +10,7 @@ import { FormFields } from "./form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
-import { horarioAulaSchema } from "@/schemas/form-schema";
+import { horarioAulaSchema } from "@/schemas/academic/horarioSchema";
 
 type HorarioAulaData = z.infer<typeof horarioAulaSchema>;
 

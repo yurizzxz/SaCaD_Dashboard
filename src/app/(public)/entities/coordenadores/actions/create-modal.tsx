@@ -10,7 +10,7 @@ import { FormFields } from "./form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { coordenadorSchema } from "@/schemas/form-schema";
+import { coordenadorSchema } from "@/schemas/entities/coordenadorSchema";
 
 type CoordenadorData = z.infer<typeof coordenadorSchema>;
 

@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFields } from "./form";
-import { professorSchema } from "@/schemas/form-schema";
+import { professorSchema } from "@/schemas/entities/professorSchema";
 import { z } from "zod";
 
 type ProfessorData = z.infer<typeof professorSchema>;

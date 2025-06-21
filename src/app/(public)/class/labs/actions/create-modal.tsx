@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFields } from "./form";
-import { laboratorioSchema } from "@/schemas/form-schema";
+import { laboratorioSchema } from "@/schemas/class/laboratorioSchema";
 
 type LaboratorioData = z.infer<typeof laboratorioSchema>;
 

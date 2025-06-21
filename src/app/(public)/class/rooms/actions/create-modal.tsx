@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFields } from "./form";
-import { salaSchema } from "@/schemas/form-schema";
+import { salaSchema } from "@/schemas/class/salaSchema";
 
 type SalaData = z.infer<typeof salaSchema>;
 
